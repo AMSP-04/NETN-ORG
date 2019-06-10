@@ -3,15 +3,16 @@
     <modelIdentification>
         <name>NETN-ORBAT</name>
         <type>FOM</type>
-        <version>0.1.1</version>
-        <modificationDate>2019-05-17</modificationDate>
+        <version>0.1.2</version>
+        <modificationDate>2019-06-10</modificationDate>
         <securityClassification>unclassified</securityClassification>
-        <purpose>Produce a ORBAT (MSDL) in a HLA Federation Execution</purpose>
+        <purpose>Produce a ORBAT (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
         <description>MSDL</description>
         <useLimitation></useLimitation>
         <useHistory>v0.1.0 - LO: First Version, extends the old MSDL_v1.1.2</useHistory>
         <useHistory>v0.1.1 - LO: Moved the object class Federate. Removed interaction classes. Updates semantics.</useHistory>
+        <useHistory>v0.1.2 - LO: Removed attributes Unit.SubUnits and Unit.Federate. </useHistory>
         <keyword>
             <keywordValue>MSDL</keywordValue>
         </keyword>
@@ -77,18 +78,8 @@
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Reference to the superior unit.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>SubUnits</name>
-                        <dataType>ArrayOfUuid</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>When changed</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>The sub units</semantics>
+                        <semantics>Reference to the superior unit. 
+May be empty if no superior unit exist.</semantics>
                     </attribute>
                     <attribute>
                         <name>EntityType</name>
@@ -115,6 +106,53 @@ Required.
 The symbol code describes the class, e.g. for ARMOR TRACK, HEAVY as a Leopard 2 shall the symbol code be: S*GPUCATH-*****, the * in second (2:nd) position is to be replaced to specify the affiliation. 
 The affiliation on a unit may change during an federation execution which imply that the 2:nd character will change. 
 Other characters specifies functionallity, e.g. if a submarine is surfaced or bottomed which can be the case during a federation execution.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Force</name>
+                        <dataType>UuidArrayOfHLAbyte16</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>The value is the UUID value of the Force that the unit belongs to.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Holdings</name>
+                        <dataType>ArrayOfHoldings</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>A sequence of holdings at the unit.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>IsSimulationEntity</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Indicates if the ORBAT Unit is created during the federation execution and its existence is to manage simulation activites. 
+For normal ORBAT Units is this False. 
+Simulation Units will not be saved when a MSDL ORBAT is saved to file. 
+No corresponding tag in the MSDL schema.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>EmbarkedIn</name>
+                        <dataType>UuidArrayOfHLAbyte16</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>WhenChanged</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>The host unit.</semantics>
                     </attribute>
                     <attribute>
                         <name>UniqueDesignation</name>
@@ -173,14 +211,14 @@ Other characters specifies functionallity, e.g. if a submarine is surfaced or bo
                     </attribute>
                     <attribute>
                         <name>Location</name>
-                        <dataType>GDClocation</dataType>
+                        <dataType>LocationStruct</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>When changed</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Disposition: Geodetic. 
+                        <semantics>Disposition: 
 If altitude is negative, then below sea level (e.g subs).</semantics>
                     </attribute>
                     <attribute>
@@ -226,64 +264,6 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
                         <semantics>Disposition: The formation of this unit.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>EmbarkedIn</name>
-                        <dataType>UuidArrayOfHLAbyte16</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>WhenChanged</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>The host unit.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>Holdings</name>
-                        <dataType>ArrayOfHoldings</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>When changed</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>A sequence of holdings at the unit.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>Force</name>
-                        <dataType>UuidArrayOfHLAbyte16</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>When changed</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>The value is the UUID value of the Force that the unit belongs to.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>Federate</name>
-                        <dataType>UuidArrayOfHLAbyte16</dataType>
-                        <updateType>Static</updateType>
-                        <updateCondition>NA</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>The federate that shall register the unit.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>IsSimulationEntity</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Static</updateType>
-                        <updateCondition>NA</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Indicates if the ORBAT Unit is created during the federation execution and its existence is to manage simulation activites. 
-For normal ORBAT Units is this False. 
-Simulation Units will not be saved when a MSDL ORBAT is saved to file. 
-No corresponding tag in the MSDL schema.</semantics>
                     </attribute>
                     <attribute>
                         <name>CategoryCode</name>
@@ -1129,6 +1109,27 @@ The relation may change during a federation execution.</semantics>
                     <value>0</value>
                 </enumerator>
             </enumeratedData>
+            <enumeratedData>
+                <name>CoordinateSystemEnum32</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>MSDL supports coordinate systems of MGRS, UTM, GDC, and GCC. Each coordinate element provides a choice of the coordinate system to be used.</semantics>
+                <enumerator>
+                    <name>MRGS</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>GDC</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>UTM</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>GCC</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
         </enumeratedDataTypes>
         <arrayDataTypes>
             <arrayData>
@@ -1182,26 +1183,6 @@ The relation may change during a federation execution.</semantics>
             </arrayData>
         </arrayDataTypes>
         <fixedRecordDataTypes>
-            <fixedRecordData>
-                <name>GDClocation</name>
-                <encoding>HLAfixedRecord</encoding>
-                <semantics>Location in geodetic coordinates.</semantics>
-                <field>
-                    <name>Latitude</name>
-                    <dataType>DegreesFloat64</dataType>
-                    <semantics>Degrees (-90 - 90)</semantics>
-                </field>
-                <field>
-                    <name>Longitude</name>
-                    <dataType>DegreesFloat64</dataType>
-                    <semantics>Degrees (-180 - 180)</semantics>
-                </field>
-                <field>
-                    <name>Altitude</name>
-                    <dataType>MetersFloat64</dataType>
-                    <semantics>Above sea level</semantics>
-                </field>
-            </fixedRecordData>
             <fixedRecordData>
                 <name>Relation</name>
                 <encoding>HLAfixedRecord</encoding>
@@ -1314,6 +1295,86 @@ SurfaceFomationType: NOT_SPECIFIED
 SubsurfaceFormationType: NOT_SPECIFIED</semantics>
                 </field>
             </fixedRecordData>
+            <fixedRecordData>
+                <name>MGRSStruct</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>The MGRS element, specifies the Military Grid Reference System (MGRS) coordinate and is made up of the child elements.</semantics>
+                <field>
+                    <name>GridZone</name>
+                    <dataType>HLAunicodeString</dataType>
+                    <semantics>The MGRSGridZone element specifies the MGRS Grid Zone designator to include the number and letter as defined by NIMA TM 8358.1.</semantics>
+                </field>
+                <field>
+                    <name>GridSquare</name>
+                    <dataType>HLAunicodeString</dataType>
+                    <semantics>The MGRSGridSquare element specifies the one hundred thousand meter grid square designator as defined by NIMA TM 8358.1.</semantics>
+                </field>
+                <field>
+                    <name>Precision</name>
+                    <dataType>Integer32</dataType>
+                    <semantics>The MGRSPrecision element specifies the precision or scale of easting and northing values. MGRSPrecision can be assigned a value of 2 to define a number using kilometers as its units of measure; a value of 3 to define a number using 100 meters as its units of measure, a value of 4 to define a number using 10 meters as its units of measure, or a value of 5 to define a number using meters as its units of measure.</semantics>
+                </field>
+                <field>
+                    <name>Easting</name>
+                    <dataType>Integer32</dataType>
+                    <semantics>The MGRSEasting element specifies the easting component of the MGRS coordinates to the precision value of the MGRS precision element.</semantics>
+                </field>
+                <field>
+                    <name>Northing</name>
+                    <dataType>Integer32</dataType>
+                    <semantics>The MGRSNorthing element specifies the northing component of the MGRS coordinates to the precision value of the MGRS precision element.</semantics>
+                </field>
+                <field>
+                    <name>ElevationAGL</name>
+                    <dataType>MeterFloat32</dataType>
+                    <semantics>The ElevationAGL element specifies the altitude, in meters of a position for the flight level for aircraft; depth for submerged objects; height of equipment or structures on the ground.</semantics>
+                </field>
+            </fixedRecordData>
+            <fixedRecordData>
+                <name>UTMStruct</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>The UTM element, specifies the Universal Transverse Mercator (UTM) coordinate and is made up of the child elements.</semantics>
+                <field>
+                    <name>GridZone</name>
+                    <dataType>HLAunicodeString</dataType>
+                    <semantics>The UTMGridZone element specifies the UTM Grid Zone designator to include the number and letter as defined by NIMA TM 8358.1.</semantics>
+                </field>
+                <field>
+                    <name>Easting</name>
+                    <dataType>Float32</dataType>
+                    <semantics>The UTMEasting element specifies the easting component of the UTM coordinate.</semantics>
+                </field>
+                <field>
+                    <name>Northing</name>
+                    <dataType>Float32</dataType>
+                    <semantics>The UTMNorthing element specifies the northing component of the UTM coordinate.</semantics>
+                </field>
+                <field>
+                    <name>ElevationAGL</name>
+                    <dataType>Float32</dataType>
+                    <semantics>The UTMNorthing element specifies the northing component of the UTM coordinate.</semantics>
+                </field>
+            </fixedRecordData>
+            <fixedRecordData>
+                <name>GDCStruct</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>The GDC element specifies the Geodetic Coordinate (GDC) and is made up of the child elements.</semantics>
+                <field>
+                    <name>Latitude</name>
+                    <dataType>DegreesFloat64</dataType>
+                    <semantics>The Latitude element specifies the decimal degrees of latitude.</semantics>
+                </field>
+                <field>
+                    <name>Longitude</name>
+                    <dataType>DegreesFloat64</dataType>
+                    <semantics>The Longitude element specifies the decimal degrees of longitude. The domain type is msdl:floatLatitudeLongitude3_3.</semantics>
+                </field>
+                <field>
+                    <name>ElevationAGL</name>
+                    <dataType>MetersFloat64</dataType>
+                    <semantics>The ElevationAGL element specifies the altitude, in meters of a position for the flight level for aircraft; depth for submerged objects; height of equipment or structures on the ground.</semantics>
+                </field>
+            </fixedRecordData>
         </fixedRecordDataTypes>
         <variantRecordDataTypes>
             <variantRecordData>
@@ -1346,6 +1407,37 @@ SubsurfaceFormationType: NOT_SPECIFIED</semantics>
                 </alternative>
                 <encoding>HLAvariantRecord</encoding>
                 <semantics>Struct for enumerated choice for the type of formation being Ground, Air, Surface or Subsurface.</semantics>
+            </variantRecordData>
+            <variantRecordData>
+                <name>LocationStruct</name>
+                <discriminant>CoordinatesType</discriminant>
+                <dataType>CoordinateSystemEnum32</dataType>
+                <alternative>
+                    <enumerator>MRGS</enumerator>
+                    <name>MGRS</name>
+                    <dataType>MGRSStruct</dataType>
+                    <semantics>MGRS Coordinate.</semantics>
+                </alternative>
+                <alternative>
+                    <enumerator>GDC</enumerator>
+                    <name>GDC</name>
+                    <dataType>GDCStruct</dataType>
+                    <semantics>Geodetic coordinates in decimal degrees of latitude and longitude.</semantics>
+                </alternative>
+                <alternative>
+                    <enumerator>UTM</enumerator>
+                    <name>UTM</name>
+                    <dataType>UTMStruct</dataType>
+                    <semantics>Universal Transverse Mercator Coordinate.</semantics>
+                </alternative>
+                <alternative>
+                    <enumerator>GCC</enumerator>
+                    <name>GCC</name>
+                    <dataType>WorldLocationStruct</dataType>
+                    <semantics>Geocentric Coordinate.</semantics>
+                </alternative>
+                <encoding>HLAvariantRecord</encoding>
+                <semantics></semantics>
             </variantRecordData>
         </variantRecordDataTypes>
     </dataTypes>
