@@ -3,8 +3,8 @@
     <modelIdentification>
         <name>NETN-ORG</name>
         <type>FOM</type>
-        <version>0.2.0</version>
-        <modificationDate>2019-06-12</modificationDate>
+        <version>0.2.2</version>
+        <modificationDate>2019-06-17</modificationDate>
         <securityClassification>unclassified</securityClassification>
         <purpose>Produce a Organisation definition (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
@@ -14,6 +14,9 @@
         <useHistory>v0.1.1 - LO: Moved the object class Federate. Removed interaction classes. Updates semantics.</useHistory>
         <useHistory>v0.1.2 - LO: Removed attributes Unit.SubUnits and Unit.Federate. </useHistory>
         <useHistory>v0.2.0 - LO: Renamed FOM module (NETN-ORG). New object class ORG_Root </useHistory>
+        <useHistory>v0.2.1 - LO: Cleanup Identification</useHistory>
+        <useHistory>v0.2.2 - LO: Update of semantics.
+</useHistory>
         <keyword>
             <keywordValue>MSDL</keywordValue>
         </keyword>
@@ -27,7 +30,6 @@
             <pocType>Primary author</pocType>
             <pocName>Lennart Olsson</pocName>
             <pocOrg>Pitch Technologies</pocOrg>
-            <pocTelephone>+46 13 470 55 06</pocTelephone>
             <pocEmail>lennart.olsson@pitch.se</pocEmail>
         </poc>
         <reference>
@@ -43,7 +45,7 @@
             <objectClass>
                 <name>ORG_Root</name>
                 <sharing>Neither</sharing>
-                <semantics>Root object class for the NETN-ORG classes.</semantics>
+                <semantics>Root object class for the NETN-ORG object classes.</semantics>
                 <attribute>
                     <name>Name</name>
                     <dataType>Text255</dataType>
@@ -53,7 +55,9 @@
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Federate name, unique</semantics>
+                    <semantics>Name, shall be unique. 
+For units, e.g. use the value from the NETN Callsign attribute.
+For federates, use the Federate Name used in the HLA join command.</semantics>
                 </attribute>
                 <attribute>
                     <name>UUID</name>
@@ -69,7 +73,9 @@
                 <objectClass>
                     <name>Federate</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>A federate</semantics>
+                    <semantics>Defines deployment of units for a federate, the Units attribute defines the units that the federate has modelling responsibility for.
+
+An extension to the MSDL standard defined in MSG-106.</semantics>
                     <attribute>
                         <name>Units</name>
                         <dataType>ArrayOfUuid</dataType>
@@ -85,11 +91,18 @@
                 <objectClass>
                     <name>OrbatObject</name>
                     <sharing>Neither</sharing>
-                    <semantics>Superclass for Unit, Force and Federate</semantics>
+                    <semantics>Superclass for Unit and Force.</semantics>
                     <objectClass>
                         <name>Unit</name>
                         <sharing>PublishSubscribe</sharing>
-                        <semantics>Specifies a Unit attributes</semantics>
+                        <semantics>Specifies a Unit attributes.
+Attributes are derivied from the MSDL standard and extensions defined in MSG-106.
+
+Following attributes are defined in MSG-106:
+EntityType
+Holdings
+EmbarkedIn
+IsSimulationEntity</semantics>
                         <attribute>
                             <name>SuperiorUnit</name>
                             <dataType>UuidArrayOfHLAbyte16</dataType>
@@ -173,7 +186,7 @@ No corresponding tag in the MSDL schema.</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>The host unit.</semantics>
+                            <semantics>The host unit that the unit is a part of at scenarion initialisation.</semantics>
                         </attribute>
                         <attribute>
                             <name>UniqueDesignation</name>
@@ -184,7 +197,8 @@ No corresponding tag in the MSDL schema.</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>UnitSymbolModifiers: Symbol’s unique designation.</semantics>
+                            <semantics>UnitSymbolModifiers: Symbol’s unique designation.
+Text for the symbols unique designation, e.g. the value at the RPR Marking attribute. </semantics>
                         </attribute>
                         <attribute>
                             <name>Echelon</name>
@@ -251,7 +265,10 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Disposition: The Direction of Movement, in compass degrees, of a scenario element.</semantics>
+                            <semantics>Disposition: The Direction of Movement, in compass degrees, of a scenario element.
+
+Optional.
+</semantics>
                         </attribute>
                         <attribute>
                             <name>Speed</name>
@@ -262,7 +279,11 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Disposition:</semantics>
+                            <semantics>Disposition: Unit speed (for display only).
+Kilometres per Hour for ground elements.
+Nautical miles per hour for maritime and air objects.
+
+Optional.</semantics>
                         </attribute>
                         <attribute>
                             <name>FormationPosition</name>
@@ -273,7 +294,9 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Disposition: The position of this unit/eqiupment in the higher unit formation.</semantics>
+                            <semantics>Disposition: The position of this unit/eqiupment in the higher unit formation.
+
+Optional.</semantics>
                         </attribute>
                         <attribute>
                             <name>OwnFormation</name>
@@ -284,7 +307,9 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Disposition: The formation of this unit.</semantics>
+                            <semantics>Disposition: The formation of this unit.
+
+Optional.</semantics>
                         </attribute>
                         <attribute>
                             <name>CategoryCode</name>
@@ -306,7 +331,8 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>JC3IEDM-3.1:</semantics>
+                            <semantics>JC3IEDM-3.1: The specific value that denotes whether an ORGANISATION-TYPE has a command function.
+</semantics>
                         </attribute>
                         <attribute>
                             <name>SizeCode</name>
@@ -339,13 +365,13 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>JC3IEDM-3.1: MilitaryOrganisationTypeServiceCode</semantics>
+                            <semantics>JC3IEDM-3.1: The specific value that represents a military, paramilitary, irregular force, force or group, capable of functioning as an offensive or defensive combat or support organisation.</semantics>
                         </attribute>
                     </objectClass>
                     <objectClass>
                         <name>Force</name>
                         <sharing>PublishSubscribe</sharing>
-                        <semantics>Units in a ORBAT belongs to a Force. 
+                        <semantics>Units in an ORBAT belongs to a Force. 
  
 Forces have relations to each other which is specified in the attribute Relations. 
 The relation between forces is defined by HostilityStatusCodeEnum32, e.g. FR (Friendly),  HO (Hostile). 
