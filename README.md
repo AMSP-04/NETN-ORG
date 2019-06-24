@@ -33,7 +33,7 @@ Version numbering of the NETN ORG FOM Module and associated documentation is bas
 
 |Version|Description|
 |---|---|
-|v (tbd) |Initial release of new module based on deprecated NETN LLBML FOM Module. Includes updated structure and additional capabilities.|
+|v 1.0.0 (RC1) |Initial release of NETN ORG FOM Module based on MSDL and Viking Computer Assisted eXercise (CAX).|
 
 [Changelog](changelog.md)
 
