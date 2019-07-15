@@ -3,20 +3,14 @@
     <modelIdentification>
         <name>NETN-ORG</name>
         <type>FOM</type>
-        <version>0.2.2</version>
-        <modificationDate>2019-06-17</modificationDate>
-        <securityClassification>unclassified</securityClassification>
+        <version>1.0 (RC v0.2.3)</version>
+        <modificationDate>2019-07-14</modificationDate>
+        <securityClassification>Not Classified</securityClassification>
         <purpose>Produce a Organisation definition (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
         <description>Organisation definition, ORBAT definitions (MSDL)</description>
         <useLimitation></useLimitation>
-        <useHistory>v0.1.0 - LO: First Version, extends the old MSDL_v1.1.2</useHistory>
-        <useHistory>v0.1.1 - LO: Moved the object class Federate. Removed interaction classes. Updates semantics.</useHistory>
-        <useHistory>v0.1.2 - LO: Removed attributes Unit.SubUnits and Unit.Federate. </useHistory>
-        <useHistory>v0.2.0 - LO: Renamed FOM module (NETN-ORG). New object class ORG_Root </useHistory>
-        <useHistory>v0.2.1 - LO: Cleanup Identification</useHistory>
-        <useHistory>v0.2.2 - LO: Update of semantics.
-</useHistory>
+        <useHistory>v1.0.0 - the first release of the FOM module.</useHistory>
         <keyword>
             <keywordValue>MSDL</keywordValue>
         </keyword>
@@ -30,14 +24,53 @@
             <pocType>Primary author</pocType>
             <pocName>Lennart Olsson</pocName>
             <pocOrg>Pitch Technologies</pocOrg>
-            <pocEmail>lennart.olsson@pitch.se</pocEmail>
+            <pocTelephone>+46134705500</pocTelephone>
+            <pocEmail>lennart.olsson@pitchtechnologies.com</pocEmail>
+        </poc>
+        <poc>
+            <pocType>Proponent</pocType>
+            <pocName>Lars Jansson</pocName>
+            <pocOrg>Swedish Defence Materiel Administration</pocOrg>
+            <pocEmail>lars.jansson@fmv.se</pocEmail>
+        </poc>
+        <poc>
+            <pocType>Release authority</pocType>
+            <pocName>NATO Modelling and Simulation Group (NMSG)</pocName>
+            <pocOrg>NATO Science and Technology Organization</pocOrg>
+            <pocEmail>msg@cso.nato.int</pocEmail>
+        </poc>
+        <poc>
+            <pocType>Contributor</pocType>
+            <pocName>Tom van den Berg</pocName>
+            <pocOrg>TNO</pocOrg>
+            <pocEmail>tom.vandenberg@tno.nl</pocEmail>
+        </poc>
+        <poc>
+            <pocType>Contributor</pocType>
+            <pocName>Björn Löfstrand</pocName>
+            <pocOrg>Pitch Technologies</pocOrg>
+            <pocTelephone>+46134705500</pocTelephone>
+            <pocEmail>bjorn.lofstrand@pitchtechnologies.com</pocEmail>
         </poc>
         <reference>
             <type>Text Document</type>
             <identification>Military Scenario Definition Language (MSDL), SISO-STD-007-2008
 </identification>
         </reference>
-        <other></other>
+        <reference>
+            <type>Dependency</type>
+            <identification>NETN-BASE</identification>
+        </reference>
+        <reference>
+            <type></type>
+            <identification></identification>
+        </reference>
+        <other>
+Copyright © 2019 by NATO/OTAN. All rights reserved.
+This work is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License.
+
+Above license gives you the right to use and redistribute the NETN FOM Module (XML file and Documentation) in its entirety without modification. You are also allowed to develop your own new FOM Modules (in separate XML files and separate documentation) that build-on/extends the NETN module by reference. You are NOT allowed to modify the NETN FOM Module or its documentation without prior permission by the NATO Modelling and Simulation Group.</other>
+        <glyph type="png" height="48" width="48" alt="">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</glyph>
     </modelIdentification>
     <objects>
         <objectClass>
@@ -56,7 +89,7 @@
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
                     <semantics>Name, shall be unique. 
-For units, e.g. use the value from the NETN Callsign attribute.
+For units, e.g. use the value from the NETN Callsign attribute. 
 For federates, use the Federate Name used in the HLA join command.</semantics>
                 </attribute>
                 <attribute>
@@ -73,8 +106,8 @@ For federates, use the Federate Name used in the HLA join command.</semantics>
                 <objectClass>
                     <name>Federate</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Defines deployment of units for a federate, the Units attribute defines the units that the federate has modelling responsibility for.
-
+                    <semantics>Defines deployment of units for a federate, the Units attribute defines the units that the federate has modelling responsibility for. 
+ 
 An extension to the MSDL standard defined in MSG-106.</semantics>
                     <attribute>
                         <name>Units</name>
@@ -95,13 +128,13 @@ An extension to the MSDL standard defined in MSG-106.</semantics>
                     <objectClass>
                         <name>Unit</name>
                         <sharing>PublishSubscribe</sharing>
-                        <semantics>Specifies a Unit attributes.
-Attributes are derivied from the MSDL standard and extensions defined in MSG-106.
-
-Following attributes are defined in MSG-106:
-EntityType
-Holdings
-EmbarkedIn
+                        <semantics>Specifies a Unit attributes. 
+Attributes are derivied from the MSDL standard and extensions defined in MSG-106. 
+ 
+Following attributes are defined in MSG-106: 
+EntityType 
+Holdings 
+EmbarkedIn 
 IsSimulationEntity</semantics>
                         <attribute>
                             <name>SuperiorUnit</name>
@@ -197,8 +230,8 @@ No corresponding tag in the MSDL schema.</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>UnitSymbolModifiers: Symbol’s unique designation.
-Text for the symbols unique designation, e.g. the value at the RPR Marking attribute. </semantics>
+                            <semantics>UnitSymbolModifiers: Symbol’s unique designation. 
+Text for the symbols unique designation, e.g. the value at the RPR Marking attribute.</semantics>
                         </attribute>
                         <attribute>
                             <name>Echelon</name>
@@ -265,10 +298,9 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Disposition: The Direction of Movement, in compass degrees, of a scenario element.
-
-Optional.
-</semantics>
+                            <semantics>Disposition: The Direction of Movement, in compass degrees, of a scenario element. 
+ 
+Optional.</semantics>
                         </attribute>
                         <attribute>
                             <name>Speed</name>
@@ -279,10 +311,10 @@ Optional.
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Disposition: Unit speed (for display only).
-Kilometres per Hour for ground elements.
-Nautical miles per hour for maritime and air objects.
-
+                            <semantics>Disposition: Unit speed (for display only). 
+Kilometres per Hour for ground elements. 
+Nautical miles per hour for maritime and air objects. 
+ 
 Optional.</semantics>
                         </attribute>
                         <attribute>
@@ -294,8 +326,8 @@ Optional.</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Disposition: The position of this unit/eqiupment in the higher unit formation.
-
+                            <semantics>Disposition: The position of this unit/eqiupment in the higher unit formation. 
+ 
 Optional.</semantics>
                         </attribute>
                         <attribute>
@@ -307,8 +339,8 @@ Optional.</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Disposition: The formation of this unit.
-
+                            <semantics>Disposition: The formation of this unit. 
+ 
 Optional.</semantics>
                         </attribute>
                         <attribute>
@@ -331,8 +363,7 @@ Optional.</semantics>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>JC3IEDM-3.1: The specific value that denotes whether an ORGANISATION-TYPE has a command function.
-</semantics>
+                            <semantics>JC3IEDM-3.1: The specific value that denotes whether an ORGANISATION-TYPE has a command function.</semantics>
                         </attribute>
                         <attribute>
                             <name>SizeCode</name>

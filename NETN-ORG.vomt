@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_92" class="java.beans.XMLDecoder">
+<java version="1.8.0_201" class="java.beans.XMLDecoder">
  <int>5</int>
  <object class="se.pitch.vomt2.model.PersistentProjectHelper$PersistentProject">
   <boolean>true</boolean>
@@ -43,7 +43,7 @@
    </void>
    <void method="add">
     <object class="se.pitch.vomt2.model.PersistentProjectHelper$PersistentModule" id="PersistentProjectHelper$PersistentModule1">
-     <string>NETN-ORBAT</string>
+     <string>NETN-ORG</string>
      <string>NETN-ORG.xml</string>
      <boolean>false</boolean>
      <boolean>false</boolean>
@@ -71,24 +71,21 @@
      <boolean>true</boolean>
      <object class="java.lang.Enum" method="valueOf">
       <class>se.pitch.vomt2.model.TableType</class>
-      <string>IDENTIFICATION_TABLE</string>
+      <string>OBJECT_CLASS_TABLE</string>
      </object>
      <object idref="PersistentProjectHelper$PersistentModule1"/>
      <int>0</int>
      <int>0</int>
-     <int>1721</int>
-     <int>697</int>
-     <object class="java.util.Collections" id="Collections$EmptySet0" method="emptySet"/>
-     <object idref="Collections$EmptySet0"/>
+     <int>1265</int>
+     <int>733</int>
+     <object class="java.util.LinkedHashSet"/>
+     <object class="java.util.Collections" method="emptySet"/>
     </object>
    </void>
   </object>
   <object class="java.util.LinkedHashSet">
    <void method="add">
     <object idref="PersistentProjectHelper$PersistentModule0"/>
-   </void>
-   <void method="add">
-    <object idref="PersistentProjectHelper$PersistentModule1"/>
    </void>
   </object>
   <boolean>false</boolean>
