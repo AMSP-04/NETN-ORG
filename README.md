@@ -1,10 +1,11 @@
 # NETN-ORG
 MSDL
 
-## Purpose
+## Introduction
+### Purpose
 Produce a ORBAT (MSDL) in a HLA Federation Execution
 
-## Scope
+### Scope
 
 
 ## License

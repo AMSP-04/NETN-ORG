@@ -3,57 +3,43 @@
     <modelIdentification>
         <name>NETN-ORG</name>
         <type>FOM</type>
-        <version>1.0 (RC v0.2.3)</version>
-        <modificationDate>2019-07-14</modificationDate>
+        <version>1.0 (RC 1)</version>
+        <modificationDate>2019-07-31</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>Produce a Organisation definition (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
         <description>Organisation definition, ORBAT definitions (MSDL)</description>
         <useLimitation></useLimitation>
         <useHistory>v1.0.0 - the first release of the FOM module.</useHistory>
-        <keyword>
-            <keywordValue>MSDL</keywordValue>
-        </keyword>
-        <keyword>
-            <keywordValue>HLA</keywordValue>
-        </keyword>
-        <keyword>
-            <keywordValue>NETN</keywordValue>
-        </keyword>
-        <poc>
-            <pocType>Primary author</pocType>
-            <pocName>Lennart Olsson</pocName>
-            <pocOrg>Pitch Technologies</pocOrg>
-            <pocTelephone>+46134705500</pocTelephone>
-            <pocEmail>lennart.olsson@pitchtechnologies.com</pocEmail>
-        </poc>
-        <poc>
-            <pocType>Proponent</pocType>
-            <pocName>Lars Jansson</pocName>
-            <pocOrg>Swedish Defence Materiel Administration</pocOrg>
-            <pocEmail>lars.jansson@fmv.se</pocEmail>
-        </poc>
         <poc>
             <pocType>Release authority</pocType>
-            <pocName>NATO Modelling and Simulation Group (NMSG)</pocName>
+            <pocName>NATO Modelling and Simulation Group</pocName>
             <pocOrg>NATO Science and Technology Organization</pocOrg>
             <pocEmail>msg@cso.nato.int</pocEmail>
         </poc>
         <poc>
+            <pocType>Primary author</pocType>
+            <pocName>MSG-163 Evolution of NATO Standards for Federated Simulation</pocName>
+            <pocOrg>NATO Modelling and Simulation Group</pocOrg>
+            <pocEmail>msg@cso.nato.int</pocEmail>
+        </poc>
+        <poc>
+            <pocType>Contributor</pocType>
+            <pocName>Lennart Olsson</pocName>
+            <pocOrg>Pitch Technologies</pocOrg>
+        </poc>
+        <poc>
             <pocType>Contributor</pocType>
             <pocName>Tom van den Berg</pocName>
-            <pocOrg>TNO</pocOrg>
-            <pocEmail>tom.vandenberg@tno.nl</pocEmail>
+            <pocOrg>TNO, the Netherlands</pocOrg>
         </poc>
         <poc>
             <pocType>Contributor</pocType>
             <pocName>Björn Löfstrand</pocName>
-            <pocOrg>Pitch Technologies</pocOrg>
-            <pocTelephone>+46134705500</pocTelephone>
-            <pocEmail>bjorn.lofstrand@pitchtechnologies.com</pocEmail>
+            <pocOrg>Pitch Technologies, Sweden</pocOrg>
         </poc>
         <reference>
-            <type>Text Document</type>
+            <type>Standard</type>
             <identification>Military Scenario Definition Language (MSDL), SISO-STD-007-2008
 </identification>
         </reference>
