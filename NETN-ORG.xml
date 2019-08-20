@@ -68,8 +68,8 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <attribute>
                     <name>Name</name>
                     <dataType>Text255</dataType>
-                    <updateType>NA</updateType>
-                    <updateCondition></updateCondition>
+                    <updateType>Static</updateType>
+                    <updateCondition>NA</updateCondition>
                     <ownership>NoTransfer</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
@@ -81,8 +81,8 @@ For federates, use the Federate Name used in the HLA join command.</semantics>
                 <attribute>
                     <name>UUID</name>
                     <dataType>UuidArrayOfHLAbyte16</dataType>
-                    <updateType>NA</updateType>
-                    <updateCondition></updateCondition>
+                    <updateType>Static</updateType>
+                    <updateCondition>NA</updateCondition>
                     <ownership>NoTransfer</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
@@ -1464,7 +1464,7 @@ SubsurfaceFormationType: NOT_SPECIFIED</semantics>
                     <semantics>Geocentric Coordinate.</semantics>
                 </alternative>
                 <encoding>HLAvariantRecord</encoding>
-                <semantics></semantics>
+                <semantics>A variant record for specification of the Units location. One of four different formats for the location shall be used.</semantics>
             </variantRecordData>
         </variantRecordDataTypes>
     </dataTypes>

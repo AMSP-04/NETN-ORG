@@ -13,3 +13,4 @@ RC v0.2.1 - LO: Cleanup Identification
 RC v0.2.2 - LO: Update of semantics.
 RC v0.2.2 - LO: Update of semantics.
 RC v0.2.3 - BL: Update of modelIdentification.
+LO: Updated update conditions and semantics.
