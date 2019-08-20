@@ -4,7 +4,7 @@
         <name>NETN-ORG</name>
         <type>FOM</type>
         <version>1.0 (RC 1)</version>
-        <modificationDate>2019-07-31</modificationDate>
+        <modificationDate>2019-08-20</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>Produce a Organisation definition (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
