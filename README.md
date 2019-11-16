@@ -1,12 +1,22 @@
 # NETN-ORG
-MSDL
+![overview](./images/overview.png)
+
 
 ## Introduction
+
+
+
 ### Purpose
-Produce a ORBAT (MSDL) in a HLA Federation Execution
+
+The NETN-ORG FOM Module provides a common standard interface for representation of the state of units including command structure and relationship between organizations. This representation can be used for setting the initial state of simulated entities, capturing subsequent snapshot states and for dynamic change of organizational relationships.
 
 ### Scope
 
+- Capture unit state for (re-)initialization and snapshots
+- Dynamic changes of organization command structure
+- Dynamic changes of relationships between organizations
+  - Force relationships
+  - Support relationships
 
 ## License
 
@@ -19,7 +29,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
 
 ## Versions, updates and extentions
 
-All updates and versioning of this work is coordinated by the NATO Modelleing and Simulation Coordination Office (MSCO), managed by the NATO Modelling and Simulation Group (NMSG) and performed as NATO Science and Technology Organization (STO) technical activities in support of the NMSG Modelling and Simulation Standards Subgroup (MS3).
+All updates and versioning of this work is coordinated by the NATO Modelling and Simulation Coordination Office (MSCO), managed by the NATO Modelling and Simulation Group (NMSG) and performed as NATO Science and Technology Organization (STO) technical activities in support of the NMSG Modelling and Simulation Standards Subgroup (MS3).
 
 Feedback on the use of this work, suggestions for improvements and identified issues are welcome and can be provided using GitGub issue tracking. To engage in the development and update of this FOM Module please contact your national NMSG representative.
 
