@@ -3,22 +3,34 @@ Copyright (C) 2019 NATO/OTAN.
 This work is licensed under a [Creative Commons Attribution-NoDerivatives 4.0 International License](LICENCE.md).
 
 ## Introduction
-A military ORBAT defines the participants, simulated entities, in a federated distributed simulation.
+Modelling of an organizational unit in a distributed simulation depend on its intra-organizational relationship with other units, e.g. superior, subordinate, and the relationship between organizations, e.g. friendly or hostile. This organizational information is normally provided to simulation systems as part of initialization based on the scenario.
 
-The NATO Education and Training Network Organization Module (NETN ORG) is a specification of how to model entities (aggregate and physical), the hierarchy of these entities, the relation between entities and the  equipment at the entities.
+The NATO Education and Training Network Organization Module (NETN ORG) is a specification of how to represent organizations in a federated distributed simulation.
 
 The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and primarily intended to support interoperability in a federated simulation (federation) based on HLA. A Federation Object Model (FOM) Module is used to specify how data is represented and exchanged in the federation. The NETN-ORG FOM module is available as an XML file for use in HLA based federations.
 
 ### Purpose
-Publish an ORBAT in a HLA Federation Execution and support saving of an ORBAT (MSDL format) between executions of a federation and restoring of an ORBAT from saved data in a federation execution.
 
-MSDL is a SISO standard and many applications uses MSDL for the specification of an ORBAT, these applications read and writes files with the MSDL format. With a HLA FOM can this data be published as object instances in a federation execution which implies that applications without the functionality to read MSDL files can achieve the ORBAT data. 
+The NETN-ORG FOM Module provides a common standard interface for representation of the state of units including command structure and relationship between organizations. This representation can be used for setting the initial state of simulated entities, capturing subsequent snapshot states and for dynamic change of organizational relationships.
+
+### Scope
+
+- Capture unit state for (re-)initialization and snapshots
+- Dynamic changes of organization command structure
+- Dynamic changes of relationships between organizations
+  - Force relationships
+  - Support relationships
+
+
+## Fundamentals
+
+During simulation the organizational relationships may change. Dynamic changes of the task organization may include new and or rearranged unit structure. The relationship between organizations may also change during the execution of a scenario. These changes can be represented in the NETN-ORG FOM module as updates of corresponding attributes reflected to all subscribing simulation systems.
+
+In a federated distributed simulation, not all units and/or equipment in the organization are simulated, i.e. represented as ground-truth Aggregate or Platform entities. The initial allocation of modelling responsibility of specific units can be provided in NETN-ORG to indicate which units and which federate should register and model the ground truth entity.
 
 The simulated entities in an application is initialized with the ORBAT data, either reading the MSDL file or subscribing to the object classes in NETN-ORG FOM module.
 
 All object classes have a UUID attribute which is a unique identifier, this identifier is static and is valid both in a federation execution and between federation executions. Applications with the ORBAT data is aware of all units in the ORBAT even if there not any aggregate or physical entities that represents the Unit in the federation execution.
-
-### Scope
 
 <img src=./objectclasses.png>
 
@@ -46,3 +58,7 @@ The relations between forces is specified in a much more understandable way in c
 
 In the ORBAT is units assigned to a Federate which will have the modelling responsibility for these simulated entities in a federation execution. The assignment can be done by reading the ORBAT file and produce the ORBAT for the application prior to the execution of the federation or subscribe to the object classes Unit and Federate and register the assigned aggregate and physical entities.
 
+## Capture unit state for (re-)initialization and snapshots
+## Dynamic changes of organization command structure
+## Dynamic changes of Force relationships
+## Dynamic changes of Support relationships
