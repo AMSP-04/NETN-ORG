@@ -32,7 +32,7 @@ The simulated entities in an application are initialized with the ORBAT data, ei
 
 All object classes have a UUID attribute which is a unique identifier, this identifier is static and is valid both in a federation execution and between federation executions. Applications with the ORBAT data is aware of all units in the ORBAT even if there not any aggregate or physical entities that represent the Unit in the federation execution.
 
-<img src=./objectclasses.png>
+<img src=./images/objectclasses.png>
 
 **Figure: ORG FOM Object Classes**
 
