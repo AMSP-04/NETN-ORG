@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) by Curtis Blais (Naval Postgraduate School) -->
 <?purpose description="This schema defines the Military Scenario" ?>
 <?version number="1.0" date="March 25, 2007"?>
-<?copyright statement="Copyright (c) 2007 by the Simulation Interoperability Standards Organization, Inc.
+<?copyright statement="Copyright (c) 2018 by the Simulation Interoperability Standards Organization, Inc.
 P.O. Box 781238
 Orlando, FL 32878-1238, USA
 All rights reserved.
-Permission is hereby granted for SISO developing committee participants to reproduce this documentfor purposes of SISO product development activities only. Prior to submitting this document to another standards development organization for standardization activities, permission must first be obtained from the SISO Standards Activity Committee (SAC). Other entities seeking permission to reproduce this document, in whole or in part, must obtain permission from the SISO Executive Committee (EXCOM).
-SISO EXCOM
+SISO hereby grants a general, royalty-free license to copy, distribute, display, and make derivative works from this material, for all purposes, provided that any use of the material contains the following attribution: "Reprinted with permission from SISO Inc." Should a reader require additional information, contact the SISO Inc. Board of Directors.
+SISO Inc. Board of Directors
 P.O. Box 781238
 Orlando, FL 32878-1238, USA"?>
-<xs:schema targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1.0.0" id="MSDL">
+<xs:schema xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="qualified" version="1.0.0" id="MSDL">
 	<xs:simpleType name="enumAnchorPointType">
 		<xs:annotation>
 			<xs:documentation>Enumerated choice of an absolute Coordinate or point graphic as a location reference</xs:documentation>

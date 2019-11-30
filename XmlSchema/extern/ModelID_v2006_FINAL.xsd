@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2006 sp1 U (http://www.altova.com) by Paul Gustavson (SimVentions, Inc.) -->
+<!-- edited with XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) by Curtis Blais (Naval Postgraduate School) -->
 <!-- created with XMLSpy v2006 U (http://www.altova.com) by Tram Chase (SimVentions) -->
-<!--W3C Schema developed by the SISO BOM Product Develop Group (PDG) - version 2006 - copyright 2006 -->
+<?copyright statement="Copyright (c) 2018 by the Simulation Interoperability Standards Organization, Inc.
+P.O. Box 781238
+Orlando, FL 32878-1238, USA
+All rights reserved.
+SISO hereby grants a general, royalty-free license to copy, distribute, display, and make derivative works from this material, for all purposes, provided that any use of the material contains the following attribution: "Reprinted with permission from SISO Inc." Should a reader require additional information, contact the SISO Inc. Board of Directors.
+SISO Inc. Board of Directors
+P.O. Box 781238
+Orlando, FL 32878-1238, USA"?>
 <!--Schema for BOM DIF
 
 Version 0.12 - Sep 8, 2005 
