@@ -277,7 +277,7 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                         </attribute>
                         <attribute>
                             <name>Direction</name>
-                            <dataType>DegreesFloat32</dataType>
+                            <dataType>DirectionDegreesFloat32</dataType>
                             <updateType>Conditional</updateType>
                             <updateCondition>When changed</updateCondition>
                             <ownership>NoTransfer</ownership>
@@ -290,7 +290,7 @@ Optional.</semantics>
                         </attribute>
                         <attribute>
                             <name>Speed</name>
-                            <dataType>SpeedFloat32</dataType>
+                            <dataType>SpeedMeterPerSecondFloat32</dataType>
                             <updateType>Conditional</updateType>
                             <updateCondition>When changed</updateCondition>
                             <ownership>NoTransfer</ownership>
@@ -298,8 +298,6 @@ Optional.</semantics>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics>Disposition: Unit speed (for display only). 
-Kilometres per Hour for ground elements. 
-Nautical miles per hour for maritime and air objects. 
  
 Optional.</semantics>
                         </attribute>
@@ -413,60 +411,12 @@ The relation may change during a federation execution.</semantics>
     <dataTypes>
         <simpleDataTypes>
             <simpleData>
-                <name>Quantity</name>
-                <representation>HLAfloat64BE</representation>
-                <units>NA</units>
-                <resolution>NA</resolution>
-                <accuracy>NA</accuracy>
-                <semantics>The quanity of a holding</semantics>
-            </simpleData>
-            <simpleData>
-                <name>DegreesFloat64</name>
-                <representation>HLAfloat64BE</representation>
-                <units>Degree</units>
-                <resolution>NA</resolution>
-                <accuracy>NA</accuracy>
-                <semantics>Degrees</semantics>
-            </simpleData>
-            <simpleData>
-                <name>MetersFloat64</name>
-                <representation>HLAfloat64BE</representation>
-                <units>Meters (m)</units>
-                <resolution>NA</resolution>
-                <accuracy>NA</accuracy>
-                <semantics>Distance in meters.</semantics>
-            </simpleData>
-            <simpleData>
-                <name>DegreesFloat32</name>
-                <representation>HLAfloat32BE</representation>
-                <units>Degree</units>
-                <resolution>NA</resolution>
-                <accuracy>NA</accuracy>
-                <semantics>The unit is compass degrees measured relative to magnetic north 0 to 360 degrees clockwise.</semantics>
-            </simpleData>
-            <simpleData>
                 <name>FormationInt32</name>
                 <representation>HLAinteger32BE</representation>
                 <units>NA</units>
                 <resolution>1</resolution>
                 <accuracy>Perfect</accuracy>
                 <semantics>Defines the formation.</semantics>
-            </simpleData>
-            <simpleData>
-                <name>MetersFloat32</name>
-                <representation>HLAfloat32BE</representation>
-                <units>Meters</units>
-                <resolution>NA</resolution>
-                <accuracy>NA</accuracy>
-                <semantics>Distance in meters.</semantics>
-            </simpleData>
-            <simpleData>
-                <name>SpeedFloat32</name>
-                <representation>HLAfloat32BE</representation>
-                <units>m/s</units>
-                <resolution>NA</resolution>
-                <accuracy>NA</accuracy>
-                <semantics>The velocity of the unit.</semantics>
             </simpleData>
         </simpleDataTypes>
         <enumeratedDataTypes>
@@ -1231,17 +1181,17 @@ The relation may change during a federation execution.</semantics>
                 <semantics>Static and dynamic data about the holding.</semantics>
                 <field>
                     <name>OperationalCount</name>
-                    <dataType>Quantity</dataType>
+                    <dataType>QuantityFloat64</dataType>
                     <semantics>The number of specific OBJECT-TYPEs a specific OBJECT-ITEM has available for operations</semantics>
                 </field>
                 <field>
                     <name>OnHandQuantity</name>
-                    <dataType>Quantity</dataType>
+                    <dataType>QuantityFloat64</dataType>
                     <semantics>Current number of the holding.</semantics>
                 </field>
                 <field>
                     <name>RequiredOnHandQuantity</name>
-                    <dataType>Quantity</dataType>
+                    <dataType>QuantityFloat64</dataType>
                     <semantics>The required number of the holding.</semantics>
                 </field>
                 <field>
@@ -1282,7 +1232,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
                 </field>
                 <field>
                     <name>SensorOrientation</name>
-                    <dataType>DegreesFloat32</dataType>
+                    <dataType>DirectionDegreesFloat32</dataType>
                     <semantics>Orientation of the main sensor, sights, and weapon in compass degrees relative to orientation of the platform (equipment).</semantics>
                 </field>
             </fixedRecordData>
@@ -1298,12 +1248,12 @@ LEAD_ELEMENT or CENTER_OF_MASS</semantics>
                 </field>
                 <field>
                     <name>FormationSpacing</name>
-                    <dataType>MetersFloat32</dataType>
+                    <dataType>MeterFloat32</dataType>
                     <semantics>The default spacing in metres between subordinate elements one echelon below.</semantics>
                 </field>
                 <field>
                     <name>FormationOrientation</name>
-                    <dataType>DegreesFloat32</dataType>
+                    <dataType>DirectionDegreesFloat32</dataType>
                     <semantics>Orientation in compass degrees for unit formations and equipment.</semantics>
                 </field>
                 <field>
@@ -1388,17 +1338,17 @@ SubsurfaceFormationType: NOT_SPECIFIED</semantics>
                 <semantics>The GDC element specifies the Geodetic Coordinate (GDC) and is made up of the child elements.</semantics>
                 <field>
                     <name>Latitude</name>
-                    <dataType>DegreesFloat64</dataType>
+                    <dataType>LatLongDegreesFloat64</dataType>
                     <semantics>The Latitude element specifies the decimal degrees of latitude.</semantics>
                 </field>
                 <field>
                     <name>Longitude</name>
-                    <dataType>DegreesFloat64</dataType>
+                    <dataType>LatLongDegreesFloat64</dataType>
                     <semantics>The Longitude element specifies the decimal degrees of longitude. The domain type is msdl:floatLatitudeLongitude3_3.</semantics>
                 </field>
                 <field>
                     <name>ElevationAGL</name>
-                    <dataType>MetersFloat64</dataType>
+                    <dataType>MeterFloat64</dataType>
                     <semantics>The ElevationAGL element specifies the altitude, in meters of a position for the flight level for aircraft; depth for submerged objects; height of equipment or structures on the ground.</semantics>
                 </field>
             </fixedRecordData>
