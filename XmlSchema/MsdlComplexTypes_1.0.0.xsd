@@ -975,7 +975,7 @@ Orlando, FL 32878-1238, USA"?>
 								<xs:all>
 									<xs:element name="ObjectHandle" type="msdl:patternUUID32"/>
 									<xs:element name="Name" minOccurs="0" type="msdl:textName255"/>
-									<xs:element name="Units">
+									<xs:element name="Units" minOccurs="0">
 										<xs:complexType>
 											<xs:sequence maxOccurs="unbounded">
 												<xs:element name="Unit">
@@ -2085,3 +2085,4 @@ Orlando, FL 32878-1238, USA"?>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>
+
