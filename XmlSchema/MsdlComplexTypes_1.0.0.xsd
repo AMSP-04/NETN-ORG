@@ -1963,7 +1963,7 @@ Orlando, FL 32878-1238, USA"?>
 					<xs:documentation>The Universal Unique Identifier (UUID) of an object.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SymbolIdentifier" type="msdl:patternForceSymbolAPP6B" minOccurs="0">
+			<xs:element name="SymbolIdentifier" type="msdl:patternForceSymbolMilStd2525C" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The 15 character Symbol identifier includes dashes for restricted fields that shall not be interpreted. These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner. Affiliation and Country Code fields are provided in the ForceSide structure data. Status field value is 'Present' unless specified otherwise by the DateTimeGroup element.</xs:documentation>
 				</xs:annotation>
@@ -2085,4 +2085,5 @@ Orlando, FL 32878-1238, USA"?>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>
+
 
