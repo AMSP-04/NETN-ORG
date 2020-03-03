@@ -60,29 +60,6 @@
      </object>
     </object>
    </void>
-   <void method="add">
-    <object class="se.pitch.vomt2.model.PersistentProjectHelper$PersistentModule" id="PersistentProjectHelper$PersistentModule2">
-     <string>AIS</string>
-     <string>C:\Users\bergtwvd\workspace\GitHubProjects\AMSP-04\NETN-AIS\AIS.xml</string>
-     <boolean>false</boolean>
-     <boolean>false</boolean>
-     <boolean>true</boolean>
-     <boolean>true</boolean>
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <int>0</int>
-      </void>
-     </object>
-     <boolean>false</boolean>
-     <boolean>false</boolean>
-     <object class="java.awt.Color">
-      <int>177</int>
-      <int>221</int>
-      <int>250</int>
-      <int>255</int>
-     </object>
-    </object>
-   </void>
   </object>
   <null/>
   <null/>
@@ -118,24 +95,12 @@
      <object idref="Collections$EmptySet0"/>
     </object>
    </void>
+  </object>
+  <object class="java.util.LinkedHashSet">
    <void method="add">
-    <object class="se.pitch.vomt2.model.PersistentProjectHelper$PersistentView">
-     <boolean>true</boolean>
-     <object class="java.lang.Enum" method="valueOf">
-      <class>se.pitch.vomt2.model.TableType</class>
-      <string>INTERACTION_CLASS_TABLE</string>
-     </object>
-     <object idref="PersistentProjectHelper$PersistentModule2"/>
-     <int>5</int>
-     <int>45</int>
-     <int>1602</int>
-     <int>632</int>
-     <object idref="Collections$EmptySet0"/>
-     <object class="java.util.LinkedHashSet"/>
-    </object>
+    <object idref="PersistentProjectHelper$PersistentModule0"/>
    </void>
   </object>
-  <object class="java.util.LinkedHashSet"/>
   <boolean>false</boolean>
  </object>
 </java>

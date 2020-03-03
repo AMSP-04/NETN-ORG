@@ -385,7 +385,7 @@ Optional.</semantics>
                         <objectClass>
                             <name>VesselUnit</name>
                             <sharing>PublishSubscribe</sharing>
-                            <semantics>Specifies part of the  AIS code from an aircraft.</semantics>
+                            <semantics>This class defines additional attributes for a Vessel Unit in order to instantiate a vessel in a simulation.</semantics>
                             <attribute>
                                 <name>MID</name>
                                 <dataType>MIDcodeInt16</dataType>
@@ -496,7 +496,7 @@ If the value is not provided then the value shall assumed to be ON.</semantics>
                         <objectClass>
                             <name>SARAircraftUnit</name>
                             <sharing>PublishSubscribe</sharing>
-                            <semantics>Specifies part of the  identification code from an aircraft.</semantics>
+                            <semantics>This class defines additional attributes for a SAR Aircraft Unit in order to instantiate a SAR aircraft in a simulation.</semantics>
                             <attribute>
                                 <name>MID</name>
                                 <dataType>MIDcodeInt16</dataType>
@@ -1271,7 +1271,7 @@ The relation may change during a federation execution.</semantics>
             <enumeratedData>
                 <name>TransmitterStatusEnum8</name>
                 <representation>HLAoctet</representation>
-                <semantics>The the status of the transmitter.</semantics>
+                <semantics>The status of the transmitter.</semantics>
                 <enumerator>
                     <name>ON</name>
                     <value>0</value>
