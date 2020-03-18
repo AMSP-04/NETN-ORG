@@ -62,3 +62,47 @@ In the ORBAT is units assigned to a Federate which will have the modelling respo
 ## Dynamic changes of organization command structure
 ## Dynamic changes of Force relationships
 ## Dynamic changes of Support relationships
+
+## SISO MSDL Schema Derivative Work
+
+The NETN-ORG FOM Module is associated with a set of XML Schemas developed based on the SISO MSDL Standard and adapted to capture additional aspects of ORBAT information and initial allocation of modelling responsibilities to systems in a federated distributed simulation. To allow reuse of exisitng MSDL files, the updated schemas only contain extensions and any existing MSDL file is still valid according to the new schema. The following updates have been made:
+
+
+
+## Units
+* Updated UnitType
+  * Added Type
+  * Added Holdings
+* UnitType.SymbolIdentifier
+  Allow MIL-STD 2525C Symbol Identifiers
+* Updated UnitModelType
+  * Added EntityType
+* Added UnitTypeType (jc3idem)
+
+## Equipment
+* Updated EquipmentItemType
+  * Added NSN_Code
+  * Added NSN_Name
+  * Added Post_Type_Category
+  * Added Post_Type_Rank
+  * Added Holdings
+* Added HoldingsType
+* Updated EquipmentModelType
+  * Added EntityType
+* Updated EquipmentRelationsType
+  * Added SupportRelations
+
+## Allocation of Modelling Responsibilities (Deployment)
+
+* Updated MilitaryScenarioType
+  * Added Deployment
+
+* Updated MilitaryScenarioType.Deployment
+  * Name – Length restrictions
+  * Units – minOccurs = 0
+  * Unit – type
+
+## ??
+
+* Updated BoundarySymbolModifiersType
+  * Added StatusPresent
