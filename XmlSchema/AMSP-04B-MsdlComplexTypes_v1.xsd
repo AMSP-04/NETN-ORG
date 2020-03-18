@@ -422,7 +422,7 @@ Orlando, FL 32878-1238, USA"?>
 					<xs:documentation>The communication nets that equipment uses/subscribes to in order to communicate with other items of equipment.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Disposition" type="msdl:EquipmentDispositionType">
+			<xs:element name="Disposition" type="msdl:EquipmentDispositionType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Disposition consists of the location of units and the manner in which these units are tactically deployed.</xs:documentation>
 				</xs:annotation>
@@ -991,6 +991,19 @@ Orlando, FL 32878-1238, USA"?>
 										<xs:complexType>
 											<xs:sequence maxOccurs="unbounded">
 												<xs:element name="Unit">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ObjectHandle" type="msdl:patternUUID32"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Equipment" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence maxOccurs="unbounded">
+												<xs:element name="EquipmentItem">
 													<xs:complexType>
 														<xs:sequence>
 															<xs:element name="ObjectHandle" type="msdl:patternUUID32"/>
@@ -2039,6 +2052,11 @@ Orlando, FL 32878-1238, USA"?>
 					<xs:documentation>The 15 character Symbol identifier includes dashes for restricted fields that shall not be interpreted. These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner. Affiliation and Country Code fields are provided in the ForceSide structure data. Status field value is 'Present' unless specified otherwise by the DateTimeGroup element.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="SymbolId-2525D" type="msdl:patternForceSymbolMilStd2525D" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The 30 character MIL-STD-2525D Symbol identifier. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Name" type="msdl:textName255" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Unabbreviated designation.</xs:documentation>
@@ -2166,6 +2184,7 @@ Orlando, FL 32878-1238, USA"?>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>
+
 
 
 

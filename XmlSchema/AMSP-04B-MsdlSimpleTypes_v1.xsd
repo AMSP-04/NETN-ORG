@@ -157,6 +157,15 @@ Orlando, FL 32878-1238, USA"?>
 			<xs:pattern value="[SIE\*]{1}[PUAFNSHGWMDLJK\*]{1}[PAGSUFXZINO\*]{1}[APCDXF\*]{1}[A-Z1-9\-]{5}[A-Z\-\*]{1}[A-Z\-\*]{2}[\-\*]{2}[AECGNSX\-\*]{1}"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="patternForceSymbolMilStd2525D">
+		<xs:annotation>
+			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.The coding scheme, position 1, shall be 'S' for unit and equipment symbol identification.  The elements in the force symbol are defined in MIL STD 2525C.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="30"/>
+			<xs:pattern value="[0-9]{30}"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="patternForceSymbolID15">
 		<xs:annotation>
 			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.The coding scheme, position 1, shall be 'S' for unit and equipment symbol identification.  The elements in the force symbol are defined in MIL STD 2525B.</xs:documentation>
@@ -388,5 +397,6 @@ Orlando, FL 32878-1238, USA"?>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
+
 
 
