@@ -397,96 +397,80 @@ Specifies the Ground Thruth size.</semantics>
                         <semantics>This class defines additional attributes for a Vessel Unit in order to instantiate a vessel in a simulation.</semantics>
                         <attribute>
                             <name>MID</name>
-                            <dataType>MIDcodeInt16</dataType>
+                            <dataType>MIDcode</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>The Maritime Identification Digits (MID) for an individual vessel. The MID for an individual vessel is a three digits code as defined by https://www.itu.int/en/ITU-R. See also https://en.wikipedia.org/wiki/Maritime_identification_digits. 
- 
-If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                            <semantics>The Maritime Identification Digits (MID) for the vessel. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
                         </attribute>
                         <attribute>
                             <name>IMO</name>
-                            <dataType>IMOcodeInt32</dataType>
+                            <dataType>IMOcode</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>The International Maritime Organization (IMO) number is a unique identifier for vessels. An IMO number is made of the three letters "IMO" followed by a seven-digit number. This number consists of a six-digit sequential unique number followed by a check digit. The integrity of an IMO number can be verified using its check digit.This is done by multiplying each of the first six digits by a factor of 2 to 7 corresponding to their position from right to left. The rightmost digit of this sum is the check digit. For example, for IMO 9074729: (9×7) + (0×6) + (7×5) + (4×4) + (7×3) + (2×2) = 139. 
- 
-This attribute represents the 7 digits value of the IMO number. The value shall be zero for not available (default). The value shall also be zero for inland vessels. 
- 
-If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                            <semantics>The International Maritime Organization (IMO) number to identify the vessel. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
                         </attribute>
                         <attribute>
                             <name>ShipType</name>
-                            <dataType>ShipTypeInt8</dataType>
+                            <dataType>ShipTypeCode</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Type of ship. See ITU-R M.1371-5 for values. 
- 
-If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                            <semantics>Type of ship. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
                         </attribute>
                         <attribute>
-                            <name>DimBow</name>
-                            <dataType>DimensionInt16</dataType>
+                            <name>DimensionBow</name>
+                            <dataType>LengthMeterFloat32</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Distance from bow. Reference point for the reported position. 
- 
-If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                            <semantics>Distance from bow. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
                         </attribute>
                         <attribute>
-                            <name>DimStern</name>
-                            <dataType>DimensionInt16</dataType>
+                            <name>DimensionStern</name>
+                            <dataType>LengthMeterFloat32</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Distance from stern. Reference point for the reported position. 
- 
-If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                            <semantics>Distance from stern. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
                         </attribute>
                         <attribute>
-                            <name>DimPort</name>
-                            <dataType>DimensionInt16</dataType>
+                            <name>DimensionPort</name>
+                            <dataType>LengthMeterFloat32</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Distance from port. Reference point for the reported position. 
- 
-If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                            <semantics>Distance from port. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
                         </attribute>
                         <attribute>
-                            <name>DimStarboard</name>
-                            <dataType>DimensionInt16</dataType>
+                            <name>DimensionStarboard</name>
+                            <dataType>LengthMeterFloat32</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Distance from straboard. Reference point for the reported position. 
- 
-If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                            <semantics>Distance from straboard. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
                         </attribute>
                         <attribute>
                             <name>TransmitterStatus</name>
@@ -497,9 +481,7 @@ If the value is zero or not provided then the subscribing federate that is respo
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>The initial status of the AIS Transmitter(s) on board of the vessel. 
- 
-If the value is not provided then the value shall assumed to be ON.</semantics>
+                            <semantics>The initial status of the AIS Transmitter(s) on board of the vessel. If the value is not provided then the value shall assumed to be ON.</semantics>
                         </attribute>
                     </objectClass>
                     <objectClass>
@@ -508,16 +490,14 @@ If the value is not provided then the value shall assumed to be ON.</semantics>
                         <semantics>This class defines additional attributes for a SAR Aircraft Unit in order to instantiate a SAR aircraft in a simulation.</semantics>
                         <attribute>
                             <name>MID</name>
-                            <dataType>MIDcodeInt16</dataType>
+                            <dataType>MIDcode</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>The Maritime Identification Digits (MID) for a SAR aircraft. The MID for an individual aircraft is a three digits code as defined by https://www.itu.int/en/ITU-R. See also https://en.wikipedia.org/wiki/Maritime_identification_digits. 
- 
-If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the SAR aircraft shall generate a value.</semantics>
+                            <semantics>The Maritime Identification Digits (MID) for the SAR aircraft. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the SAR aircraft shall generate a value.</semantics>
                         </attribute>
                     </objectClass>
                 </objectClass>
@@ -554,38 +534,6 @@ The relation may change during a federation execution.</semantics>
                 <resolution>1</resolution>
                 <accuracy>Perfect</accuracy>
                 <semantics>Defines the formation.</semantics>
-            </simpleData>
-            <simpleData>
-                <name>MIDcodeInt16</name>
-                <representation>HLAinteger16BE</representation>
-                <units>NA</units>
-                <resolution>1</resolution>
-                <accuracy>Perfect</accuracy>
-                <semantics>Defines the MID.</semantics>
-            </simpleData>
-            <simpleData>
-                <name>IMOcodeInt32</name>
-                <representation>HLAinteger32BE</representation>
-                <units>NA</units>
-                <resolution>1</resolution>
-                <accuracy>30 bits value</accuracy>
-                <semantics>Defnes the 7 digits of the IMO number.</semantics>
-            </simpleData>
-            <simpleData>
-                <name>ShipTypeInt8</name>
-                <representation>HLAoctet</representation>
-                <units>NA</units>
-                <resolution>1</resolution>
-                <accuracy>8 bits value</accuracy>
-                <semantics>Defines the Ship Type.</semantics>
-            </simpleData>
-            <simpleData>
-                <name>DimensionInt16</name>
-                <representation>HLAinteger16BE</representation>
-                <units>NA</units>
-                <resolution>meters</resolution>
-                <accuracy>Whole meters</accuracy>
-                <semantics>Defines the dimension.</semantics>
             </simpleData>
         </simpleDataTypes>
         <enumeratedDataTypes>
