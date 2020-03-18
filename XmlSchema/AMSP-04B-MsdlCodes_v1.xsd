@@ -377,6 +377,11 @@ Orlando, FL 32878-1238, USA"?>
 					<xs:documentation>Type of owner is a force/side</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="EQUIPMENT">
+				<xs:annotation>
+					<xs:documentation>Type of owner is a piece of equipment</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="enumFormationLocationType">
