@@ -1,16 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) by Curtis Blais (Naval Postgraduate School) -->
-<?purpose description="This schema defines complex types used in the Military Scenario Definition Language." ?>
-<?version number="1.0" date="March 25, 2007"?>
-<?copyright statement="Copyright (c) 2018 by the Simulation Interoperability Standards Organization, Inc.
-P.O. Box 781238
-Orlando, FL 32878-1238, USA
-All rights reserved.
-SISO hereby grants a general, royalty-free license to copy, distribute, display, and make derivative works from this material, for all purposes, provided that any use of the material contains the following attribution: "Reprinted with permission from SISO Inc." Should a reader require additional information, contact the SISO Inc. Board of Directors.
-SISO Inc. Board of Directors
-P.O. Box 781238
-Orlando, FL 32878-1238, USA"?>
-<?Reprinted with permission from SISO Inc.?>
+<?purpose description="Derivative work based on MsdlComplexTypes_1.0.0 XML Schema. Reprinted with permission from SISO Inc. This schema defines complex types used in the Military Scenario Definition Language." ?>
+<?version number="1.0" date="March 18, 2020"?>
+<!-- 	
+	This XML Schema is a derivative work and is "Reprinted with permission from SISO Inc."  
+
+	The Schema is based on MsdlComplexTypes_1.0.0 XML Schema - Copyright (c) 2018 by the Simulation Interoperability Standards Organization, Inc
+	SISO grants a general, royalty-free license to copy, distribute, display, and make derivative works from the MsdlComplexTypes_1.0.0 XML Schema, 
+	for all purposes, provided that any use of the material contains the following attribution: "Reprinted with permission from SISO Inc." 
+
+	This derivative work is maintained by NATO NMSG MS3 for use in AMSP-04.
+
+	## Changes made for AMSP-04 Ed A
+		* Updated BoundarySymbolModifiersType
+			* Added StatusPresent
+		* Added HoldingsType
+		* Added UnitTypeType (jc3idem)
+		* Updated UnitModelType
+			* Added EntityType
+		* Updated EquipmentItemType
+			* Added NSN_Code
+			* Added NSN_Name
+			* Added Post_Type_Category
+			* Added Post_Type_Rank
+			* Added Holdings
+		* Updated EquipmentModelType
+			* Added EntityType
+		* Updated EquipmentRelationsType
+			* Added SupportRelations
+		* Renamed InstallationType element
+			* patternInstallationSymbolID15 to patternInstallationSymbolAPP6B
+		* Renamed METOCGraphicTypeelement
+			* patternMETOCSymbolID15 to patternMETOCSymbolAPP6B
+		* Renamed MOOTWGraphicType
+			* patternMOOTWSymbolID15 to patternMOOTWSymbolAPP6B
+		* Renamed TacticalGraphicType
+			* patternTacticalGraphicSymbolID15 to patternTacticalGraphicSymbolAPP6B
+		* Updated MilitaryScenarioType
+			* Added Deployment
+		* Updated UnitType
+			* Added Type
+			* Added Holdings
+			* Renamed patternForceSymbolID15 to patternForceSymbolAPP6B
+
+	## Additional Changes made for AMSP-04 Ed B
+		* Updated MilitaryScenarioType.Deployment
+  			* Name – Length restrictions
+  			* Units – minOccurs = 0
+  			* Unit – type
+		* UnitType.SymbolIdentifier
+  			* Changed to patternForceSymbolMilStd2525C from patternForceSymbolAPP6B
+-->
 <?This is a derivative work of the MsdlComplexTypes_1.0.0 xml schema developed for AMSP 04A and AMSP 04B?>
 <xs:schema xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:modelID="http://www.sisostds.org/schemas/modelID" xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0" id="MSDL">
 	<xs:include schemaLocation="AMSP-04B-MsdlCodes_v1.xsd"/>
