@@ -1224,21 +1224,15 @@ The relation may change during a federation execution.</semantics>
                     <value>3</value>
                 </enumerator>
             </enumeratedData>
-            <enumeratedData>
-                <name>TransmitterStatusEnum8</name>
-                <representation>HLAoctet</representation>
-                <semantics>The status of the transmitter.</semantics>
-                <enumerator>
-                    <name>ON</name>
-                    <value>0</value>
-                </enumerator>
-                <enumerator>
-                    <name>OFF</name>
-                    <value>1</value>
-                </enumerator>
-            </enumeratedData>
         </enumeratedDataTypes>
         <arrayDataTypes>
+            <arrayData>
+                <name>SymbolIdentifierArray15</name>
+                <dataType>HLAASCIIchar</dataType>
+                <cardinality>15</cardinality>
+                <encoding>HLAfixedArray</encoding>
+                <semantics>MIL-STD-2525C symbol code.</semantics>
+            </arrayData>
             <arrayData>
                 <name>ArrayOfRelations</name>
                 <dataType>Relation</dataType>
@@ -1280,6 +1274,13 @@ The relation may change during a federation execution.</semantics>
                 <cardinality>[0..255]</cardinality>
                 <encoding>HLAvariableArray</encoding>
                 <semantics>General text of max -length 255 characters.</semantics>
+            </arrayData>
+            <arrayData>
+                <name>SymbolIdentifierArray30</name>
+                <dataType>HLAASCIIchar</dataType>
+                <cardinality>30</cardinality>
+                <encoding>HLAfixedArray</encoding>
+                <semantics>MIL-STD-2525D symbol code.</semantics>
             </arrayData>
         </arrayDataTypes>
         <fixedRecordDataTypes>
