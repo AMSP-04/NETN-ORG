@@ -3,8 +3,8 @@
     <modelIdentification>
         <name>NETN-ORG</name>
         <type>FOM</type>
-        <version>1.0 (RC 1)</version>
-        <modificationDate>2019-08-20</modificationDate>
+        <version>1.0.0 (Baseline MAR 2020)</version>
+        <modificationDate>2020-03-18</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>Produce a Organisation definition (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
@@ -142,7 +142,7 @@ May be empty if no superior unit exist.</semantics>
                         <semantics>DIS Enumeration, defining the type of the entity, e.g. for the Main Battle Tank type Leopard 2 A5, the value shall be: 1.1.78.1.2.5.0.</semantics>
                     </attribute>
                     <attribute>
-                        <name>SymbolIdentifier</name>
+                        <name>SymbolId-2525C</name>
                         <dataType>SymbolIdentifierArray15</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>When changed</updateCondition>
@@ -155,6 +155,17 @@ Required.
 The symbol code describes the class, e.g. for ARMOR TRACK, HEAVY as a Leopard 2 shall the symbol code be: S*GPUCATH-*****, the * in second (2:nd) position is to be replaced to specify the affiliation. 
 The affiliation on a unit may change during an federation execution which imply that the 2:nd character will change. 
 Other characters specifies functionallity, e.g. if a submarine is surfaced or bottomed which can be the case during a federation execution.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>SymbolId-2525D</name>
+                        <dataType>SymbolIdentifierArray30</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When Changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>Neither</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>msdl:UnitType/SymbolIdentifier-2525D, MIL-STD-2525D symbol code.</semantics>
                     </attribute>
                     <attribute>
                         <name>Force</name>
@@ -286,7 +297,7 @@ Optional.</semantics>
                     </attribute>
                     <attribute>
                         <name>Speed</name>
-                        <dataType>SpeedMeterPerSecondFloat32</dataType>
+                        <dataType>VelocityMeterPerSecondFloat32</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>When changed</updateCondition>
                         <ownership>NoTransfer</ownership>
@@ -354,7 +365,9 @@ Optional.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>JC3IEDM-3.1: The specific value that represents the relative size of the commonly accepted configuration of military formations.</semantics>
+                        <semantics>JC3IEDM-3.1: The specific value that represents the relative size of the commonly accepted configuration of military formations. 
+ 
+Specifies the Ground Thruth size.</semantics>
                     </attribute>
                     <attribute>
                         <name>ArmCategoryCode</name>
@@ -1283,7 +1296,7 @@ The relation may change during a federation execution.</semantics>
                 <dataType>HLAASCIIchar</dataType>
                 <cardinality>15</cardinality>
                 <encoding>HLAfixedArray</encoding>
-                <semantics>MIL 2525C symbol code</semantics>
+                <semantics>MIL-STD-2525C symbol code.</semantics>
             </arrayData>
             <arrayData>
                 <name>ArrayOfRelations</name>
@@ -1326,6 +1339,13 @@ The relation may change during a federation execution.</semantics>
                 <cardinality>[0..255]</cardinality>
                 <encoding>HLAvariableArray</encoding>
                 <semantics>General text of max -length 255 characters.</semantics>
+            </arrayData>
+            <arrayData>
+                <name>SymbolIdentifierArray30</name>
+                <dataType>HLAASCIIchar</dataType>
+                <cardinality>30</cardinality>
+                <encoding>HLAfixedArray</encoding>
+                <semantics>MIL-STD-2525D symbol code.</semantics>
             </arrayData>
         </arrayDataTypes>
         <fixedRecordDataTypes>

@@ -12,3 +12,7 @@ Added new xml schemas
     AMSP-04B-MsdlCodes_v1 replaces MsdlCodes_1.0.0
     AMSP-04B-MsdlSimpleTypes_v1 replaces MsdlSimpleTypes_1.0.0
     AMSP-04B-MsdlComplexTypes_v1 replaces MsdlComplexTypes_1.0.0
+
+2020-3-18 - LO:
+Added new attribute SymbolId-2525D (FOM and schema)
+MSG-164 updated schema
