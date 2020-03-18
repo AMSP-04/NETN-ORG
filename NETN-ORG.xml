@@ -474,7 +474,7 @@ Specifies the Ground Thruth size.</semantics>
                         </attribute>
                         <attribute>
                             <name>TransmitterStatus</name>
-                            <dataType>TransmitterStatusEnum8</dataType>
+                            <dataType>TransmitterOperationalStatusEnum8</dataType>
                             <updateType>Conditional</updateType>
                             <updateCondition>When the tansmitter status updated by the vessel</updateCondition>
                             <ownership>NoTransfer</ownership>
