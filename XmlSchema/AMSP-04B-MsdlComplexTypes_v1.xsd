@@ -49,6 +49,7 @@
   			* Unit – type
 		* UnitType.SymbolIdentifier
   			* Changed to patternForceSymbolMilStd2525C from patternForceSymbolAPP6B
+		* Added UnitType.SymbolId-2525D
 -->
 <?This is a derivative work of the MsdlComplexTypes_1.0.0 xml schema developed for AMSP 04A and AMSP 04B?>
 <xs:schema xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:modelID="http://www.sisostds.org/schemas/modelID" xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0" id="MSDL">
