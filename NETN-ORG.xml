@@ -1240,13 +1240,6 @@ The relation may change during a federation execution.</semantics>
         </enumeratedDataTypes>
         <arrayDataTypes>
             <arrayData>
-                <name>SymbolIdentifierArray15</name>
-                <dataType>HLAASCIIchar</dataType>
-                <cardinality>15</cardinality>
-                <encoding>HLAfixedArray</encoding>
-                <semantics>MIL-STD-2525C symbol code.</semantics>
-            </arrayData>
-            <arrayData>
                 <name>ArrayOfRelations</name>
                 <dataType>Relation</dataType>
                 <cardinality>Dynamic</cardinality>
@@ -1287,13 +1280,6 @@ The relation may change during a federation execution.</semantics>
                 <cardinality>[0..255]</cardinality>
                 <encoding>HLAvariableArray</encoding>
                 <semantics>General text of max -length 255 characters.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>SymbolIdentifierArray30</name>
-                <dataType>HLAASCIIchar</dataType>
-                <cardinality>30</cardinality>
-                <encoding>HLAfixedArray</encoding>
-                <semantics>MIL-STD-2525D symbol code.</semantics>
             </arrayData>
         </arrayDataTypes>
         <fixedRecordDataTypes>
