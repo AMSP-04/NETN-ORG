@@ -397,7 +397,7 @@ Specifies the Ground Thruth size.</semantics>
                         <semantics>This class defines additional attributes for a Vessel Unit in order to instantiate a vessel in a simulation.</semantics>
                         <attribute>
                             <name>MID</name>
-                            <dataType>MIDcode</dataType>
+                            <dataType>MIDType</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
@@ -408,7 +408,7 @@ Specifies the Ground Thruth size.</semantics>
                         </attribute>
                         <attribute>
                             <name>IMO</name>
-                            <dataType>IMOcode</dataType>
+                            <dataType>IMOType</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
@@ -419,7 +419,7 @@ Specifies the Ground Thruth size.</semantics>
                         </attribute>
                         <attribute>
                             <name>ShipType</name>
-                            <dataType>ShipTypeCode</dataType>
+                            <dataType>ShipTypeType</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
@@ -490,7 +490,7 @@ Specifies the Ground Thruth size.</semantics>
                         <semantics>This class defines additional attributes for a SAR Aircraft Unit in order to instantiate a SAR aircraft in a simulation.</semantics>
                         <attribute>
                             <name>MID</name>
-                            <dataType>MIDcode</dataType>
+                            <dataType>MIDType</dataType>
                             <updateType>Static</updateType>
                             <updateCondition>Init</updateCondition>
                             <ownership>NoTransfer</ownership>
