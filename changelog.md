@@ -16,3 +16,7 @@ Added new xml schemas
 2020-3-18 - LO:
 Added new attribute SymbolId-2525D (FOM and schema)
 MSG-164 updated schema
+
+2020-3-19 - LO:
+Moved datatypes to NETN-BASE
+Updated datatype at attributes (use defined in RPR_v2)
