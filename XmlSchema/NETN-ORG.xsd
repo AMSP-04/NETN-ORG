@@ -11,7 +11,7 @@
 	This derivative work is maintained by NATO NMSG MS3 for use in AMSP-04.
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" xmlns:modelID="http://www.sisostds.org/schemas/modelID" xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.0" id="MSDL">
-	<xs:include schemaLocation="AMSP-04B-MsdlComplexTypes_v1.xsd"/>
+	<xs:include schemaLocation="NETN-ORG-ComplexTypes.xsd"/>
 	<xs:element name="MilitaryScenario" type="msdl:MilitaryScenarioType">
 		<xs:annotation>
 			<xs:documentation>The Military Scenario for the exercise.</xs:documentation>

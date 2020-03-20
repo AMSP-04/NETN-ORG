@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?purpose description="Derivative work based on MsdlComplexTypes_1.0.0 XML Schema. Reprinted with permission from SISO Inc. This schema defines complex types used in the Military Scenario Definition Language." ?>
-<?version number="1.0" date="March 18, 2020"?>
+<?version number="1.1" date="March 20, 2020"?>
 <!-- 	
 	This XML Schema is a derivative work and is "Reprinted with permission from SISO Inc."  
 
@@ -53,8 +53,8 @@
 -->
 <?This is a derivative work of the MsdlComplexTypes_1.0.0 xml schema developed for AMSP 04A and AMSP 04B?>
 <xs:schema xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:modelID="http://www.sisostds.org/schemas/modelID" xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0" id="MSDL">
-	<xs:include schemaLocation="AMSP-04B-MsdlCodes_v1.xsd"/>
-	<xs:include schemaLocation="AMSP-04B-MsdlSimpleTypes_v1.xsd"/>
+	<xs:include schemaLocation="NETN-ORG-Codes.xsd"/>
+	<xs:include schemaLocation="NETN-ORG-SimpleTypes.xsd"/>
 	<xs:import namespace="http://www.sisostds.org/schemas/modelID" schemaLocation="extern/ModelID_v2006_FINAL.xsd"/>
 	<xs:import namespace="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" schemaLocation="extern/JC3IEDMMeteorological.xsd"/>
 	<xs:complexType name="AnchorPointType">
