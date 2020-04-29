@@ -24,7 +24,7 @@ The NETN-ORG FOM Module provides a common standard interface for the representat
 
 ## Licence
 
-Copyright (C) 2019 NATO/OTAN.
+Copyright (C) 2020 NATO/OTAN.
 This work is licensed under a [Creative Commons Attribution-NoDerivatives 4.0 International License](LICENCE.md). 
 
 The work includes the [NETN-ORG.xml](NETN-ORG.xml) FOM Module and [documentation](NETN-ORG.md).
@@ -48,7 +48,7 @@ Version numbering of this FOM Module and associated documentation is based on th
 
 |Version|Description|
 |---|---|
-|v 1.0.0 (RC1) |Initial release of NETN ORG FOM Module based on MSDL and Viking Computer Assisted eXercise (CAX).|
+|v 1.0 |Initial release of NETN ORG FOM Module based on MSDL and Viking Computer Assisted eXercise (CAX).|
 
 [Changelog](changelog.md)
 
