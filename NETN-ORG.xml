@@ -90,11 +90,9 @@ For federates, use the Federate Name used in the HLA join command.</semantics>
                     <semantics>Unique Identifier, msdl:UnitType/ObjectHandle.</semantics>
                 </attribute>
                 <objectClass>
-                    <name>Federate</name>
+                    <name>FederateApplication</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Defines deployment of units for a federate, the Units attribute defines the units that the federate has modelling responsibility for. 
- 
-An extension to the MSDL standard defined in MSG-106.</semantics>
+                    <semantics>Defines deployment of units for a federate application. The Units attribute defines the units that the federate has modelling responsibility for. This is an extension to the MSDL standard defined bij MSG-106.</semantics>
                     <attribute>
                         <name>Units</name>
                         <dataType>ArrayOfUuid</dataType>
@@ -127,8 +125,7 @@ IsSimulationEntity</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Reference to the superior unit. 
-May be empty if no superior unit exist.</semantics>
+                        <semantics>Required: Reference to the superior unit of this unit. If this unit has no superior unit (i.e. is the top-unit) then the value of this attribute shall be "000000000000000".</semantics>
                     </attribute>
                     <attribute>
                         <name>EntityType</name>
@@ -142,7 +139,7 @@ May be empty if no superior unit exist.</semantics>
                         <semantics>DIS Enumeration, defining the type of the entity, e.g. for the Main Battle Tank type Leopard 2 A5, the value shall be: 1.1.78.1.2.5.0.</semantics>
                     </attribute>
                     <attribute>
-                        <name>SymbolId-2525C</name>
+                        <name>SymbolId2525C</name>
                         <dataType>SymbolIdentifierArray15</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>When changed</updateCondition>
@@ -157,7 +154,7 @@ The affiliation on a unit may change during an federation execution which imply 
 Other characters specifies functionallity, e.g. if a submarine is surfaced or bottomed which can be the case during a federation execution.</semantics>
                     </attribute>
                     <attribute>
-                        <name>SymbolId-2525D</name>
+                        <name>SymbolId2525D</name>
                         <dataType>SymbolIdentifierArray30</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>When Changed</updateCondition>
