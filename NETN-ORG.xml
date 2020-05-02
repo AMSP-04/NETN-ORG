@@ -102,7 +102,7 @@ For federates, use the Federate Name used in the HLA join command.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>The units that the federate has responsibility for.</semantics>
+                        <semantics>Required: List of references to units that the federate application has initial modelling responsibility for.</semantics>
                     </attribute>
                 </objectClass>
                 <objectClass>
