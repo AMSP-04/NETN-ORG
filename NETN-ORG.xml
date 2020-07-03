@@ -4,7 +4,7 @@
         <name>NETN-ORG</name>
         <type>FOM</type>
         <version>1.0</version>
-        <modificationDate>2020-06-24</modificationDate>
+        <modificationDate>2020-07-03</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>Produce a Organisation definition (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
@@ -74,7 +74,9 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Required: Unique Identifier.</semantics>
+                    <semantics>Required. 
+ 
+Unique Identifier.</semantics>
                 </attribute>
                 <attribute>
                     <name>Name</name>
@@ -85,7 +87,8 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Required: Name.
+                    <semantics>Required. 
+ 
 For units, e.g. use the value from the NETN Callsign attribute. 
 For federates, use the Federate Name used in the HLA join command.</semantics>
                 </attribute>
@@ -102,7 +105,9 @@ For federates, use the Federate Name used in the HLA join command.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required: List of references to units that the federate application has initial modelling responsibility for.</semantics>
+                        <semantics>Optional, default is an empty list. 
+ 
+The units that the federate has responsibility for.</semantics>
                     </attribute>
                 </objectClass>
                 <objectClass>
@@ -125,7 +130,11 @@ IsSimulationEntity</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required: Reference to the superior unit of this unit. If this unit has no superior unit (i.e. is the top-unit) then the value of this attribute shall be "000000000000000".</semantics>
+                        <semantics>Required. 
+ 
+Reference to the superior unit of this unit. 
+ 
+If this unit has no superior unit (i.e. is the top-unit) then the value of this attribute shall be 00000000-0000-0000-0000-000000000000 (UUID with all zeros).</semantics>
                     </attribute>
                     <attribute>
                         <name>EntityType</name>
@@ -136,7 +145,13 @@ IsSimulationEntity</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>DIS Enumeration, defining the type of the entity, e.g. for the Main Battle Tank type Leopard 2 A5, the value shall be: 1.1.78.1.2.5.0.</semantics>
+                        <semantics>Required. 
+ 
+DIS Enumeration, defining the type of the entity, e.g. for the Main Battle Tank type Leopard 2 A5, the value shall be: 1.1.78.1.2.5.0. 
+ 
+For aggregates, use zero (0) for the country code, follow SISO-REF-010-00v20-0D03 or later for kind, domain, echelon (category), type (subcategory), HQ (specific). 
+ 
+When no definition for the type is sufficient, the federation agreement shall define additional types.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolId2525C</name>
@@ -147,8 +162,10 @@ IsSimulationEntity</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>msdl:UnitType/SymbolIdentifier, MIL 2525 C symbol code. 
-Required. 
+                        <semantics>Required. 
+ 
+msdl:UnitType/SymbolIdentifier, MIL 2525 C symbol code. 
+ 
 The symbol code describes the class, e.g. for ARMOR TRACK, HEAVY as a Leopard 2 shall the symbol code be: S*GPUCATH-*****, the * in second (2:nd) position is to be replaced to specify the affiliation. 
 The affiliation on a unit may change during an federation execution which imply that the 2:nd character will change. 
 Other characters specifies functionallity, e.g. if a submarine is surfaced or bottomed which can be the case during a federation execution.</semantics>
@@ -159,10 +176,12 @@ Other characters specifies functionallity, e.g. if a submarine is surfaced or bo
                         <updateType>Conditional</updateType>
                         <updateCondition>When Changed</updateCondition>
                         <ownership>NoTransfer</ownership>
-                        <sharing>Neither</sharing>
+                        <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>msdl:UnitType/SymbolIdentifier-2525D, MIL-STD-2525D symbol code.</semantics>
+                        <semantics>Optional. 
+ 
+msdl:UnitType/SymbolIdentifier-2525D, MIL-STD-2525D symbol code.</semantics>
                     </attribute>
                     <attribute>
                         <name>Force</name>
@@ -173,7 +192,9 @@ Other characters specifies functionallity, e.g. if a submarine is surfaced or bo
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>The value is the UUID value of the Force that the unit belongs to.</semantics>
+                        <semantics>Required. 
+ 
+The value is the UUID value of the Force that the unit belongs to.</semantics>
                     </attribute>
                     <attribute>
                         <name>Holdings</name>
@@ -184,7 +205,9 @@ Other characters specifies functionallity, e.g. if a submarine is surfaced or bo
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>A sequence of holdings at the unit.</semantics>
+                        <semantics>Optional, default is an empty list. 
+ 
+A sequence of holdings at the unit.</semantics>
                     </attribute>
                     <attribute>
                         <name>IsSimulationEntity</name>
@@ -195,8 +218,12 @@ Other characters specifies functionallity, e.g. if a submarine is surfaced or bo
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Indicates if the ORBAT Unit is created during the federation execution and its existence is to manage simulation activites. 
+                        <semantics>Optional, default is False. 
+ 
+Indicates if the ORBAT Unit is created during the federation execution and its existence is to manage simulation activites. 
+ 
 For normal ORBAT Units is this False. 
+ 
 Simulation Units will not be saved when a MSDL ORBAT is saved to file. 
 No corresponding tag in the MSDL schema.</semantics>
                     </attribute>
@@ -209,7 +236,9 @@ No corresponding tag in the MSDL schema.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>The host unit that the unit is a part of at scenarion initialisation.</semantics>
+                        <semantics>Optional, default value is 00000000-0000-0000-0000-000000000000 (UUID with all zeros). 
+ 
+The host unit that the unit Is Part Of at scenarion initialisation.</semantics>
                     </attribute>
                     <attribute>
                         <name>UniqueDesignation</name>
@@ -220,8 +249,11 @@ No corresponding tag in the MSDL schema.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>UnitSymbolModifiers: Symbol’s unique designation. 
-Text for the symbols unique designation, e.g. the value at the RPR Marking attribute.</semantics>
+                        <semantics>Required. 
+ 
+UnitSymbolModifiers: Symbol’s unique designation. 
+ 
+Text for the symbols unique designation, e.g. the value at the RPR Marking/NETN Callsign attribute.</semantics>
                     </attribute>
                     <attribute>
                         <name>Echelon</name>
@@ -232,7 +264,9 @@ Text for the symbols unique designation, e.g. the value at the RPR Marking attri
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>UnitSymbolModifiers: Graphic modifier that identifies the command level.</semantics>
+                        <semantics>Optional, default NONE. 
+ 
+UnitSymbolModifiers: Graphic modifier that identifies the command level.</semantics>
                     </attribute>
                     <attribute>
                         <name>CombatEffectiveness</name>
@@ -243,7 +277,9 @@ Text for the symbols unique designation, e.g. the value at the RPR Marking attri
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>UnitSymbolModifiers: Specifies the modifier that indicates the ability of a unit to perform its mission.</semantics>
+                        <semantics>Optional. 
+ 
+UnitSymbolModifiers: Specifies the modifier that indicates the ability of a unit to perform its mission.</semantics>
                     </attribute>
                     <attribute>
                         <name>HigherFormation</name>
@@ -254,7 +290,9 @@ Text for the symbols unique designation, e.g. the value at the RPR Marking attri
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>UnitSymbolModifiers: When the designation is different that the one specified by the Relations element.</semantics>
+                        <semantics>Optional. 
+ 
+UnitSymbolModifiers: When the designation is different that the one specified by the Relations element.</semantics>
                     </attribute>
                     <attribute>
                         <name>IFF</name>
@@ -265,7 +303,9 @@ Text for the symbols unique designation, e.g. the value at the RPR Marking attri
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>UnitSymbolModifiers: Displays IFF/SIF identification modes and codes.</semantics>
+                        <semantics>Optional. 
+ 
+UnitSymbolModifiers: Displays IFF/SIF identification modes and codes.</semantics>
                     </attribute>
                     <attribute>
                         <name>Location</name>
@@ -276,7 +316,9 @@ Text for the symbols unique designation, e.g. the value at the RPR Marking attri
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Disposition: 
+                        <semantics>Optional. 
+ 
+Disposition: 
 If altitude is negative, then below sea level (e.g subs).</semantics>
                     </attribute>
                     <attribute>
@@ -288,9 +330,9 @@ If altitude is negative, then below sea level (e.g subs).</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Disposition: The Direction of Movement, in compass degrees, of a scenario element. 
+                        <semantics>Optional. 
  
-Optional.</semantics>
+Disposition: The Direction of Movement, in compass degrees, of a scenario element.</semantics>
                     </attribute>
                     <attribute>
                         <name>Speed</name>
@@ -301,9 +343,9 @@ Optional.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Disposition: Unit speed (for display only). 
+                        <semantics>Optional. 
  
-Optional.</semantics>
+Disposition: Unit speed (for display only).</semantics>
                     </attribute>
                     <attribute>
                         <name>FormationPosition</name>
@@ -314,9 +356,9 @@ Optional.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Disposition: The position of this unit/eqiupment in the higher unit formation. 
+                        <semantics>Optional. 
  
-Optional.</semantics>
+Disposition: The position of this unit/eqiupment in the higher unit formation.</semantics>
                     </attribute>
                     <attribute>
                         <name>OwnFormation</name>
@@ -327,9 +369,9 @@ Optional.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Disposition: The formation of this unit. 
+                        <semantics>Optional. 
  
-Optional.</semantics>
+Disposition: The formation of this unit.</semantics>
                     </attribute>
                     <attribute>
                         <name>CategoryCode</name>
@@ -340,7 +382,9 @@ Optional.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>JC3IEDM-3.1: The specific value that represents the class of UNIT-TYPE.</semantics>
+                        <semantics>Optional. 
+ 
+JC3IEDM-3.1: The specific value that represents the class of UNIT-TYPE.</semantics>
                     </attribute>
                     <attribute>
                         <name>CommandFunctionIndicatorCode</name>
@@ -351,7 +395,9 @@ Optional.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>JC3IEDM-3.1: The specific value that denotes whether an ORGANISATION-TYPE has a command function.</semantics>
+                        <semantics>Optional. 
+ 
+JC3IEDM-3.1: The specific value that denotes whether an ORGANISATION-TYPE has a command function.</semantics>
                     </attribute>
                     <attribute>
                         <name>SizeCode</name>
@@ -362,7 +408,9 @@ Optional.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>JC3IEDM-3.1: The specific value that represents the relative size of the commonly accepted configuration of military formations. 
+                        <semantics>Optional. 
+ 
+JC3IEDM-3.1: The specific value that represents the relative size of the commonly accepted configuration of military formations. 
  
 Specifies the Ground Thruth size.</semantics>
                     </attribute>
@@ -375,7 +423,9 @@ Specifies the Ground Thruth size.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>JC3IEDM-3.1: The specific value that represents the designation of a military branch for a particular UNIT-TYPE.</semantics>
+                        <semantics>Optional. 
+ 
+JC3IEDM-3.1: The specific value that represents the designation of a military branch for a particular UNIT-TYPE.</semantics>
                     </attribute>
                     <attribute>
                         <name>TypeServiceCode</name>
@@ -386,7 +436,22 @@ Specifies the Ground Thruth size.</semantics>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>JC3IEDM-3.1: The specific value that represents a military, paramilitary, irregular force, force or group, capable of functioning as an offensive or defensive combat or support organisation.</semantics>
+                        <semantics>Optional. 
+ 
+JC3IEDM-3.1: The specific value that represents a military, paramilitary, irregular force, force or group, capable of functioning as an offensive or defensive combat or support organisation.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>CommunicationNetworkInstances</name>
+                        <dataType>ArrayOfCommunicationNetworks</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When Changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional, default is an empty list.
+
+Array of Communication Network instances.</semantics>
                     </attribute>
                     <objectClass>
                         <name>VesselUnit</name>
@@ -517,6 +582,167 @@ The relation may change during a federation execution.</semantics>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
                         <semantics>Sequence of relations, force-relation.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>EquipmentItem</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>A holder for the MSDL class EquipmentItem</semantics>
+                    <attribute>
+                        <name>HoldingOrganization</name>
+                        <dataType>HoldingOrganizationStruct</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. 
+ 
+Defines the owner (type and id).</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>SymbolId2525C</name>
+                        <dataType>SymbolIdentifierArray15</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. 
+ 
+msdl:EquipmentItemType/SymbolIdentifier, MIL 2525 C symbol code. 
+ 
+The symbol code describes the class, e.g. for ARMOR TRACK, HEAVY as a Leopard 2 shall the symbol code be: S*GPUCATH-*****, the * in second (2:nd) position is to be replaced to specify the affiliation. 
+The affiliation on a unit may change during an federation execution which imply that the 2:nd character will change. 
+Other characters specifies functionallity, e.g. if a submarine is surfaced or bottomed which can be the case during a federation execution.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>CommunicationNetworkReferences</name>
+                        <dataType>ArrayOfCommunicationNetworks</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When updated</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional, default is an empty list. 
+ 
+The reference to a CommunicationNetInstance that equipment monitors or uses to communicate with a mission.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Location</name>
+                        <dataType>GDCStruct</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. 
+ 
+Disposition: 
+If altitude is negative, then below sea level (e.g subs).</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>NSNcode</name>
+                        <dataType>NatoStockNumberArray13</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. 
+ 
+13 digits (0-9)</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>EntityType</name>
+                        <dataType>EntityTypeStruct</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required, if unknown, use 0.0.0.0.0.0.0. 
+ 
+DIS/RPR definition of the type.
+
+MSDL: Model tag</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Resolution</name>
+                        <dataType>ModelResolutionTypeEnum32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When Changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional, default value: NOT_SPECIFIED
+ 
+Enumeration indicating the level of fidelity appropriate for instancing the unit or equipment in the simulation.
+
+MSDL: Model tag</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>CombatEffectiveness</name>
+                        <dataType>CombatEffectivenessTypeEnum32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. 
+ 
+EquipmentSymbolModifiers: 
+The text modifier for units and  installations that indicates unit effectiveness or installation capability.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Quantity</name>
+                        <dataType>QuantityInt32</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional, default is one (1). 
+ 
+EquipmentSymbolModifiers: 
+Identifies the number of items present.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>UniqueDesignation</name>
+                        <dataType>Text21</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. 
+ 
+EquipmentSymbolModifiers: 
+The text modifier for the symbol's unique designation.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>EquipmentType</name>
+                        <dataType>Text24</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>When changed</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. 
+ 
+EquipmentSymbolModifiers: 
+The text modifier that indicates type of equipment.</semantics>
                     </attribute>
                 </objectClass>
             </objectClass>
@@ -1132,6 +1358,186 @@ The relation may change during a federation execution.</semantics>
                     <value>3</value>
                 </enumerator>
             </enumeratedData>
+            <enumeratedData>
+                <name>ModelResolutionTypeEnum32</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Enumeration indicating the level of fidelity appropriate for instancing the unit or equipment in the simulation.</semantics>
+                <enumerator>
+                    <name>NONE</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>MINIMAL</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>STANDARD</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>ENHANCED</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>HIGH</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>NOT_SPECIFIED</name>
+                    <value>5</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>CommunicationServiceTypeEnum32</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>List of Communications Net Types for Army Units.</semantics>
+                <enumerator>
+                    <name>DATTRF</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>FAX</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>IFF</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>IMAGE</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>MCI</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>MHS</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>TDL</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>VIDSVC</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>VOCSVC</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>NOS</name>
+                    <value>9</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>ForceOwnerTypeEnum32</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Enum for type of Owner.</semantics>
+                <enumerator>
+                    <name>UNIT</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>FORCE_SIDE</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>EQUIPMENT</name>
+                    <value>2</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>EchelonEnum32</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Graphic modifier that identifies Command level.</semantics>
+                <enumerator>
+                    <name>NONE</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>TEAM</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>CREW</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>SQUAD</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>SECTION</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>PLATOON</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>DETACHMENT</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>COMPANY</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>BATTERY</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>TROOP</name>
+                    <value>9</value>
+                </enumerator>
+                <enumerator>
+                    <name>BATTALION</name>
+                    <value>10</value>
+                </enumerator>
+                <enumerator>
+                    <name>SQUADRON</name>
+                    <value>11</value>
+                </enumerator>
+                <enumerator>
+                    <name>REGIMENT</name>
+                    <value>12</value>
+                </enumerator>
+                <enumerator>
+                    <name>GROUP</name>
+                    <value>13</value>
+                </enumerator>
+                <enumerator>
+                    <name>BRIGADE</name>
+                    <value>14</value>
+                </enumerator>
+                <enumerator>
+                    <name>DIVISION</name>
+                    <value>15</value>
+                </enumerator>
+                <enumerator>
+                    <name>CORPS</name>
+                    <value>16</value>
+                </enumerator>
+                <enumerator>
+                    <name>ARMY</name>
+                    <value>17</value>
+                </enumerator>
+                <enumerator>
+                    <name>ARMYGROUP</name>
+                    <value>18</value>
+                </enumerator>
+                <enumerator>
+                    <name>FRONT</name>
+                    <value>19</value>
+                </enumerator>
+                <enumerator>
+                    <name>REGION</name>
+                    <value>20</value>
+                </enumerator>
+            </enumeratedData>
         </enumeratedDataTypes>
         <arrayDataTypes>
             <arrayData>
@@ -1175,6 +1581,28 @@ The relation may change during a federation execution.</semantics>
                 <cardinality>[0..255]</cardinality>
                 <encoding>HLAvariableArray</encoding>
                 <semantics>General text of max -length 255 characters.</semantics>
+            </arrayData>
+            <arrayData>
+                <name>Text64</name>
+                <dataType>HLAunicodeChar</dataType>
+                <cardinality>[0..64]</cardinality>
+                <encoding>HLAvariableArray</encoding>
+                <semantics>Text of max length 64 characters.</semantics>
+            </arrayData>
+            <arrayData>
+                <name>Text24</name>
+                <dataType>HLAunicodeChar</dataType>
+                <cardinality>[0..24]</cardinality>
+                <encoding>HLAvariableArray</encoding>
+                <semantics>Text of max length 24 characters.</semantics>
+            </arrayData>
+            <arrayData>
+                <name>ArrayOfCommunicationNetworks</name>
+                <dataType>CommunicationNetworkStruct</dataType>
+                <cardinality>Dynamic</cardinality>
+                <encoding>HLAvariableArray</encoding>
+                <semantics>An array of Communication Networks.
+</semantics>
             </arrayData>
         </arrayDataTypes>
         <fixedRecordDataTypes>
@@ -1368,6 +1796,43 @@ SubsurfaceFormationType: NOT_SPECIFIED</semantics>
                     <name>ElevationAGL</name>
                     <dataType>MeterFloat64</dataType>
                     <semantics>The ElevationAGL element specifies the altitude, in meters of a position for the flight level for aircraft; depth for submerged objects; height of equipment or structures on the ground.</semantics>
+                </field>
+            </fixedRecordData>
+            <fixedRecordData>
+                <name>HoldingOrganizationStruct</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>Identifies the element (unit, equipment or force) to which the equipment is held.</semantics>
+                <field>
+                    <name>OwnerChoise</name>
+                    <dataType>ForceOwnerTypeEnum32</dataType>
+                    <semantics>Defines the type of the owner.</semantics>
+                </field>
+                <field>
+                    <name>OwnerUuid</name>
+                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <semantics>Unique id at the owner.</semantics>
+                </field>
+            </fixedRecordData>
+            <fixedRecordData>
+                <name>CommunicationNetworkStruct</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>CommunicationNetInstance that equipment monitors or uses to communicate with a mission.</semantics>
+                <field>
+                    <name>Service</name>
+                    <dataType>CommunicationServiceTypeEnum32</dataType>
+                    <semantics>Required. 
+ 
+The type of service being used for communication as defined in JC3IEDM.</semantics>
+                </field>
+                <field>
+                    <name>Owner</name>
+                    <dataType>UuidArrayOfHLAbyte16</dataType>
+                    <semantics>UUID reference to the Unit that owns a particular item of data as part of that unit's organization.</semantics>
+                </field>
+                <field>
+                    <name>NetId</name>
+                    <dataType>Text64</dataType>
+                    <semantics>Name or ID of the Communication net.</semantics>
                 </field>
             </fixedRecordData>
         </fixedRecordDataTypes>

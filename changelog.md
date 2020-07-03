@@ -22,3 +22,7 @@ MSG-164 updated schema
 2020-3-19 - LO:
 Moved datatypes to NETN-BASE
 Updated datatype at attributes (use defined in RPR_v2)
+
+2020-07-03 - LO:
+Added object class EquipmentItem
+Added attribute CommunicationNetwokInstances at Unit
