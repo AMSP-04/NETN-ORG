@@ -47,7 +47,7 @@ Many attributes in the Unit object class has an equivalent attribute at the obje
 #### Force
 
 Units in an ORBAT belongs to a Force. 
- 
+
 Forces have relations to each other which is specified in the attribute Relations. 
 The relation between forces is defined by HostilityStatusCodeEnum32 which is derived from JC3IEDM, e.g. FR (Friendly),  HO (Hostile). 
 The relation between Force A and Force B does not have to be the same as the relation between B and A. 
@@ -57,6 +57,12 @@ The relations between forces is specified in a much more understandable way in c
 #### Federate
 
 In the ORBAT is units assigned to a Federate which will have the modelling responsibility for these simulated entities in a federation execution. The assignment can be done by reading the ORBAT file and produce the ORBAT for the application prior to the execution of the federation or subscribe to the object classes Unit and Federate and register the assigned aggregate and physical entities.
+
+#### Entity type and symbol identification
+
+Units and equipment items in NETN-ORG have both an `entity type` attribute and a `symbol identification` attribute. The entity type attribute designates the type of entity in the simulation. The SISO standard `SISO-REF-010` (Reference for Enumerations for Simulation Interoperability) provides the entity type enumeration values. The symbol identification is an alpha-numeric code used to describe the military symbol. NETN-ORG follows NATO `APP-6` (NATO Joint Military Symbology) for identification codes.
+
+There is currently no authoritative mapping between (simulation) entity type and (military) symbol identification. Hence both values should be provided for the correct representation units and equipment items in simulation systems and C2 systems.
 
 ## Capture unit state for (re-)initialization and snapshots
 ## Dynamic changes of organization command structure
