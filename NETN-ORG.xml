@@ -453,115 +453,6 @@ JC3IEDM-3.1: The specific value that represents a military, paramilitary, irregu
  
 Array of Communication Network instances.</semantics>
                     </attribute>
-                    <objectClass>
-                        <name>VesselUnit</name>
-                        <sharing>PublishSubscribe</sharing>
-                        <semantics>This class defines additional attributes for a Vessel Unit in order to instantiate a vessel in a simulation.</semantics>
-                        <attribute>
-                            <name>MID</name>
-                            <dataType>MIDType</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>The Maritime Identification Digits (MID) for the vessel. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>IMO</name>
-                            <dataType>IMOType</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>The International Maritime Organization (IMO) number to identify the vessel. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>ShipType</name>
-                            <dataType>ShipTypeType</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Type of ship. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>DimensionBow</name>
-                            <dataType>LengthMeterFloat32</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Distance from bow. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>DimensionStern</name>
-                            <dataType>LengthMeterFloat32</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Distance from stern. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>DimensionPort</name>
-                            <dataType>LengthMeterFloat32</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Distance from port. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>DimensionStarboard</name>
-                            <dataType>LengthMeterFloat32</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Distance from straboard. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>TransmitterStatus</name>
-                            <dataType>TransmitterOperationalStatusEnum8</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>When the tansmitter status updated by the vessel</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>The initial status of the AIS Transmitter(s) on board of the vessel. If the value is not provided then the value shall assumed to be ON.</semantics>
-                        </attribute>
-                    </objectClass>
-                    <objectClass>
-                        <name>SARAircraftUnit</name>
-                        <sharing>PublishSubscribe</sharing>
-                        <semantics>This class defines additional attributes for a SAR Aircraft Unit in order to instantiate a SAR aircraft in a simulation.</semantics>
-                        <attribute>
-                            <name>MID</name>
-                            <dataType>MIDType</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>The Maritime Identification Digits (MID) for the SAR aircraft. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the SAR aircraft shall generate a value.</semantics>
-                        </attribute>
-                    </objectClass>
                 </objectClass>
                 <objectClass>
                     <name>Force</name>
@@ -744,6 +635,115 @@ The text modifier for the symbol's unique designation.</semantics>
 EquipmentSymbolModifiers: 
 The text modifier that indicates type of equipment.</semantics>
                     </attribute>
+                    <objectClass>
+                        <name>Vessel</name>
+                        <sharing>PublishSubscribe</sharing>
+                        <semantics>This class defines additional attributes for a Vessel equipment in order to instantiate a vessel in a simulation.</semantics>
+                        <attribute>
+                            <name>MID</name>
+                            <dataType>MIDType</dataType>
+                            <updateType>Static</updateType>
+                            <updateCondition>Init</updateCondition>
+                            <ownership>NoTransfer</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>OPTIONAL. The Maritime Identification Digits (MID) for the vessel. If the value is not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                        </attribute>
+                        <attribute>
+                            <name>IMO</name>
+                            <dataType>IMOType</dataType>
+                            <updateType>Static</updateType>
+                            <updateCondition>Init</updateCondition>
+                            <ownership>NoTransfer</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>OPTIONAL. The International Maritime Organization (IMO) number to identify the vessel. If the value is not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                        </attribute>
+                        <attribute>
+                            <name>ShipType</name>
+                            <dataType>ShipTypeType</dataType>
+                            <updateType>Static</updateType>
+                            <updateCondition>Init</updateCondition>
+                            <ownership>NoTransfer</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>OPTIONAL. Type of ship. If the value is not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                        </attribute>
+                        <attribute>
+                            <name>DimensionBow</name>
+                            <dataType>LengthMeterFloat32</dataType>
+                            <updateType>Static</updateType>
+                            <updateCondition>Init</updateCondition>
+                            <ownership>NoTransfer</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>OPTIONAL. Distance from bow. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                        </attribute>
+                        <attribute>
+                            <name>DimensionStern</name>
+                            <dataType>LengthMeterFloat32</dataType>
+                            <updateType>Static</updateType>
+                            <updateCondition>Init</updateCondition>
+                            <ownership>NoTransfer</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>OPTIONAL. Distance from stern. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                        </attribute>
+                        <attribute>
+                            <name>DimensionPort</name>
+                            <dataType>LengthMeterFloat32</dataType>
+                            <updateType>Static</updateType>
+                            <updateCondition>Init</updateCondition>
+                            <ownership>NoTransfer</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>OPTIONAL. Distance from port. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                        </attribute>
+                        <attribute>
+                            <name>DimensionStarboard</name>
+                            <dataType>LengthMeterFloat32</dataType>
+                            <updateType>Static</updateType>
+                            <updateCondition>Init</updateCondition>
+                            <ownership>NoTransfer</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>OPTIONAL. Distance from straboard. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
+                        </attribute>
+                        <attribute>
+                            <name>TransmitterStatus</name>
+                            <dataType>TransmitterOperationalStatusEnum8</dataType>
+                            <updateType>Conditional</updateType>
+                            <updateCondition>When the tansmitter status updated by the vessel</updateCondition>
+                            <ownership>NoTransfer</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>OPTIONAL. The initial status of the AIS Transmitter(s) on board of the vessel. If the value is not provided then the value shall assumed to be ON.</semantics>
+                        </attribute>
+                    </objectClass>
+                    <objectClass>
+                        <name>SARAircraft</name>
+                        <sharing>PublishSubscribe</sharing>
+                        <semantics>This class defines additional attributes for a SAR Aircraft equipment  in order to instantiate a SAR aircraft in a simulation.</semantics>
+                        <attribute>
+                            <name>MID</name>
+                            <dataType>MIDType</dataType>
+                            <updateType>Static</updateType>
+                            <updateCondition>Init</updateCondition>
+                            <ownership>NoTransfer</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>OPTIONAL. The Maritime Identification Digits (MID) for the SAR aircraft. If the value is not provided then the subscribing federate that is responsible for the modelling of the SAR aircraft shall generate a value.</semantics>
+                        </attribute>
+                    </objectClass>
                 </objectClass>
             </objectClass>
         </objectClass>

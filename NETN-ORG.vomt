@@ -60,6 +60,29 @@
      </object>
     </object>
    </void>
+   <void method="add">
+    <object class="se.pitch.vomt2.model.PersistentProjectHelper$PersistentModule">
+     <string>NETN-BASE</string>
+     <string>C:\Users\bergtwvd\workspace\GitHubProjects\AMSP-04\NETN-BASE\NETN-BASE.xml</string>
+     <boolean>false</boolean>
+     <boolean>false</boolean>
+     <boolean>true</boolean>
+     <boolean>true</boolean>
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <int>0</int>
+      </void>
+     </object>
+     <boolean>false</boolean>
+     <boolean>false</boolean>
+     <object class="java.awt.Color">
+      <int>177</int>
+      <int>221</int>
+      <int>250</int>
+      <int>255</int>
+     </object>
+    </object>
+   </void>
   </object>
   <null/>
   <null/>
