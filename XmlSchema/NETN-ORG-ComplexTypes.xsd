@@ -2142,16 +2142,6 @@
 					<xs:documentation>The quantity of all specific Equipment/Consumable that is held by, installed in, or included with the unit</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="VesselData" type="msdl:VesselDataType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Specifies the data to be included in a AIS message from a vessel.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="SARData" type="msdl:SARDataType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Specifies the data to be included in a identification message from an aircraft.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="UnitTypeType">
