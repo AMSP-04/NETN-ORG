@@ -154,34 +154,15 @@ For aggregates, use zero (0) for the country code, follow SISO-REF-010-00v20-0D0
 When no definition for the type is sufficient, the federation agreement shall define additional types.</semantics>
                     </attribute>
                     <attribute>
-                        <name>SymbolId2525C</name>
-                        <dataType>SymbolIdentifierArray15</dataType>
+                        <name>SymbolId</name>
+                        <dataType>SymbolIdentifier</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>When changed</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. 
- 
-msdl:UnitType/SymbolIdentifier, MIL 2525 C symbol code. 
- 
-The symbol code describes the class, e.g. for ARMOR TRACK, HEAVY as a Leopard 2 shall the symbol code be: S*GPUCATH-*****, the * in second (2:nd) position is to be replaced to specify the affiliation. 
-The affiliation on a unit may change during an federation execution which imply that the 2:nd character will change. 
-Other characters specifies functionallity, e.g. if a submarine is surfaced or bottomed which can be the case during a federation execution.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>SymbolId2525D</name>
-                        <dataType>SymbolIdentifierArray30</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>When Changed</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Optional. 
- 
-msdl:UnitType/SymbolIdentifier-2525D, MIL-STD-2525D symbol code.</semantics>
+                        <semantics>Required: A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
                     </attribute>
                     <attribute>
                         <name>Force</name>
@@ -493,21 +474,15 @@ The relation may change during a federation execution.</semantics>
 Defines the owner (type and id).</semantics>
                     </attribute>
                     <attribute>
-                        <name>SymbolId2525C</name>
-                        <dataType>SymbolIdentifierArray15</dataType>
+                        <name>SymbolId</name>
+                        <dataType>SymbolIdentifier</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>When changed</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. 
- 
-msdl:EquipmentItemType/SymbolIdentifier, MIL 2525 C symbol code. 
- 
-The symbol code describes the class, e.g. for ARMOR TRACK, HEAVY as a Leopard 2 shall the symbol code be: S*GPUCATH-*****, the * in second (2:nd) position is to be replaced to specify the affiliation. 
-The affiliation on a unit may change during an federation execution which imply that the 2:nd character will change. 
-Other characters specifies functionallity, e.g. if a submarine is surfaced or bottomed which can be the case during a federation execution.</semantics>
+                        <semantics>Required. A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
                     </attribute>
                     <attribute>
                         <name>CommunicationNetworkReferences</name>
