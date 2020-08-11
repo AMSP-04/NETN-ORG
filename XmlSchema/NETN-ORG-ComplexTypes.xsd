@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?purpose description="Derivative work based on MsdlComplexTypes_1.0.0 XML Schema. Reprinted with permission from SISO Inc. This schema defines complex types used in the Military Scenario Definition Language." ?>
-<?version number="1.1" date="March 20, 2020"?>
+<?version number="1.0" date="August 7, 2020"?>
 <!-- 	
 	This XML Schema is a derivative work and is "Reprinted with permission from SISO Inc."  
 
@@ -43,16 +43,27 @@
 			* Renamed patternForceSymbolID15 to patternForceSymbolAPP6B
 
 	## Additional Changes made for AMSP-04 Ed B
+		* Changed schema attribute elementFormDefault= from qualified to unqualified
 		* Updated MilitaryScenarioType.Deployment
   			* Name – Length restrictions
   			* Units – minOccurs = 0
   			* Unit – type
-		* UnitType.SymbolIdentifier
-  			* Changed to patternForceSymbolMilStd2525C from patternForceSymbolAPP6B
-		* Added UnitType.SymbolId-2525D
+		* Changed type of all SymbolIdentifier elements to patternSymbolId and updated documentation.
+		* Added  minOccurs="0" to datatypes for Unit and Equipment deployment elements.
+		* Changed complex type EquipmentItemType to allow additional elements. Changed from <all> to <choice maxOccurs="unbounded"> and added CustomData element.
+		* Changed complex type UnitType to allow additional elements. Changed from <all> to <choice maxOccurs="unbounded"> and added CustomData element.
+		* targetNamespace changed to urn:nato:nmsg:ms3:netn:org:1
+		
 -->
-<?This is a derivative work of the MsdlComplexTypes_1.0.0 xml schema developed for AMSP 04A and AMSP 04B?>
-<xs:schema xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:modelID="http://www.sisostds.org/schemas/modelID" xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0" id="MSDL">
+<xs:schema xmlns:msdl="urn:nato:nmsg:ms3:netn:org:1" 
+	xmlns:modelID="http://www.sisostds.org/schemas/modelID"
+	xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="urn:nato:nmsg:ms3:netn:org:1" 
+	elementFormDefault="unqualified" 
+	attributeFormDefault="unqualified" 
+	version="1.0.0">
+	
 	<xs:include schemaLocation="NETN-ORG-Codes.xsd"/>
 	<xs:include schemaLocation="NETN-ORG-SimpleTypes.xsd"/>
 	<xs:import namespace="http://www.sisostds.org/schemas/modelID" schemaLocation="extern/ModelID_v2006_FINAL.xsd"/>
@@ -426,18 +437,22 @@
 		<xs:annotation>
 			<xs:documentation>Information about a single piece of equipment.</xs:documentation>
 		</xs:annotation>
+	
 		<xs:all>
-			<xs:element name="ObjectHandle" type="msdl:patternUUID32">
+			<xs:element name="ObjectHandle" type="msdl:patternUUID32" minOccurs="1">
 				<xs:annotation>
 					<xs:documentation>The Universal Unique Identifier (UUID) of an object.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SymbolIdentifier" type="msdl:patternForceSymbolAPP6B" minOccurs="0">
+			<xs:element name="SymbolIdentifier" type="msdl:patternSymbolId" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The 15 character Symbol identifier includes dashes for restricted fields that shall not be interpreted. These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner. Affiliation and Country Code fields are provided in the ForceSide structure data. Status field value is 'Present' unless specified otherwise by the DateTimeGroup element.</xs:documentation>
+					<xs:documentation>A symbol identifier is represented as a string. 
+The symbol standard used is indicated using an optional uri notation (uri:xxxxxxxxxx). 
+The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. 
+If not provided the default symbol standard used is the one specified in the ScenarioDataStandards element of the XML file.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="NSN_Code" type="msdl:patternNSN">
+			<xs:element name="NSN_Code" type="msdl:patternNSN" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The 13 character of NATO Stock Number.</xs:documentation>
 				</xs:annotation>
@@ -467,7 +482,7 @@
 					<xs:documentation>Disposition consists of the location of units and the manner in which these units are tactically deployed.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Relations" type="msdl:EquipmentRelationsType">
+			<xs:element name="Relations" type="msdl:EquipmentRelationsType" minOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Relations identify the realtionship of equipment in terms of owner and organic relationships.</xs:documentation>
 				</xs:annotation>
@@ -493,17 +508,13 @@
 					<xs:documentation>The quantity of all specific Equipment/Consumable that is held by, installed in, or included with the unit.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="VesselData" type="msdl:VesselDataType" minOccurs="0">
+			<xs:element name="CustomData" type="xs:anyType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Specifies the data to be included in a AIS message from a vessel.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="SARData" type="msdl:SARDataType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Specifies the data to be included in a identification message from an aircraft.</xs:documentation>
+					<xs:documentation>Any additional information.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:all>
+		
 	</xs:complexType>
 	<xs:complexType name="EquipmentModelType">
 		<xs:annotation>
@@ -831,9 +842,12 @@
 					<xs:documentation>The Universal Unique Identifier (UUID) of an object.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SymbolIdentifier" type="msdl:patternInstallationSymbolAPP6B">
+			<xs:element name="SymbolIdentifier" type="msdl:patternSymbolId">
 				<xs:annotation>
-					<xs:documentation>The 15 character Symbol identifier includes dashes for restricted fields that shall not be interpreted. These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner. Affiliation and Country Code fields are provided in the ForceSide structure data. Status field value is 'Present' unless specified otherwise by the DateTimeGroup element.</xs:documentation>
+					<xs:documentation>A symbol identifier is represented as a string. 
+The symbol standard used is indicated using an optional uri notation (uri:xxxxxxxxxx). 
+The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. 
+If not provided the default symbol standard used is the one specified in the ScenarioDataStandards element of the XML file.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Affiliation" type="msdl:enumBaseAffiliation">
@@ -945,9 +959,12 @@
 					<xs:documentation>The Universal Unique Identifier (UUID) of an object.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SymbolIdentifier" type="msdl:patternMETOCSymbolAPP6B">
+			<xs:element name="SymbolIdentifier" type="msdl:patternSymbolId">
 				<xs:annotation>
-					<xs:documentation>The 15 character Symbol identifier includes dashes for restricted fields that shall not be interpreted. These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner. Affiliation and Country Code fields are provided in the ForceSide structure data. Status field value is 'Present' unless specified otherwise by the DateTimeGroup element.</xs:documentation>
+					<xs:documentation>A symbol identifier is represented as a string. 
+The symbol standard used is indicated using an optional uri notation (uri:xxxxxxxxxx). 
+The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. 
+If not provided the default symbol standard used is the one specified in the ScenarioDataStandards element of the XML file.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="UniqueDesignation" type="msdl:text21">
@@ -1029,7 +1046,7 @@
 									<xs:element name="Name" minOccurs="0" type="msdl:textName255"/>
 									<xs:element name="Units" minOccurs="0">
 										<xs:complexType>
-											<xs:sequence maxOccurs="unbounded">
+											<xs:sequence maxOccurs="unbounded"  minOccurs="0">
 												<xs:element name="Unit">
 													<xs:complexType>
 														<xs:sequence>
@@ -1042,7 +1059,7 @@
 									</xs:element>
 									<xs:element name="Equipment" minOccurs="0">
 										<xs:complexType>
-											<xs:sequence maxOccurs="unbounded">
+											<xs:sequence maxOccurs="unbounded"  minOccurs="0">
 												<xs:element name="EquipmentItem">
 													<xs:complexType>
 														<xs:sequence>
@@ -1168,9 +1185,12 @@
 					<xs:documentation>The Universal Unique Identifier (UUID) of an object.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SymbolIdentifier" type="msdl:patternMOOTWSymbolAPP6B">
+			<xs:element name="SymbolIdentifier" type="msdl:patternSymbolId">
 				<xs:annotation>
-					<xs:documentation>The 15 character Symbol identifier includes dashes for restricted fields that shall not be interpreted. These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner. Affiliation and Country Code fields are provided in the ForceSide structure data. Status field value is 'Present' unless specified otherwise by the DateTimeGroup element.</xs:documentation>
+					<xs:documentation>A symbol identifier is represented as a string. 
+The symbol standard used is indicated using an optional uri notation (uri:xxxxxxxxxx). 
+The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. 
+If not provided the default symbol standard used is the one specified in the ScenarioDataStandards element of the XML file.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Affiliation" type="msdl:enumBaseAffiliation">
@@ -1758,9 +1778,12 @@
 					<xs:documentation>The Universal Unique Identifier (UUID) of an object.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SymbolIdentifier" type="msdl:patternTacticalGraphicSymbolAPP6B">
+			<xs:element name="SymbolIdentifier" type="msdl:patternSymbolId">
 				<xs:annotation>
-					<xs:documentation>The 15 character Symbol identifier includes dashes for restricted fields that shall not be interpreted. These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner. Affiliation and Country Code fields are provided in the ForceStructure data. Status field value is 'Present' unless specified otherwise by the DateTimeGroup element.</xs:documentation>
+					<xs:documentation>A symbol identifier is represented as a string. 
+The symbol standard used is indicated using an optional uri notation (uri:xxxxxxxxxx). 
+The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. 
+If not provided the default symbol standard used is the one specified in the ScenarioDataStandards element of the XML file.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Affiliation" type="msdl:enumBaseAffiliation">
@@ -1932,65 +1955,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="VesselDataType">
-		<xs:annotation>
-			<xs:documentation xml:lang="en">Specifies vessel data sent with AIS message for a Unit.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="MID" type="xs:short" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">The Maritime Identification Digits (MID) for an individual vessel.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="IMO" type="xs:integer" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">The International Maritime Organization (IMO) number is a unique identifier for vessels.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="ShipType" type="xs:byte" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">Type of ship. See ITU-R M.1371-5 for values. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="DimBow" type="xs:short" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">Distance from bow. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="DimStern" type="xs:short" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">Distance from stern. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="DimPort" type="xs:short" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">Distance from port. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="DimStarboard" type="xs:short" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">Distance from straboard. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="TransmitterStatus" type="xs:byte" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">The initial status of the AIS Transmitter(s) on board of the vessel.  ON=0; OFF=1</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="SARDataType">
-		<xs:annotation>
-			<xs:documentation xml:lang="en">Specifies SAR data for identification from an aircraft.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="MID" type="xs:short" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">The Maritime Identification Digits (MID) for an individual aircraft.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
+	
 	<xs:complexType name="UnitRelationsType">
 		<xs:annotation>
 			<xs:documentation>Relationship of units in terms of command, support, and organic relationships.</xs:documentation>
@@ -2082,19 +2047,17 @@
 			<xs:documentation>The description of a Unit of a Military Scenario.</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="ObjectHandle" type="msdl:patternUUID32">
+			<xs:element name="ObjectHandle" type="msdl:patternUUID32" minOccurs="1">
 				<xs:annotation>
 					<xs:documentation>The Universal Unique Identifier (UUID) of an object.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SymbolIdentifier" type="msdl:patternForceSymbolMilStd2525C" minOccurs="0">
+			<xs:element name="SymbolIdentifier" type="msdl:patternSymbolId" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The 15 character Symbol identifier includes dashes for restricted fields that shall not be interpreted. These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner. Affiliation and Country Code fields are provided in the ForceSide structure data. Status field value is 'Present' unless specified otherwise by the DateTimeGroup element.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="SymbolId-2525D" type="msdl:patternForceSymbolMilStd2525D" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>The 30 character MIL-STD-2525D Symbol identifier. </xs:documentation>
+					<xs:documentation>A symbol identifier is represented as a string. 
+The symbol standard used is indicated using an optional uri notation (uri:xxxxxxxxxx). 
+The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. 
+If not provided the default symbol standard used is the one specified in the ScenarioDataStandards element of the XML file.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Name" type="msdl:textName255" minOccurs="0">
@@ -2127,7 +2090,7 @@
 					<xs:documentation>Disposition consists of the location of units and the manner in which these units are tactically deployed.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Relations" type="msdl:UnitRelationsType">
+			<xs:element name="Relations" type="msdl:UnitRelationsType" minOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Realationship of units in terms of command, support, and organic relationships.</xs:documentation>
 				</xs:annotation>
@@ -2140,6 +2103,11 @@
 			<xs:element name="Holdings" type="msdl:HoldingsType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The quantity of all specific Equipment/Consumable that is held by, installed in, or included with the unit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomData" type="xs:anyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Any additional information.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:all>
@@ -2214,7 +2182,3 @@
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>
-
-
-
-

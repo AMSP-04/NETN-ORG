@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?purpose description="Derivative work based on MsdlSimpleTypes_1.0.0 XML Schema. Reprinted with permission from SISO Inc. This schema defines simple types used in the Military Scenario Definition Language."?>
-<?version number="1.1" date="March 20, 2020"?>
+<?version number="1.1" date="August 7, 2020"?>
 <!-- 	
 	This XML Schema is a derivative work and is "Reprinted with permission from SISO Inc."  
 
@@ -20,12 +20,54 @@
 		* Added patternTacticalGraphicSymbolAPP6B
 
 	## Additional Changes made for AMSP-04 Ed B
-		* Renamed Schema file to AMSP-04B-MSDL_v1.xsd
-		* Added patternForceSymbolMilStd2525C
-
+		* Renamed Schema file to NETN-ORG-SimpleTypes.xsd
+		* Removed simple type patternForceSymbolAPP6B
+		* Remove simple type patternForceSymbolID15
+		* Remove simple type patternInstallationSymbolAPP6B
+		* Remove simple type patternInstallationSymbolID15
+		* Remove simple type patternMETOCSymbolAPP6B
+		* Remove simple type patternMETOCSymbolID15
+		* Remove simple type patternMOOTWSymbolAPP6B
+		* Remove simple type patternMOOTWSymbolID15
+		* Remove simple type patternTacticalGraphicSymbolAPP6B
+		* Remove simple type patternTacticalGraphicSymbolID15
+		* Added simple type patternSymbolId (that replaces simple types related to pattern for symbols)
+		* Target namespece change to urn:nato:nmsg:ms3:netn:org:1
 -->
-<?This is a derivative work of the MsdlSimpleTypes_1.0.0 xml schema developed for AMSP 04A and AMSP 04B?>
-<xs:schema xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:modelID="http://www.sisostds.org/schemas/modelID" xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="qualified" version="1.0.0" id="MSDL">
+<xs:schema xmlns:msdl="urn:nato:nmsg:ms3:netn:org:1" 
+	xmlns:modelID="http://www.sisostds.org/schemas/modelID" 
+	xmlns:jc3iedm="urn:int:nato:standard:mip:jc3iedm:3.1:oo:2.0" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="urn:nato:nmsg:ms3:netn:org:1" 
+	elementFormDefault="qualified" version="1.0.0">
+
+	<xs:simpleType name="patternSymbolId">
+		<xs:annotation>
+			<xs:documentation>A symbol identifier is represented as a string. 
+The symbol standard used is indicated using an optional uri notation (uri:xxxxxxxxxx). 
+The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. 
+If not provided the default symbol standard used is the one specified in the ScenarioDataStandards element of the XML file.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+
+	<xs:simpleType name="patternNSN">
+		<xs:annotation>
+			<xs:documentation>The 13 character NATO STOCK NUMBER. See http://www.nato.int/structur/ac/135/ncs_guide/english/e_1-6-5.htm </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="13"/>
+		</xs:restriction>
+
+	</xs:simpleType>
+	<xs:simpleType name="patternEntityType">
+		<xs:annotation>
+			<xs:documentation>For HLA</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+
+
 	<xs:simpleType name="boolean">
 		<xs:annotation>
 			<xs:documentation>The MSDL base type for boolean values.</xs:documentation>
@@ -152,78 +194,6 @@
 			<xs:maxInclusive value="999999"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="patternForceSymbolAPP6B">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.The coding scheme, position 1, shall be 'S' for unit and equipment symbol identification.  The elements in the force symbol are defined in NATO APP6(B).</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[S]{1}[\-]{1}[PAGSUFX\-]{1}[\-]{1}[A-Z\-]{6}[A-Z\-\*]{1}[A-Z\-\*]{1}[\-]{2}[AECGNSX\-\*]{1}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternForceSymbolMilStd2525C">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.The coding scheme, position 1, shall be 'S' for unit and equipment symbol identification.  The elements in the force symbol are defined in MIL STD 2525C.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[SIE\*]{1}[PUAFNSHGWMDLJK\*]{1}[PAGSUFXZINO\*]{1}[APCDXF\*]{1}[A-Z1-9\-]{5}[A-Z\-\*]{1}[A-Z\-\*]{2}[\-\*]{2}[AECGNSX\-\*]{1}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternForceSymbolMilStd2525D">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.The coding scheme, position 1, shall be 'S' for unit and equipment symbol identification.  The elements in the force symbol are defined in MIL STD 2525C.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="30"/>
-			<xs:pattern value="[0-9]{30}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternForceSymbolID15">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.The coding scheme, position 1, shall be 'S' for unit and equipment symbol identification.  The elements in the force symbol are defined in MIL STD 2525B.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[S]{1}[\-]{1}[PAGMOSTUFVXLIZ\-]{1}[\-]{1}[A-Z\-]{6}[A-Z\-\*]{1}[A-Z\-\*]{1}[\-]{2}[AECGNSX\-\*]{1}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternInstallationSymbolAPP6B">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.  The coding scheme, position 1, shall be 'S' for Installation symbol identification.  The elements in the installation symbol are defined in NATO APP6(B).</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[S]{1}[\-]{1}[G]{1}[AP\-]{1}[I]{1}[A-Z\-]{5}[A-Z\-\*]{1}[A-Z\-\*]{1}[\-]{2}[AECGNSX\-\*]{1}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternInstallationSymbolID15">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.  The coding scheme, position 1, shall be 'S' for Installation symbol identification.  The elements in the installation symbol are defined in MIL STD 2525B.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[S]{1}[\-]{1}[G]{1}[AP\-]{1}[I]{1}[A-Z\-]{5}[A-Z\-\*]{1}[A-Z\-\*]{1}[\-]{2}[AECGNSX\-\*]{1}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternMETOCSymbolAPP6B">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.  The coding scheme, position 1, shall be 'W' for the METOC symbol identification.  The elements in the METOC symbol are defined in NATO APP6(B).</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[W]{1}[\-]{1}[A]{1}\-[PTIWFCRSO\-]{1}[B-X\-]{3}[\-]{2}\-\-\-\-\-"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternMETOCSymbolID15">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.  The coding scheme, position 1, shall be 'W' for the METOC symbol identification.  The elements in the METOC symbol are defined in MIL STD 2525B.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[W]{1}[AOS]{1}\-\-[BCGHILMOPTW\-]{1}[ABCDEFHIJLMNOPRSTX\-]{1}[ABCDFGHILMNOPQRSTUVW\-]{1}[ABCDEFGHIKLMOPQRSTUVWZ\-]{1}[ABCDEFGHILMNOPRSTVW\-]{1}[ABCEFGHILMOPQSTUVWYZ\-]{1}\-\-\-\-\-"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="patternMGRSGridSquare2">
 		<xs:annotation>
 			<xs:documentation>The MGRS one hundred thousand meter grid square designator, as defined by NIMA TM 8358.1.</xs:documentation>
@@ -231,59 +201,6 @@
 		<xs:restriction base="xs:string">
 			<xs:length value="2"/>
 			<xs:pattern value="[ABCDEFGHJKLMNPQRSTUVWXYZ]{2}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternMOOTWSymbolAPP6B">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.  The coding scheme, position 1, shall be 'O' for the MOOTW symbol identification.  The elements in the MOOTW symbol are defined in NATO APP6B.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[G]{1}[\-]{1}[O\-]{1}[AP\-]{1}[A-Z\-]{6}[A-Z\-\*]{1}[A-Z\-\*]{1}[\-]{2}[AECGNSX\-\*]{1}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternMOOTWSymbolID15">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.  The coding scheme, position 1, shall be 'O' for the MOOTW symbol identification.  The elements in the MOOTW symbol are defined in MIL STD 2525B.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[O]{1}[\-]{1}[VXLIZ\-]{1}[AP\-]{1}[A-Z\-]{6}[A-Z\-\*]{1}[A-Z\-\*]{1}[\-]{2}[AECGNSX\-\*]{1}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternNSN">
-		<xs:annotation>
-			<xs:documentation>The 13 character NATO STOCK NUMBER. See http://www.nato.int/structur/ac/135/ncs_guide/english/e_1-6-5.htm </xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="13"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="patternEntityType">
-		<xs:annotation>
-			<xs:documentation>For HLA</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string"/>
-	</xs:simpleType>
-	
-		<xs:simpleType name="patternTacticalGraphicSymbolAPP6B">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.The coding scheme, position 1, shall be 'G' for the Tactical Graphic symbol identification.  The elements in the tactical graphic symbol are defined in NATO APP6(B).</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[G]{1}[\-]{1}[TCOX\-]{1}[AP\-]{1}[A-Z\-]{6}[A-Z\-\*]{1}[A-Z\-\*]{1}[\-]{2}[AECGNSX\-\*]{1}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	
-	
-	<xs:simpleType name="patternTacticalGraphicSymbolID15">
-		<xs:annotation>
-			<xs:documentation>The 15 character Symbol identifier with fields that shall not be interpreted restricted using dashes.  These fields would be redundant to other explicit elements in the standard. Affiliation, Status, and Country Code are restricted in this manner.  Affiliation and Country Code values are provided in the ForceSide structure data.  Status is to be interpreted as 'Present' until such time as a separate element is created to distinguish truth values from perceived values.The coding scheme, position 1, shall be 'G' for the Tactical Graphic symbol identification.  The elements in the tactical graphic symbol are defined in MIL STD 2525B.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="15"/>
-			<xs:pattern value="[G]{1}[\-]{1}[PAGMOSTUFVXLIZ\-]{1}[AP\-]{1}[A-Z\-]{6}[A-Z\-\*]{1}[A-Z\-\*]{1}[\-]{2}[AECGNSX\-\*]{1}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="patternTimeDTG20">
@@ -410,6 +327,3 @@
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
-
-
-

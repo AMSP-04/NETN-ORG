@@ -4,7 +4,7 @@
         <name>NETN-ORG</name>
         <type>FOM</type>
         <version>1.0</version>
-        <modificationDate>2020-07-05</modificationDate>
+        <modificationDate>2020-08-12</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>Produce a Organisation definition (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
@@ -154,34 +154,15 @@ For aggregates, use zero (0) for the country code, follow SISO-REF-010-00v20-0D0
 When no definition for the type is sufficient, the federation agreement shall define additional types.</semantics>
                     </attribute>
                     <attribute>
-                        <name>SymbolId2525C</name>
-                        <dataType>SymbolIdentifierArray15</dataType>
+                        <name>SymbolId</name>
+                        <dataType>SymbolIdentifier</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>When changed</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. 
- 
-msdl:UnitType/SymbolIdentifier, MIL 2525 C symbol code. 
- 
-The symbol code describes the class, e.g. for ARMOR TRACK, HEAVY as a Leopard 2 shall the symbol code be: S*GPUCATH-*****, the * in second (2:nd) position is to be replaced to specify the affiliation. 
-The affiliation on a unit may change during an federation execution which imply that the 2:nd character will change. 
-Other characters specifies functionallity, e.g. if a submarine is surfaced or bottomed which can be the case during a federation execution.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>SymbolId2525D</name>
-                        <dataType>SymbolIdentifierArray30</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>When Changed</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Optional. 
- 
-msdl:UnitType/SymbolIdentifier-2525D, MIL-STD-2525D symbol code.</semantics>
+                        <semantics>Required: A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
                     </attribute>
                     <attribute>
                         <name>Force</name>
@@ -493,21 +474,15 @@ The relation may change during a federation execution.</semantics>
 Defines the owner (type and id).</semantics>
                     </attribute>
                     <attribute>
-                        <name>SymbolId2525C</name>
-                        <dataType>SymbolIdentifierArray15</dataType>
+                        <name>SymbolId</name>
+                        <dataType>SymbolIdentifier</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>When changed</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. 
- 
-msdl:EquipmentItemType/SymbolIdentifier, MIL 2525 C symbol code. 
- 
-The symbol code describes the class, e.g. for ARMOR TRACK, HEAVY as a Leopard 2 shall the symbol code be: S*GPUCATH-*****, the * in second (2:nd) position is to be replaced to specify the affiliation. 
-The affiliation on a unit may change during an federation execution which imply that the 2:nd character will change. 
-Other characters specifies functionallity, e.g. if a submarine is surfaced or bottomed which can be the case during a federation execution.</semantics>
+                        <semantics>Required. A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
                     </attribute>
                     <attribute>
                         <name>CommunicationNetworkReferences</name>
@@ -635,115 +610,6 @@ The text modifier for the symbol's unique designation.</semantics>
 EquipmentSymbolModifiers: 
 The text modifier that indicates type of equipment.</semantics>
                     </attribute>
-                    <objectClass>
-                        <name>Vessel</name>
-                        <sharing>PublishSubscribe</sharing>
-                        <semantics>This class defines additional attributes for a Vessel equipment in order to instantiate a vessel in a simulation.</semantics>
-                        <attribute>
-                            <name>MID</name>
-                            <dataType>MIDType</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>OPTIONAL. The Maritime Identification Digits (MID) for the vessel. If the value is not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>IMO</name>
-                            <dataType>IMOType</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>OPTIONAL. The International Maritime Organization (IMO) number to identify the vessel. If the value is not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>ShipType</name>
-                            <dataType>ShipTypeType</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>OPTIONAL. Type of ship. If the value is not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>DimensionBow</name>
-                            <dataType>LengthMeterFloat32</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>OPTIONAL. Distance from bow. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>DimensionStern</name>
-                            <dataType>LengthMeterFloat32</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>OPTIONAL. Distance from stern. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>DimensionPort</name>
-                            <dataType>LengthMeterFloat32</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>OPTIONAL. Distance from port. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>DimensionStarboard</name>
-                            <dataType>LengthMeterFloat32</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>OPTIONAL. Distance from straboard. Reference point for the reported position. If the value is zero or not provided then the subscribing federate that is responsible for the modelling of the vessel shall generate a value.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>TransmitterStatus</name>
-                            <dataType>TransmitterOperationalStatusEnum8</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>When the tansmitter status updated by the vessel</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>OPTIONAL. The initial status of the AIS Transmitter(s) on board of the vessel. If the value is not provided then the value shall assumed to be ON.</semantics>
-                        </attribute>
-                    </objectClass>
-                    <objectClass>
-                        <name>SARAircraft</name>
-                        <sharing>PublishSubscribe</sharing>
-                        <semantics>This class defines additional attributes for a SAR Aircraft equipment  in order to instantiate a SAR aircraft in a simulation.</semantics>
-                        <attribute>
-                            <name>MID</name>
-                            <dataType>MIDType</dataType>
-                            <updateType>Static</updateType>
-                            <updateCondition>Init</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>OPTIONAL. The Maritime Identification Digits (MID) for the SAR aircraft. If the value is not provided then the subscribing federate that is responsible for the modelling of the SAR aircraft shall generate a value.</semantics>
-                        </attribute>
-                    </objectClass>
                 </objectClass>
             </objectClass>
         </objectClass>

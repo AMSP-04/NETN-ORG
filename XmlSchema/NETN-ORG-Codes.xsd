@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?purpose description="Derivative work based on MsdlCodes_1.0.0 XML Schema. Reprinted with permission from SISO Inc." ?>
-<?version number="1.1" date="March 20, 2020"?>
+<?version number="1.1" date="August 7, 2020"?>
 <!-- 	
 	This XML Schema is a derivative work and is "Reprinted with permission from SISO Inc."  
 
@@ -9,8 +9,15 @@
 	for all purposes, provided that any use of the material contains the following attribution: "Reprinted with permission from SISO Inc." 
 
 	This derivative work is maintained by NATO NMSG MS3 for use in AMSP-04.
+
+	## Changes made for AMSP-04 Ed B
+	* Added enumCombatEffectivenessType <xs:enumeration value="">
+	* TargetNamespace changed to urn:nato:nmsg:ms3:netn:org:1
 -->
-<xs:schema xmlns:msdl="urn:sisostds:scenario:military:data:draft:msdl:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sisostds:scenario:military:data:draft:msdl:1" elementFormDefault="qualified" version="1.0.0" id="MSDL">
+<xs:schema xmlns:msdl="urn:nato:nmsg:ms3:netn:org:1" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="urn:nato:nmsg:ms3:netn:org:1" 
+	elementFormDefault="qualified" version="1.0.0">
 	<xs:simpleType name="enumAnchorPointType">
 		<xs:annotation>
 			<xs:documentation>Enumerated choice of an absolute Coordinate or point graphic as a location reference</xs:documentation>
@@ -89,6 +96,11 @@
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="WHITE">
+				<xs:annotation>
+					<xs:documentation>Not applicable or no information available</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="">
 				<xs:annotation>
 					<xs:documentation>Not applicable or no information available</xs:documentation>
 				</xs:annotation>
