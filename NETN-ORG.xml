@@ -1360,13 +1360,6 @@ The text modifier that indicates type of equipment.</semantics>
                 <semantics>General text of max -length 255 characters.</semantics>
             </arrayData>
             <arrayData>
-                <name>Text64</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..64]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 64 characters.</semantics>
-            </arrayData>
-            <arrayData>
                 <name>Text24</name>
                 <dataType>HLAunicodeChar</dataType>
                 <cardinality>[0..24]</cardinality>
