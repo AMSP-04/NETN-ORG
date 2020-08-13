@@ -4,7 +4,7 @@
         <name>NETN-ORG</name>
         <type>FOM</type>
         <version>1.0</version>
-        <modificationDate>2020-08-12</modificationDate>
+        <modificationDate>2020-08-13</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>Produce a Organisation definition (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
@@ -87,10 +87,9 @@ Unique Identifier.</semantics>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Required. 
- 
-For units, e.g. use the value from the NETN Callsign attribute. 
-For federates, use the Federate Name used in the HLA join command.</semantics>
+                    <semantics>Required. A unique name used to reference units, equipment items, forces, and for initial allocation of modelling responsibilities to federate applications.
+
+For allocation of modelling responsibilities, it is a unique name in the organization to group units and equipment items. This group name is used to determine the initial allocation of modelling responsibility of units and equipment items to a federate. The federation agreements should specify how this name is to be interpreted and how the allocation will be performed. A common agreement and practice is to use the federate name as group name, i.e. the units and equipment items are allocated to the federate with that name. Typically one application will be responsible for performing the allocation. Alternatives for the group name are for example: federate type name, a functional name.</semantics>
                 </attribute>
                 <objectClass>
                     <name>FederateApplication</name>
