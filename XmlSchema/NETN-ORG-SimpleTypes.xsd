@@ -33,6 +33,7 @@
 		* Remove simple type patternTacticalGraphicSymbolID15
 		* Added simple type patternSymbolId (that replaces simple types related to pattern for symbols)
 		* Target namespece change to urn:nato:nmsg:ms3:netn:org:1
+		
 -->
 <xs:schema xmlns:msdl="urn:nato:nmsg:ms3:netn:org:1" 
 	xmlns:modelID="http://www.sisostds.org/schemas/modelID" 
