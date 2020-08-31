@@ -45,7 +45,7 @@
 	## Additional Changes made for AMSP-04 Ed B
 		* Changed schema attribute elementFormDefault= from qualified to unqualified
 		* Updated MilitaryScenarioType.Deployment
-  			* Name – Length restrictions
+  			* Name – No Length restrictions
   			* Units – minOccurs = 0
   			* Unit – type
 		* Changed type of all SymbolIdentifier elements to patternSymbolId and updated documentation.
@@ -53,7 +53,6 @@
 		* Changed complex type EquipmentItemType to allow additional elements. Changed from <all> to <choice maxOccurs="unbounded"> and added CustomData element.
 		* Changed complex type UnitType to allow additional elements. Changed from <all> to <choice maxOccurs="unbounded"> and added CustomData element.
 		* targetNamespace changed to urn:nato:nmsg:ms3:netn:org:1
-		* Relax federate name datatype in deployment to xs:string
 		
 -->
 <xs:schema xmlns:msdl="urn:nato:nmsg:ms3:netn:org:1" 
