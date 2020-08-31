@@ -363,7 +363,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required: Name of the force/side.</semantics>
+                        <semantics>Required. Name of the force/side.</semantics>
                     </attribute>
                     <attribute>
                         <name>Relations</name>
@@ -374,7 +374,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional: Sequence of relations, force-relation. Default is empty array.</semantics>
+                        <semantics>Optional. Sequence of relations, force-relation. Default is empty array.</semantics>
                     </attribute>
                 </objectClass>
                 <objectClass>
@@ -401,7 +401,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional: Default is an empty list. The units that the federate has responsibility for.</semantics>
+                        <semantics>Optional. The units that the federate has responsibility for. Default is an empty list. </semantics>
                     </attribute>
                     <attribute>
                         <name>Equipment</name>
@@ -412,7 +412,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional: Default is an empty list. The equipment that the federate has responsibility for.</semantics>
+                        <semantics>Optional. The equipment that the federate has responsibility for. Default is an empty list. </semantics>
                     </attribute>
                 </objectClass>
             </objectClass>
