@@ -159,7 +159,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
-                        <dataType>UnitSymbolAmplification</dataType>
+                        <dataType>UnitSymbolAmplificationStruct</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On change</updateCondition>
                         <ownership>NoTransfer</ownership>
@@ -191,7 +191,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <semantics>Optional. Formation of this unit.</semantics>
                     </attribute>
                     <attribute>
-                        <name>IsHQ</name>
+                        <name>IsHq</name>
                         <dataType>HLAboolean</dataType>
                         <updateType>Static</updateType>
                         <updateCondition>NA</updateCondition>
@@ -259,7 +259,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. Identifies the lowest level unit in the ORBAT to which this equipment item belong.</semantics>
+                        <semantics>Required. Identifies the lowest level unit in the ORBAT to which this equipment item belongs.</semantics>
                     </attribute>
                     <attribute>
                         <name>MountedOn</name>
@@ -271,6 +271,28 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
                         <semantics>Optional. Reference to antoher equipment item on which this item is mounted or attached.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>EntityType</name>
+                        <dataType>EntityTypeStruct</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>NatoStockNumber</name>
+                        <dataType>NatoStockNumberArray13</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. NATO stock number code. 13 digits (0-9)</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolId</name>
@@ -285,7 +307,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
-                        <dataType>EquipmentSymbolAmplification</dataType>
+                        <dataType>EquipmentSymbolAmplificationStruct</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On change</updateCondition>
                         <ownership>NoTransfer</ownership>
@@ -317,28 +339,6 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <semantics>Optional. Set of Communication Networks that equipment monitors and uses to communicate during a mission.</semantics>
                     </attribute>
                     <attribute>
-                        <name>NSNcode</name>
-                        <dataType>NatoStockNumberArray13</dataType>
-                        <updateType>Static</updateType>
-                        <updateCondition>NA</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Required. NATO stock number code. 13 digits (0-9)</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>EntityType</name>
-                        <dataType>EntityTypeStruct</dataType>
-                        <updateType>Static</updateType>
-                        <updateCondition>NA</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.</semantics>
-                    </attribute>
-                    <attribute>
                         <name>Resolution</name>
                         <dataType>ModelResolutionTypeEnum32</dataType>
                         <updateType>Conditional</updateType>
@@ -351,11 +351,71 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     </attribute>
                 </objectClass>
                 <objectClass>
+                    <name>Installation</name>
+                    <sharing>Neither</sharing>
+                    <semantics>Representation of an initial or snapshot state of an installation/facility based on attributes defined in the NETN-ORG extensions of MSDL.</semantics>
+                    <attribute>
+                        <name>Name</name>
+                        <dataType>Text255</dataType>
+                        <updateType>NA</updateType>
+                        <updateCondition></updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. A unique name of the installation.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Owner</name>
+                        <dataType>UUID</dataType>
+                        <updateType>NA</updateType>
+                        <updateCondition></updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>Neither</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required: Reference to the force, unit or equipment item owning or hosting the installation.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>SymbolId</name>
+                        <dataType>SymbolIdentifier</dataType>
+                        <updateType>NA</updateType>
+                        <updateCondition></updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>SymbolAmplification</name>
+                        <dataType>InstallationSymbolAmplificationStruct</dataType>
+                        <updateType>NA</updateType>
+                        <updateCondition></updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. Text amplifications for the installation's symbol. Static or very low update rate.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Location</name>
+                        <dataType>GeodeticPoint</dataType>
+                        <updateType>NA</updateType>
+                        <updateCondition></updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required: Geographic location of the installation.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
                     <name>Force</name>
                     <sharing>PublishSubscribe</sharing>
                     <semantics>Representation of a specific force and its relationship with other forces. Units belonging to a force all have the same relationship with units belonging to another force. The relation between forces can be asymetrical, e.g. Force A can be hostile to B while B is neutral to A. The relation may change during a federation execution.</semantics>
                     <attribute>
-                        <name>ForceName</name>
+                        <name>Name</name>
                         <dataType>Text255</dataType>
                         <updateType>Static</updateType>
                         <updateCondition>NA</updateCondition>
@@ -401,7 +461,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. The units that the federate has responsibility for. Default is an empty list. </semantics>
+                        <semantics>Optional. The units that the federate has responsibility for. Default is an empty list.</semantics>
                     </attribute>
                     <attribute>
                         <name>Equipment</name>
@@ -412,7 +472,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. The equipment that the federate has responsibility for. Default is an empty list. </semantics>
+                        <semantics>Optional. The equipment that the federate has responsibility for. Default is an empty list.</semantics>
                     </attribute>
                 </objectClass>
             </objectClass>
@@ -905,7 +965,7 @@ The type of service being used for communication as defined in JC3IEDM.</semanti
                 </field>
             </fixedRecordData>
             <fixedRecordData>
-                <name>UnitSymbolAmplification</name>
+                <name>UnitSymbolAmplificationStruct</name>
                 <encoding>HLAfixedRecord</encoding>
                 <semantics>Text amplifiers for Unit symbols.</semantics>
                 <field>
@@ -976,7 +1036,7 @@ Credibility Ratings:
                 </field>
             </fixedRecordData>
             <fixedRecordData>
-                <name>EquipmentSymbolAmplification</name>
+                <name>EquipmentSymbolAmplificationStruct</name>
                 <encoding>HLAfixedRecord</encoding>
                 <semantics>Text amplifiers for Equipment symbols.</semantics>
                 <field>
