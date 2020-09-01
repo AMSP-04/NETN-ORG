@@ -352,13 +352,13 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 </objectClass>
                 <objectClass>
                     <name>Installation</name>
-                    <sharing>Neither</sharing>
+                    <sharing>PublishSubscribe</sharing>
                     <semantics>Representation of an initial or snapshot state of an installation/facility based on attributes defined in the NETN-ORG extensions of MSDL.</semantics>
                     <attribute>
                         <name>Name</name>
                         <dataType>Text255</dataType>
-                        <updateType>NA</updateType>
-                        <updateCondition></updateCondition>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
@@ -368,8 +368,8 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <attribute>
                         <name>Owner</name>
                         <dataType>UUID</dataType>
-                        <updateType>NA</updateType>
-                        <updateCondition></updateCondition>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>Neither</sharing>
                         <transportation>HLAreliable</transportation>
@@ -377,10 +377,21 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <semantics>Required: Reference to the force, unit or equipment item owning or hosting the installation.</semantics>
                     </attribute>
                     <attribute>
+                        <name>EntityType</name>
+                        <dataType>EntityTypeStruct</dataType>
+                        <updateType>Static</updateType>
+                        <updateCondition>NA</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>Neither</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.</semantics>
+                    </attribute>
+                    <attribute>
                         <name>SymbolId</name>
                         <dataType>SymbolIdentifier</dataType>
-                        <updateType>NA</updateType>
-                        <updateCondition></updateCondition>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
@@ -390,8 +401,8 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <attribute>
                         <name>SymbolAmplification</name>
                         <dataType>InstallationSymbolAmplificationStruct</dataType>
-                        <updateType>NA</updateType>
-                        <updateCondition></updateCondition>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
@@ -401,8 +412,8 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                     <attribute>
                         <name>Location</name>
                         <dataType>GeodeticPoint</dataType>
-                        <updateType>NA</updateType>
-                        <updateCondition></updateCondition>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
                         <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
@@ -1129,6 +1140,62 @@ Credibility Ratings:
                     <name>FormationPosition</name>
                     <dataType>FormationPositionStruct</dataType>
                     <semantics>The position of this unit/eqiupment in the higher unit formation.</semantics>
+                </field>
+            </fixedRecordData>
+            <fixedRecordData>
+                <name>InstallationSymbolAmplificationStruct</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>Text amplifiers for Installation symbols.</semantics>
+                <field>
+                    <name>StaffComments</name>
+                    <dataType>Text20</dataType>
+                    <semantics>A text amplifier for units, equipment and installations.</semantics>
+                </field>
+                <field>
+                    <name>AdditionalInformation</name>
+                    <dataType>Text20</dataType>
+                    <semantics>A text amplifier for units, equipment and installations.</semantics>
+                </field>
+                <field>
+                    <name>EvaluationRating</name>
+                    <dataType>Text2</dataType>
+                    <semantics>A text amplifier for units, equipment and installations that consists of a one-letter reliability rating and a one-number credibility rating. 
+ 
+Reliability Ratings: 
+A-completely reliable 
+B-usually reliable 
+C-fairly reliable 
+D-not usually reliable 
+E-unreliable 
+F-reliability cannot be judged 
+ 
+Credibility Ratings: 
+1-confirmed by other sources 
+2-probably true 
+3-possibly true 
+4-doubtfully true 
+5-improbable 
+6-truth cannot be judged.</semantics>
+                </field>
+                <field>
+                    <name>CombatEffectiveness</name>
+                    <dataType>Text5</dataType>
+                    <semantics>A text amplifier for units and installations that indicates unit effectiveness or installation capability.</semantics>
+                </field>
+                <field>
+                    <name>IFF_SIF_AIS</name>
+                    <dataType>Text15</dataType>
+                    <semantics>A text amplifier displaying IFF/SIF/AIS identification modes and codes.</semantics>
+                </field>
+                <field>
+                    <name>UniqueDesignation</name>
+                    <dataType>Text21</dataType>
+                    <semantics>A text amplifier for units, equipment and installations that uniquely identifies a particular symbol or track number. Identifies acquisitions number when used with SIGINT symbology.</semantics>
+                </field>
+                <field>
+                    <name>EngagementBarText</name>
+                    <dataType>Text8</dataType>
+                    <semantics>A text amplifier placed immediately atop the symbol in the engagement bar. May denote, 1) local/remote status; 2) engagement status; and 3) weapon type.</semantics>
                 </field>
             </fixedRecordData>
         </fixedRecordDataTypes>
