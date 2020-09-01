@@ -89,7 +89,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A unique name of the units.</semantics>
+                        <semantics>Required. A unique name of the unit.</semantics>
                     </attribute>
                     <attribute>
                         <name>SuperiorUnit</name>
@@ -122,7 +122,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. A reference to the Force that the unit belongs to. Default value is interpreted as the force is unknown/undetermined.</semantics>
+                        <semantics>Optional. A reference to the Force that the unit belongs to. A missing value is interpreted as the force being unknown/undetermined.</semantics>
                     </attribute>
                     <attribute>
                         <name>Holdings</name>
@@ -144,7 +144,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. The entity type to use for representation of the units as an aggregate entity. Entity types should be based on SISO-REF-010 and/or defined by federation agreements.</semantics>
+                        <semantics>Required. The entity type to use for representation of the unit as an aggregate entity. Entity types should be based on SISO-REF-010 and/or defined by federation agreements.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolId</name>
@@ -155,7 +155,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
+                        <semantics>Required. A symbol identifier represented as a string. The symbol standard used is indicated using a URI notation (uri:xxxxxxxxxx). The following URI should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
@@ -177,7 +177,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Formation location, direction and speed of unit.</semantics>
+                        <semantics>Optional. Detailed positional information on unit.</semantics>
                     </attribute>
                     <attribute>
                         <name>Formation</name>
@@ -199,7 +199,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Indicate if the unit has a command function, e.g. if it is an HQ or not.</semantics>
+                        <semantics>Optional. Indicate whether the unit has a command function, e.g. if it is an HQ or not.</semantics>
                     </attribute>
                     <attribute>
                         <name>Echelon</name>
@@ -221,7 +221,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Set of Communication Networks that unit monitors and uses to communicate during a mission.</semantics>
+                        <semantics>Optional. Set of Communication Networks that the unit monitors and uses to communicate during a mission.</semantics>
                     </attribute>
                     <attribute>
                         <name>IsSimulationEntity</name>
@@ -270,7 +270,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Reference to antoher equipment item on which this item is mounted or attached.</semantics>
+                        <semantics>Optional. Reference to another equipment item on which this item is mounted or attached.</semantics>
                     </attribute>
                     <attribute>
                         <name>EntityType</name>
@@ -325,7 +325,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Formation position, location, orientation and speed.</semantics>
+                        <semantics>Optional. Detailed positional information on equipment item.</semantics>
                     </attribute>
                     <attribute>
                         <name>CommunicationNetworks</name>
@@ -336,7 +336,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Set of Communication Networks that equipment monitors and uses to communicate during a mission.</semantics>
+                        <semantics>Optional. Set of Communication Networks that the equipment monitors and uses to communicate during a mission.</semantics>
                     </attribute>
                     <attribute>
                         <name>Resolution</name>
@@ -347,7 +347,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Enumeration indicating the level of fidelity appropriate for instancing the unit or equipment in the simulation. Default value: NOT_SPECIFIED.</semantics>
+                        <semantics>Optional. Enumeration indicating the level of fidelity appropriate for instancing the equipment in the simulation. Default value: NOT_SPECIFIED.</semantics>
                     </attribute>
                 </objectClass>
                 <objectClass>
@@ -914,7 +914,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
                 <field>
                     <name>OutOfFormation</name>
                     <dataType>HLAboolean</dataType>
-                    <semantics>Identifies if the element is maneuvering independent from the higher unit's formation.</semantics>
+                    <semantics>Identifies if the element is maneuvering independently from the higher unit's formation.</semantics>
                 </field>
                 <field>
                     <name>FormationOrder</name>
@@ -934,8 +934,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
                 <field>
                     <name>FormationLocationType</name>
                     <dataType>FormationLocationTypeEnum32</dataType>
-                    <semantics>The method used to correlate formation to location as center of mass or lead element. 
-LEAD_ELEMENT or CENTER_OF_MASS</semantics>
+                    <semantics>The method used to correlate formation to location as center of mass or lead element.</semantics>
                 </field>
                 <field>
                     <name>FormationSpacing</name>
