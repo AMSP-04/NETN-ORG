@@ -11,7 +11,7 @@ The specification is based on IEEE 1516 High Level Architecture (HLA) Object Mod
 
 ### Purpose
 
-The NETN-ORG FOM Module provides a common standard interface for the representation of the state of units including command structure, relationship between organizations and equipment items associated with units. This representation can be used for setting the initial state for models of simulated entities, capturing subsequent snapshot states and for dynamic change of model attributes, including organizational relationships.
+The NETN-ORG FOM Module provides a common standard interface for the representation of the state of units including command structure, relationship between organizations and equipment items as well as installations associated with a unit or a force. This representation can be used for setting the initial state for models of simulated entities, capturing subsequent snapshot states and for dynamic change of some model attributes, including organizational relationships.
 
 In addition to the FOM Module, a file based data storage and interchange format is defined based on SISO-STD-007-2008 Military Scenario Definition Language (MSDL). The NETN-ORG XML Schema defines elements used to capture units, equipment, relations, and initial modelling responsibilities, in an XML based text file format.
 
@@ -24,7 +24,7 @@ In addition to the FOM Module, a file based data storage and interchange format 
 
 ## Overview
 
-Use the NETN-ORG FOM module to represent organizational units, their internal organizational structure and relationships between different organizations based on force affiliation. Specific equipment items are associated with a unit and the initial modelling responsibility of both units and equipment can be allocated to specific federate applications.
+Use the NETN-ORG FOM module to represent organizational units, their internal organizational structure and relationships between different organizations based on force affiliation. Specific equipment items are associated with a unit and the initial modelling responsibility of both units and equipment can be allocated to specific federate applications. Represent installations associated with a unit or force.
 
 <img src=./images/objectclasses.png>
 
@@ -35,12 +35,13 @@ Use the NETN-ORG FOM module to represent organizational units, their internal or
 |ORG_Root|Root object class for all NETN-ORG object classes. Includes unique identifier and unique name attributes inherited by all subclasses.|
 |Unit|Representation of an initial or snapshot state of an organizational unit based on attributes defined in the NETN-ORG extensions of MSDL.|
 |EquipmentItem|Representation of an initial or snapshot state of a specific equipment item based on attributes defined in the NETN-ORG extensions of MSDL.|
+|Installation|Representation of an initial or snapshot state of an installation/facility based on attributes defined in the NETN-ORG extensions of MSDL.|
 |Force| Representation of a specific force and its relationship with other forces. Units belonging to a force all have the same relationship with units belonging to another force. The relation between forces can be asymetrical, e.g. Force A can be hostile to B while B is neutral to A. The relation may change during a federation execution.|
 |FederateApplication| Representation of an allocation of initial modelling responsibility of units and equipment items to a federate application. |
 
 During a simulation, the organizational relationships may change. Dynamic changes in the task organization may include new and or rearranged unit structure. The relationship between organizations may also change during the execution of a scenario. These changes can be represented in the NETN-ORG FOM module as updates of corresponding attributes reflected by all subscribing simulation systems.
 
-## Units and Equipment Items
+## Units, Equipment and Installation
 
 Not all units and equipment items are required to have a corresponding simulation entity representation in the federation execution. The existence of simulation entities may depend on the aggregation level of the federation and participating applications. During execution of a scenario the level of aggregation may also change, e.g. by using NETN-MRM aggregation patterns. Units may also be divided and represented as multiple aggregate entities or as platforms. 
 
@@ -72,7 +73,7 @@ The `Unit` object class attributes represents model data for organizational unit
 |SymbolAmplification|**Optional.** Text amplifications for the unit's symbol. Static or very low update rate.|
 |Disposition|**Optional.** Formation location, direction and speed of unit.|
 |Formation|**Optional.** Formation of this unit.|
-|IsHQ|**Optional.** Indicate if the unit has a command function, e.g. if it is an HQ or not.|
+|IsHq|**Optional.** Indicate if the unit has a command function, e.g. if it is an HQ or not.|
 |Echelon|**Optional.** Symbol modifier identifying the command level. Default NONE.|
 |CommunicationNetworks|**Optional.** Set of Communication Networks that unit monitors and uses to communicate during a mission.|
 |IsSimulationEntity|**Optional.** Indicates if the Unit has an initial allocation of modelling responsibility and is represented as a ground-truth aggregate entity during federation execution. Default is False.|
@@ -89,14 +90,27 @@ The `EquipmentItem` object class attributes represents specific equipment associ
 |Name|**Required.** A unique name of the equipment item.|
 |HoldingUnit|**Required.** Identifies the lowest level unit in the ORBAT to which this equipment item belong.|
 |MountedOn|**Optional.** Reference to antoher equipment item on which this item is mounted or attached.|
+|EntityType|**Required.** SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
+|NatoStockNumber|**Required.** NATO stock number code. 13 digits (0-9)|
 |SymbolId|**Required.** A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.|
 |SymbolAmplification|**Optional.** Text amplifications for the equipment's symbol. Static or very low update rate.|
 |Disposition|**Optional.** Formation position, location, orientation and speed.|
 |CommunicationNetworks|**Optional.** Set of Communication Networks that equipment monitors and uses to communicate during a mission.|
-|NSNcode|**Required.** NATO stock number code. 13 digits (0-9)|
-|EntityType|**Required.** SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
 |Resolution|**Optional.** Enumeration indicating the level of fidelity appropriate for instancing the unit or equipment in the simulation. Default value: NOT_SPECIFIED.|
 
+### Installation
+
+Representation of an initial or snapshot state of an installation/facility based on attributes defined in the NETN-ORG extensions of MSDL.
+
+|Attribute|Description|
+|---|---|
+|UniqueId|***Inherited:*** **Required.** Unique Identifier.|
+|Name|**Required.** A unique name of the installation.|
+|Owner|**Required** Reference to the force, unit or equipment item owning or hosting the installation.|
+|EntityType|**Required.** SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
+|SymbolId|**Required.** A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.|
+|SymbolAmplification|**Optional.** Text amplifications for the installation's symbol. Static or very low update rate.|
+|Location|**Required.** Geographic location of the installation.|
 
 ## Force
 

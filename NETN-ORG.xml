@@ -111,7 +111,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. A reference to a unit or equipment item which can carry/transport the unit. Default value is 00000000-0000-0000-0000-000000000000 (UUID with all zeros) indicating that the unit is not embarked in or mounted on any other unit or equipment.</semantics>
+                        <semantics>Optional. A reference to a unit or equipment item which is carrying/transporting the unit. Default value is 00000000-0000-0000-0000-000000000000 (UUID with all zeros) indicating that the unit is not embarked in or mounted on any other unit or equipment.</semantics>
                     </attribute>
                     <attribute>
                         <name>Force</name>
@@ -122,7 +122,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. A reference to the Force that the unit belongs to. Default value is interpreted as the force is unknown/undetermined.</semantics>
+                        <semantics>Optional. A reference to the Force that the unit belongs to. A missing value is interpreted as the force is unknown/undetermined.</semantics>
                     </attribute>
                     <attribute>
                         <name>Holdings</name>
@@ -155,7 +155,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
+                        <semantics>Required. A symbol identifier represented as a string. If not provided the symbol standard used is undefined.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
@@ -303,7 +303,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
+                        <semantics>Required. A symbol identifier represented as a string. If not provided the symbol standard used is undefined.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
@@ -374,7 +374,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>Neither</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required: Reference to the force, unit or equipment item owning or hosting the installation.</semantics>
+                        <semantics>Required. Reference to the force, unit or equipment item owning or hosting the installation.</semantics>
                     </attribute>
                     <attribute>
                         <name>EntityType</name>
@@ -396,7 +396,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.</semantics>
+                        <semantics>Required. A symbol identifier represented as a string. If not provided the symbol standard used is undefined.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
@@ -418,7 +418,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required: Geographic location of the installation.</semantics>
+                        <semantics>Required. Geographic location of the installation.</semantics>
                     </attribute>
                 </objectClass>
                 <objectClass>
@@ -854,7 +854,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
             <fixedRecordData>
                 <name>Relation</name>
                 <encoding>HLAfixedRecord</encoding>
-                <semantics>The specific value that represents the perceived hostility status of a specific OBJECT-ITEM. Description of enumerations can be found in Domain List of JC3IEDM under object-item-hostility-status-code.</semantics>
+                <semantics>The specific value that represents the perceived hostility status.</semantics>
                 <field>
                     <name>Affiliate</name>
                     <dataType>UUID</dataType>
@@ -960,9 +960,7 @@ LEAD_ELEMENT or CENTER_OF_MASS</semantics>
                 <field>
                     <name>Service</name>
                     <dataType>CommunicationServiceTypeEnum32</dataType>
-                    <semantics>Required. 
- 
-The type of service being used for communication as defined in JC3IEDM.</semantics>
+                    <semantics>Required. The type of service being used for communication.</semantics>
                 </field>
                 <field>
                     <name>Owner</name>
