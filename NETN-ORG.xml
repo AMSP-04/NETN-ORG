@@ -424,7 +424,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <objectClass>
                     <name>Force</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Representation of a specific force and its relationship with other forces. Units belonging to a force all have the same relationship with units belonging to another force. The relation between forces can be asymetrical, e.g. Force A can be hostile to B while B is neutral to A. The relation may change during a federation execution.</semantics>
+                    <semantics>Representation of a specific force and its relationship with other forces. Units belonging to a force all have the same relationship with units belonging to another force. The relation between forces can be asymmetrical, e.g. Force A can be hostile to B while B is neutral to A. The relation may change during a federation execution.</semantics>
                     <attribute>
                         <name>Name</name>
                         <dataType>Text255</dataType>
@@ -445,7 +445,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Sequence of relations, force-relation. Default is empty array.</semantics>
+                        <semantics>Optional. Sequence of relations, force-relation. Default is an empty array.</semantics>
                     </attribute>
                 </objectClass>
                 <objectClass>
@@ -461,7 +461,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A unique name in the organization to group units and equipment items. This group name is used to determine the initial allocation of modelling responsibility of units and equipment items to a federate. The federation agreements should specify how this name is to be interpreted and how the allocation will be performed. A common agreement and practice is to use the federate name as group name, i.e. the units and equipment items are allocated to the federate with that name. Typically one application will be responsible for performing the allocation. Alternatives for the group name are for example: federate type name, a functional name.</semantics>
+                        <semantics>Required. A unique name in the organization to group units and equipment items. This group name is used to determine the initial allocation of modelling responsibility of units and equipment items to a federate. The federation agreements should specify how this name is to be interpreted and how the allocation will be performed. A common agreement and practice are to use the federate name as group name, i.e. the units and equipment items are allocated to the federate with that name. Typically one application will be responsible for performing the allocation. Alternatives for the group name are for example: federate type name, a functional name.</semantics>
                     </attribute>
                     <attribute>
                         <name>Units</name>
@@ -472,7 +472,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. The units that the federate has responsibility for. Default is an empty list.</semantics>
+                        <semantics>Optional. The units for which the federate has the responsibility of simulating.  Default is an empty list.</semantics>
                     </attribute>
                     <attribute>
                         <name>Equipment</name>
@@ -483,7 +483,18 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. The equipment that the federate has responsibility for. Default is an empty list.</semantics>
+                        <semantics>Optional. The equipment for which the federate has the responsibility of simulating.  Default is an empty list.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Installations</name>
+                        <dataType>ArrayOfUuid</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. The installations for which the federate has the responsibility of simulating. Default is an empty list.</semantics>
                     </attribute>
                 </objectClass>
             </objectClass>
