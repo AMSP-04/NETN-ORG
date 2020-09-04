@@ -4,7 +4,7 @@
         <name>NETN-ORG</name>
         <type>FOM</type>
         <version>1.0</version>
-        <modificationDate>2020-08-31</modificationDate>
+        <modificationDate>2020-09-04</modificationDate>
         <securityClassification>Not Classified</securityClassification>
         <purpose>Produce a Organisation definition (MSDL style) in a HLA Federation Execution</purpose>
         <applicationDomain>Simulation</applicationDomain>
@@ -22,21 +22,6 @@
             <pocName>MSG-163 Evolution of NATO Standards for Federated Simulation</pocName>
             <pocOrg>NATO Modelling and Simulation Group</pocOrg>
             <pocEmail>msg@cso.nato.int</pocEmail>
-        </poc>
-        <poc>
-            <pocType>Contributor</pocType>
-            <pocName>Lennart Olsson</pocName>
-            <pocOrg>Pitch Technologies</pocOrg>
-        </poc>
-        <poc>
-            <pocType>Contributor</pocType>
-            <pocName>Tom van den Berg</pocName>
-            <pocOrg>TNO, the Netherlands</pocOrg>
-        </poc>
-        <poc>
-            <pocType>Contributor</pocType>
-            <pocName>Björn Löfstrand</pocName>
-            <pocOrg>Pitch Technologies, Sweden</pocOrg>
         </poc>
         <reference>
             <type>Standard</type>
@@ -79,7 +64,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <objectClass>
                     <name>Unit</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Representation of an initial or snapshot state of an organizational unit based on attributes defined in the NETN-ORG extensions of MSDL.</semantics>
+                    <semantics>Representation of an organizational unit based on attributes defined in the NETN-ORG extensions of MSDL.</semantics>
                     <attribute>
                         <name>Name</name>
                         <dataType>Text255</dataType>
@@ -177,7 +162,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Detailed positional information on unit.</semantics>
+                        <semantics>Required. Detailed positional information on unit.</semantics>
                     </attribute>
                     <attribute>
                         <name>Formation</name>
@@ -238,7 +223,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <objectClass>
                     <name>EquipmentItem</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Representation of an initial or snapshot state of a specific equipment item based on attributes defined in the NETN-ORG extensions of MSDL.</semantics>
+                    <semantics>Representation of an equipment item based on attributes defined in the NETN-ORG extensions of MSDL.</semantics>
                     <attribute>
                         <name>Name</name>
                         <dataType>Text255</dataType>
@@ -292,7 +277,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. NATO stock number code. 13 digits (0-9)</semantics>
+                        <semantics>Optional. NATO stock number code. 13 digits (0-9)</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolId</name>
@@ -325,7 +310,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. Detailed positional information on equipment item.</semantics>
+                        <semantics>Required. Detailed positional information on equipment item.</semantics>
                     </attribute>
                     <attribute>
                         <name>CommunicationNetworks</name>
@@ -353,7 +338,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <objectClass>
                     <name>Installation</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Representation of an initial or snapshot state of an installation/facility based on attributes defined in the NETN-ORG extensions of MSDL.</semantics>
+                    <semantics>Representation of an installation/facility based on attributes defined in the NETN-ORG extensions of MSDL.</semantics>
                     <attribute>
                         <name>Name</name>
                         <dataType>Text255</dataType>
@@ -424,7 +409,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <objectClass>
                     <name>Force</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Representation of a specific force and its relationship with other forces. Units belonging to a force all have the same relationship with units belonging to another force. The relation between forces can be asymmetrical, e.g. Force A can be hostile to B while B is neutral to A. The relation may change during a federation execution.</semantics>
+                    <semantics>Representation of a specific force and its relationship with other forces. Units belonging to a force all have the same relationship with units belonging to another force. The relationships between forces can be asymmetrical, e.g. Force A can be hostile to B while B is neutral to A. The relation may change during a federation execution.</semantics>
                     <attribute>
                         <name>Name</name>
                         <dataType>Text255</dataType>
@@ -451,7 +436,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <objectClass>
                     <name>FederateApplication</name>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Representation of an allocation of initial modelling responsibility of units and equipment items to a federate application.</semantics>
+                    <semantics>Representation of the allocation of initial modelling responsibility of units and equipment items to a federate application.</semantics>
                     <attribute>
                         <name>Name</name>
                         <dataType>Text255</dataType>
@@ -475,7 +460,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <semantics>Optional. The units for which the federate has the responsibility of simulating.  Default is an empty list.</semantics>
                     </attribute>
                     <attribute>
-                        <name>Equipment</name>
+                        <name>EquipmentItems</name>
                         <dataType>ArrayOfUuid</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On Change</updateCondition>

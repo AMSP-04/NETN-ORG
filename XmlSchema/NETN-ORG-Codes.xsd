@@ -13,6 +13,7 @@
 	## Changes made for AMSP-04 Ed B
 	* Added enumCombatEffectivenessType <xs:enumeration value="">
 	* TargetNamespace changed to urn:nato:nmsg:ms3:netn:org:1
+	* EQUIPMENT added to enumForceOwnerType
 -->
 <xs:schema xmlns:msdl="urn:nato:nmsg:ms3:netn:org:1" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
