@@ -3,7 +3,7 @@ Copyright (C) 2020 NATO/OTAN.
 This work is licensed under a [Creative Commons Attribution-NoDerivatives 4.0 International License](LICENCE.md).
 
 ## Introduction
-Modelling of an organizational unit in a distributed simulation depends on its organizational relationship with other units (e.g. superior, subordinate) and on the relationship between organizational units (e.g. friendly or hostile). This organizational information is normally provided to a simulation system as part of its initialization.
+Modelling of an organizational unit in a distributed simulation depends on its organizational relationship with other units (e.g. superior, subordinate) and the relationship between organizational units (e.g. friendly or hostile). This organizational information is normally provided to a simulation system as part of its initialization.
 
 The NATO Education and Training Network Organization Module (NETN ORG) is a specification of how to represent organizations in a federated distributed simulation.
 
@@ -23,7 +23,7 @@ In addition to the FOM Module, a file-based data storage and interchange format 
 
 ## Overview
 
-Use the NETN-ORG FOM module to represent organizational units, their internal organizational structure and relationships between different organizations based on force affiliation. Specific equipment items are associated with a unit, and the initial modelling responsibility of both units and equipment can be allocated to specific federates. Represent installations associated with a unit or force.
+Use the NETN-ORG FOM module to represent organizational units, their internal organizational structure and relationships between different organizations based on force affiliation. Specific equipment items are associated with a unit, and the initial modelling responsibility of both units and equipment can be allocated to specific federates. Represent installations related to a unit or force.
 
 <img src=./images/objectclasses.png>
 
@@ -46,13 +46,13 @@ Not all units and equipment items are required to have a corresponding simulatio
 
 Units and equipment items in NETN-ORG have both an `EntityType` attribute and a `SymbolId` attribute. The `EntityType` attribute indicates the type of model to use in the simulation. The `SymbolId` is a representation of the simulated entity as a 2D symbol on a map. In some cases, the symbol selected may indicate a different type of entity compared to the simulation `EntityType`. The SISO standard SISO-REF-010 (Reference for Enumerations for Simulation Interoperability) provides a standard set of entity type enumeration values. Federation agreements and mapping of entity types to simulation models may be developed to complement and override the standard enumerations.
 
-The NETN-ORG objects represent data used for (re-)initialization of ground truth objects such as NETN-Physical Platforms and NETN-MRM Aggregate entities. The initial value of the NETN-ORG object attributes can be used by federates to perform initial registration and update of ground-truth objects. Note that each federate will interpret these values and perform their internal initialization which might include approximations, adjustments etc. E.g. an equipment item representing a ground vehicle can be located in water or inside buildings/trees. Therefore the initial value of the corresponding ground-truth platform can be adjusted by the federate. 
+The NETN-ORG objects represent data used for (re-)initialization of ground truth objects such as NETN-Physical Platforms and NETN-MRM Aggregate entities. The initial value of the NETN-ORG object attributes can be used by federates to perform initial registration and update of ground-truth objects. Note that each federate will interpret these values and perform their internal initialization which might include approximations, adjustments etc. E.g. an equipment item that is representing a ground vehicle can be located in water or inside buildings/trees. Therefore the initial value of the corresponding ground-truth platform can be adjusted by the federate. 
 
 Subsequent updates of NETN-ORG objects with an associated ground-truth representation in the federation execution should be considered a re-initialization of the ground-truth object. A federate with current modelling responsibility of a ground-truth object must perform the re-initialization based on the updated unit or equipment item attribute values. Federation agreements should specify any limitation as to which NETN-ORG object attributes are allowed to be updated during the federation execution.  
 
 Snapshots of the simulation ground-truth can be made at any point during the federation execution but preferably in a paused state when there is no advancement of simulation time. The snapshot is an update of all NETN-ORG objects to reflect the current simulated ground-truth state, e.g. unit locations and relationships in NETN-ORG are updated.
 
-The initial allocation of modelling responsibility of NETN-ORG objects (unit, equipment item, installation) in the federation is represented by Federate Application, which associates specific federates with NETN-ORG objects. As noted earlier, during the federation execution the modeling responsibility may change and another federate may be come responsible for modelling a certain unit and/or child units.
+The initial allocation of modelling responsibility of NETN-ORG objects (unit, equipment item, installation) in the federation is represented by Federate Application, which associates specific federates with NETN-ORG objects. As noted earlier, during the federation execution the modelling responsibility may change, and another federate may become responsible for modelling a particular unit or child units.
 
 
 ### Unit
