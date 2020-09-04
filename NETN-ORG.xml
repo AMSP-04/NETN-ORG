@@ -960,7 +960,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
                 <field>
                     <name>Owner</name>
                     <dataType>UUID</dataType>
-                    <semantics>UUID reference to the Unit that owns a particular item of data as part of that unit's organization.</semantics>
+                    <semantics>UUID reference to the Unit that owns the communication network.</semantics>
                 </field>
                 <field>
                     <name>NetworkName</name>
