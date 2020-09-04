@@ -63,20 +63,20 @@ The `Unit` object class attributes represent model data for organizational units
 
 |Attribute|Description|
 |---|---|
-|UniqueId|***Inherited:*** **Required.** Unique Identifier.|
-|Name|**Required.** A unique name of the units.|
-|SuperiorUnit|**Required.** Reference to the superior unit of this unit. If this unit has no superior unit (i.e. is the top-unit) then the value of this attribute shall be 00000000-0000-0000-0000-000000000000 (UUID with all zeros).|
-|EmbarkedIn|**Optional.** A reference to a host unit which carries/transports the unit. Default value is 00000000-0000-0000-0000-000000000000 (UUID with all zeros) indicating that the unit is not embarked in any other unit.|
-|Force|**Required.** The UUID referencing the Force that the unit belongs to.|
+|UniqueId (Inherited)|**Required.** Unique Identifier.|
+|Name|**Required.** A unique name of the unit.|
+|SuperiorUnit|**Required.** Reference to the superior unit. If this unit has no superior unit (i.e. is the top-unit) then the value of this attribute shall be 00000000-0000-0000-0000-000000000000 (UUID with all zeros).|
+|EmbarkedIn|**Optional.** A reference to a unit or equipment item which is carrying/transporting the unit. Default value is 00000000-0000-0000-0000-000000000000 (UUID with all zeros) indicating that the unit is not embarked in or mounted on any other unit or equipment.|
+|Force|**Required.** A reference to the Force that the unit belongs to. A missing value is interpreted as the force being unknown/undetermined.|
 |Holdings|**Optional.** A set of holdings of the unit. Default is an empty list.|
-|EntityType|**Required.** The entity type to use for representation of the units as an aggregate entity. Entity types should be based on SISO-REF-010 and/or defined by federation agreements.|
-|SymbolId|**Required.** A symbol identifier represented as a string. The symbol standard used is indicated using an URI notation (uri:xxxxxxxxxx). The following uri should be used for common symbology standards app6b, app6b, app6c, app6c, 2525b, 2525c, 2525d. If not provided the symbol standard used is undefined.|
+|EntityType|**Required.** The entity type to use for representation of the unit as an aggregate entity. Entity types should be based on SISO-REF-010 and/or defined by federation agreements.|
+|SymbolId|**Required.** A symbol identifier represented as a string.|
 |SymbolAmplification|**Optional.** Text amplifications for the unit's symbol. Static or very low update rate.|
-|Disposition|**Required.** Formation location, direction and speed of unit.|
+|Disposition|**Required.** Detailed positional information on unit.|
 |Formation|**Optional.** Formation of this unit.|
-|IsHq|**Optional.** Indicate if the unit has a command function, e.g. if it is an HQ or not.|
+|IsHq|**Optional.** Indicate whether the unit has a command function, e.g. if it is an HQ or not.|
 |Echelon|**Optional.** Symbol modifier identifying the command level. Default NONE.|
-|CommunicationNetworks|**Optional.** Set of Communication Networks that unit monitors and uses to communicate during a mission.|
+|CommunicationNetworks|**Optional.** Set of Communication Networks that the unit monitors and uses to communicate during a mission.|
 |IsSimulationEntity|**Optional.** Indicates if the Unit has an initial allocation of modelling responsibility and is represented as a ground-truth aggregate entity during federation execution. Default is False.|
 
 ### Equipment Item
@@ -85,17 +85,17 @@ The `EquipmentItem` object class attributes represent specific equipment associa
 
 |Attribute|Description|
 |---|---|
-|UniqueId|***Inherited:*** **Required.** Unique Identifier.|
+|UniqueId (Inherited)|**Required.** Unique Identifier.|
 |Name|**Required.** A unique name of the equipment item.|
-|HoldingUnit|**Required.** Identifies the lowest level unit in the ORBAT to which this equipment item belong.|
+|HoldingUnit|**Required.** Identifies the lowest level unit in the ORBAT to which this equipment item belongs.|
 |MountedOn|**Optional.** Reference to another equipment item on which this item is mounted or attached.|
 |EntityType|**Required.** SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
 |NatoStockNumber|**Optional.** NATO stock number code. 13 digits (0-9)|
-|SymbolId|**Required.** A symbol identifier represented as a string. If not provided the symbol standard used is undefined.|
+|SymbolId|**Required.** Required. A symbol identifier represented as a string.|
 |SymbolAmplification|**Optional.** Text amplifications for the equipment's symbol. Static or very low update rate.|
-|Disposition|**Required.** Formation position, location, orientation and speed.|
-|CommunicationNetworks|**Optional.** Set of Communication Networks that equipment monitors and uses to communicate during a mission.|
-|Resolution|**Optional.** Enumeration indicating the level of fidelity appropriate for instancing the unit or equipment in the simulation. Default value: NOT_SPECIFIED.|
+|Disposition|**Required.** Detailed positional information on equipment item.|
+|CommunicationNetworks|**Optional.** Set of Communication Networks that the equipment monitors and uses to communicate during a mission.|
+|Resolution|**Optional.** Enumeration indicating the level of fidelity appropriate for instancing the equipment in the simulation. Default value: NOT_SPECIFIED.|
 
 ### Installation
 
@@ -103,11 +103,11 @@ Representation of an initial or snapshot state of an installation/facility based
 
 |Attribute|Description|
 |---|---|
-|UniqueId|***Inherited:*** **Required.** Unique Identifier.|
+|UniqueId (Inherited)|**Required.** Unique Identifier.|
 |Name|**Required.** A unique name of the installation.|
 |Owner|**Required** Reference to the force, unit or equipment item owning or hosting the installation.|
 |EntityType|**Required.** SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
-|SymbolId|**Required.** A symbol identifier represented as a string. If not provided the symbol standard used is undefined.|
+|SymbolId|**Required.** A symbol identifier represented as a string.|
 |SymbolAmplification|**Optional.** Text amplifications for the installation's symbol. Static or very low update rate.|
 |Location|**Required.** Geographic location of the installation.|
 
@@ -117,8 +117,8 @@ A `Force` object represents a specific force or side and its relationship with o
 
 |Attribute|Description|
 |---|---|
-|UniqueId|***Inherited:*** **Required.** Unique Identifier.|
-|ForceName|**Required** Name of the force/side.|
+|UniqueId (Inherited)|**Required.** Unique Identifier.|
+|Name|**Required** Name of the force/side.|
 |Relations|**Optional:** Sequence of relations, force-relation. Default is an empty array. |
 
 ## FederateApplication
@@ -127,11 +127,11 @@ A `FederateApplication` object is used to represent the allocation of initial mo
 
 |Attribute|Description|
 |---|---|
-|UniqueId|***Inherited:*** **Required.** Unique Identifier.|
+|UniqueId (Inherited)|**Required.** Unique Identifier.|
 |Name|**Required.** A unique name in the organization to group units and equipment items. This group name is used to determine the initial allocation of modelling responsibility of units and equipment items to a federate. The federation agreements should specify how this name is to be interpreted and how the allocation will be performed. A common agreement and practice are to use the federate name as group name, i.e. the units and equipment items are allocated to the federate with that name. Typically one application will be responsible for performing the allocation. Alternatives for the group name are for example: federate type name, a functional name.|
-|Units|**Optional:**  The units for which the federate has the responsibility of simulating. Default is an empty list. |
-|EquipmentItems|**Optional.**  The equipment for which the federate has the responsibility of simulating. Default is an empty list. |
-|Installations|**Optional.**  The installations for which the federate has the responsibility of simulating. Default is an empty list. |
+|Units|**Optional:** The units for which the federate has the responsibility of simulating.  Default is an empty list.|
+|EquipmentItems|**Optional.** The equipment for which the federate has the responsibility of simulating.  Default is an empty list.|
+|Installations|**Optional.** The installations for which the federate has the responsibility of simulating. Default is an empty list.|
 
 Note that each unit, equipment or installation is only allowed to be referenced in one `FederateApplication` object instance. 
 

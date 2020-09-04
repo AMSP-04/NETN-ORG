@@ -85,7 +85,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. Reference to the superior unit of this unit. If this unit has no superior unit (i.e. is the top-unit) then the value of this attribute shall be 00000000-0000-0000-0000-000000000000 (UUID with all zeros).</semantics>
+                        <semantics>Required. Reference to the superior unit. If this unit has no superior unit (i.e. is the top-unit) then the value of this attribute shall be 00000000-0000-0000-0000-000000000000 (UUID with all zeros).</semantics>
                     </attribute>
                     <attribute>
                         <name>EmbarkedIn</name>
@@ -140,7 +140,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A symbol identifier represented as a string. If not provided the symbol standard used is undefined.</semantics>
+                        <semantics>Required. A symbol identifier represented as a string.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
@@ -288,7 +288,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A symbol identifier represented as a string. If not provided the symbol standard used is undefined.</semantics>
+                        <semantics>Required. A symbol identifier represented as a string.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
@@ -381,7 +381,7 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A symbol identifier represented as a string. If not provided the symbol standard used is undefined.</semantics>
+                        <semantics>Required. A symbol identifier represented as a string.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
@@ -960,7 +960,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
                 <field>
                     <name>Owner</name>
                     <dataType>UUID</dataType>
-                    <semantics>UUID reference to the Unit that owns the communication network.</semantics>
+                    <semantics>UUID reference to the Unit that owns a particular item of data as part of that unit's organization.</semantics>
                 </field>
                 <field>
                     <name>NetworkName</name>
