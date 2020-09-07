@@ -45,7 +45,7 @@
 	## Additional Changes made for AMSP-04 Ed B
 		* Changed schema attribute elementFormDefault= from qualified to unqualified
 		* Updated MilitaryScenarioType.Deployment
-  			* Name – Length restrictions
+  			* Name – No Length restrictions
   			* Units – minOccurs = 0
   			* Unit – type
 		* Changed type of all SymbolIdentifier elements to patternSymbolId and updated documentation.
@@ -1043,7 +1043,7 @@ If not provided the default symbol standard used is the one specified in the Sce
 							<xs:complexType>
 								<xs:all>
 									<xs:element name="ObjectHandle" type="msdl:patternUUID32"/>
-									<xs:element name="Name" minOccurs="0" type="msdl:textName255"/>
+									<xs:element name="Name" minOccurs="0" type="xs:string"/>
 									<xs:element name="Units" minOccurs="0">
 										<xs:complexType>
 											<xs:sequence maxOccurs="unbounded"  minOccurs="0">
