@@ -50,17 +50,6 @@ Above license gives you the right to use and redistribute the NETN FOM Module (X
                 <name>ORG_Root</name>
                 <sharing>Neither</sharing>
                 <semantics>Root object class for all NETN-ORG object classes. Includes unique identifier and unique name attributes inherited by all subclasses.</semantics>
-                <attribute>
-                    <name>UniqueId</name>
-                    <dataType>UUID</dataType>
-                    <updateType>Static</updateType>
-                    <updateCondition>NA</updateCondition>
-                    <ownership>NoTransfer</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Required. Unique Identifier.</semantics>
-                </attribute>
                 <objectClass>
                     <name>Unit</name>
                     <sharing>PublishSubscribe</sharing>
