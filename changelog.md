@@ -1,8 +1,7 @@
 ## Changelog NETN-ORG
 
-### Changes in NETN-METOC v2.0 as part of NETN-FOM v4.0
+### Changes for v1.1
+Version 1.1 was developed by MSG-191 and included in NETN-FOM v4.0.
 
-Version 2.0 is a major update of the module to adapt to HLA 4 FOM modelling and FOM module merging.
+* Move attribute `UniqueId` of object class `ORG_Root` to object class `HLAobjectRoot` defined in `NETN-BASE` FOM module
 
-== Changes that does not break backward compatibility
-* UniqueId attribute definition at ORG_Root is removed and replaced by inherited attribute `Id` from `HLAobjectRoot defined in NETN-BASE FOM module
