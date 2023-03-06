@@ -477,63 +477,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
             </simpleData>
         </simpleDataTypes>
         <enumeratedDataTypes>
-            <enumeratedData>
-                <name>HostilityStatusCodeEnum32</name>
-                <representation>HLAinteger32BE</representation>
-                <semantics>The specific value that represents the perceived hostility status.</semantics>
-                <enumerator>
-                    <name>AFR</name>
-                    <value>0</value>
-                </enumerator>
-                <enumerator>
-                    <name>AHO</name>
-                    <value>1</value>
-                </enumerator>
-                <enumerator>
-                    <name>AIV</name>
-                    <value>2</value>
-                </enumerator>
-                <enumerator>
-                    <name>ANT</name>
-                    <value>3</value>
-                </enumerator>
-                <enumerator>
-                    <name>FAKER</name>
-                    <value>4</value>
-                </enumerator>
-                <enumerator>
-                    <name>FR</name>
-                    <value>5</value>
-                </enumerator>
-                <enumerator>
-                    <name>HO</name>
-                    <value>6</value>
-                </enumerator>
-                <enumerator>
-                    <name>IV</name>
-                    <value>7</value>
-                </enumerator>
-                <enumerator>
-                    <name>JOKER</name>
-                    <value>8</value>
-                </enumerator>
-                <enumerator>
-                    <name>NEUTRL</name>
-                    <value>9</value>
-                </enumerator>
-                <enumerator>
-                    <name>PENDNG</name>
-                    <value>10</value>
-                </enumerator>
-                <enumerator>
-                    <name>SUSPCT</name>
-                    <value>11</value>
-                </enumerator>
-                <enumerator>
-                    <name>UNK</name>
-                    <value>12</value>
-                </enumerator>
-            </enumeratedData>
+            
             <enumeratedData>
                 <name>FormationLocationTypeEnum32</name>
                 <representation>HLAinteger32BE</representation>
