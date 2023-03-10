@@ -461,6 +461,17 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <order>Receive</order>
                         <semantics>Optional. The installations for which the federate has the responsibility of simulating. Default is an empty list.</semantics>
                     </attribute>
+                    <attribute>
+                        <name>SeObjects</name>
+                        <dataType>ArrayOfUuid</dataType>
+                        <updateType>NA</updateType>
+                        <updateCondition></updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. The synthetic environment objects which the federate has the responsibility of simulating. Corresponds to the UniqueId attribute of instances of subclasses of SE_Root (see NETN-SE).</semantics>
+                    </attribute>
                 </objectClass>
             </objectClass>
         </objectClass>
@@ -477,7 +488,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
             </simpleData>
         </simpleDataTypes>
         <enumeratedDataTypes>
-            
             <enumeratedData>
                 <name>FormationLocationTypeEnum32</name>
                 <representation>HLAinteger32BE</representation>
