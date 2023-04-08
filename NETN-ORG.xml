@@ -279,8 +279,8 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     <attribute>
                         <name>ForceIdentifier</name>
                         <dataType>ForceIDEnum8</dataType>
-                        <updateType>NA</updateType>
-                        <updateCondition></updateCondition>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
                         <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
@@ -290,8 +290,8 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     <attribute>
                         <name>Nation</name>
                         <dataType>HLAunicodeString</dataType>
-                        <updateType>NA</updateType>
-                        <updateCondition></updateCondition>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
                         <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
@@ -910,14 +910,14 @@ Credibility Ratings:
         </note>
         <note>
             <label>netn-org_2</label>
-            <semantics>## Overview
-
-Use the NETN-ORG FOM module to represent organizations and their internal structure, relationships, associated units, equipment, and installations.
-
-Dynamic organizational changes may include new and or rearranged unit structure or changes in the relationships with other organizations.
-
+            <semantics>## Overview 
+ 
+Use the NETN-ORG FOM module to represent organizations and their internal structure, relationships, associated units, equipment, and installations. 
+ 
+Dynamic organizational changes may include new and or rearranged unit structure or changes in the relationships with other organizations. 
+ 
 In a simulation, not all units, equipment and installations have a corresponding simulation entity in the federation. Which elements to represent as simulated entities are determined by the current modelling responsibility described in NETN-TMR and dynamic changes in the level of aggregation described in NETN-MRM. 
-
+ 
 The NETN-ORG organization elements are the basis for the initialization of simulated entities, e.g. `Platforms` or `AggregateEntity` objects. Therefore, updates of NETN-ORG objects should be considered a re-initialization of any associate simulation entity. E.g. updating the `Unit` attribute `Holdings` should be reflected in an `AggregateEntity` representing the unit.</semantics>
         </note>
     </notes>
