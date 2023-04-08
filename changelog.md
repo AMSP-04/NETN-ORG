@@ -6,6 +6,10 @@
 
 ### v2.0 - Updated version developed by MSG-191. Release included in NETN-FOM v4.0
 
+* Removed dependency `NETN-BASE`
+* Added dependency `NETN-MRM`
+
+
 * Replaced `ORG_Root` attribute `UniqueId` with NETN-BASE `HLAobjectRoot` attribute `UniqueId`
 * Added `ORG_Root` attribute `Name`
 
@@ -51,4 +55,8 @@
 * Removed datatype `ModelResolutionTypeEnum32`
 * Removed datatype `NatoStockNumberArray13`
 * Replaced datatype `Text255` with `HLAunicodeString`
+
+* Added `BaseEntity` attribute `Organization`
+* Added `AggregateEntity` attribute `Unit`
+* Added `Platform` attribute `Equipment`
 

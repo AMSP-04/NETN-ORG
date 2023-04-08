@@ -2,7 +2,7 @@
 # NETN-ORG
 |Version| Date| Dependencies|
 |---|---|---|
-|2.0|2023-04-08|NETN-BASE|
+|2.0|2023-04-08|NETN-MRM|
 
 The NATO Education and Training Organization (NETN-ORG) module provides a standard way to represent organizations in the simulation scenario and their relationships and structure. The relationships include unit command structure, relationships between organizations, unit equipment, and installations.
 
@@ -12,14 +12,14 @@ The specification is based on IEEE 1516 High Level Architecture (HLA) Object Mod
 
 Use the NETN-ORG information to: * initialize simulated entities * perform disaggregation, aggregation, divide and merge actions using NETN-MRM * change organizational relationships * capture simulated unit and equipment state as snapshots
 
-## Overview
-
-Use the NETN-ORG FOM module to represent organizations and their internal structure, relationships, associated units, equipment, and installations.
-
-Dynamic organizational changes may include new and or rearranged unit structure or changes in the relationships with other organizations.
-
+## Overview 
+ 
+Use the NETN-ORG FOM module to represent organizations and their internal structure, relationships, associated units, equipment, and installations. 
+ 
+Dynamic organizational changes may include new and or rearranged unit structure or changes in the relationships with other organizations. 
+ 
 In a simulation, not all units, equipment and installations have a corresponding simulation entity in the federation. Which elements to represent as simulated entities are determined by the current modelling responsibility described in NETN-TMR and dynamic changes in the level of aggregation described in NETN-MRM. 
-
+ 
 The NETN-ORG organization elements are the basis for the initialization of simulated entities, e.g. `Platforms` or `AggregateEntity` objects. Therefore, updates of NETN-ORG objects should be considered a re-initialization of any associate simulation entity. E.g. updating the `Unit` attribute `Holdings` should be reflected in an `AggregateEntity` representing the unit.
 
 
@@ -30,11 +30,15 @@ Note that inherited and dependency attributes are not included in the descriptio
 ```mermaid
 graph RL
 ORG_Root-->HLAobjectRoot
+BaseEntity-->HLAobjectRoot
 OrganizationElement-->ORG_Root
 Organization-->ORG_Root
 Equipment-->OrganizationElement
 Unit-->OrganizationElement
 Installation-->OrganizationElement
+AggregateEntity-->BaseEntity
+PhysicalEntity-->BaseEntity
+Platform-->PhysicalEntity
 ```
 
 ### ORG_Root
@@ -98,6 +102,30 @@ An organization have relationships with other organizations. Units belonging to 
 |Relations|ArrayOfRelations|Optional. The relations with other organizations. The federation agreements specify default relationship.|
 |ForceIdentifier|ForceIDEnum8|Required: A force identifier indicate a special relationship with an organization in the scenario designated as the default perspective of the scenario. The force identifier applies to all simulated entities representing an organizational element belonging to the organization and is a required attribute for all `PhysicalEntity` and `AggregateEntity` objects in the federation.|
 |Nation|HLAunicodeString|Optional: A textual description of the nation the organization affiliates with.|
+
+### BaseEntity
+
+A base class of aggregate and discrete scenario domain participants. The BaseEntity class is characterized by being located at a particular location in space and independently movable, if capable of movement at all. It specifically excludes elements normally considered to be a component of another element. The BaseEntity class is intended to be a container for common attributes for entities of this type. Since it lacks sufficient class specific attributes that are required for simulation purposes, federates cannot publish objects of this class. Certain simulation management federates, e.g. viewers, may subscribe to this class. Simulation federates will normally subscribe to one of the subclasses, to gain the extra information required to properly simulate the entity.
+
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|Organization|UUID|Optional: The organization in the scenario this entity belongs to.|
+
+### AggregateEntity
+
+A group of one or more separate objects that operate together as part of an organization. These objects may be discrete, may be other aggregate objects, or may be a mixture of both.
+
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|Unit|UUID|Optional: Reference to an existing NETN-ORG `Unit` object that is represented by this `AggregateEntity`. Default value is all zeros.|
+
+### Platform
+
+A physical object under the control of armed forces upon which sensor, communication, or weapon systems may be mounted.
+
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|Equipment|UUID|Optional: Reference to a Equipment that is represented by this Platform. Default value is all zeros.|
 
 ## Datatypes
 

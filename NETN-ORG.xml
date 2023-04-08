@@ -38,7 +38,7 @@ The specification is based on IEEE 1516 High Level Architecture (HLA) Object Mod
         </reference>
         <reference>
             <type>Dependency</type>
-            <identification>NETN-BASE</identification>
+            <identification>NETN-MRM</identification>
         </reference>
         <other>
 Copyright © 2020 by NATO/OTAN. All rights reserved.
@@ -298,6 +298,57 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <order>Receive</order>
                         <semantics>Optional: A textual description of the nation the organization affiliates with.</semantics>
                     </attribute>
+                </objectClass>
+            </objectClass>
+            <objectClass>
+                <name>BaseEntity</name>
+                <sharing>Subscribe</sharing>
+                <semantics>A base class of aggregate and discrete scenario domain participants. The BaseEntity class is characterized by being located at a particular location in space and independently movable, if capable of movement at all. It specifically excludes elements normally considered to be a component of another element. The BaseEntity class is intended to be a container for common attributes for entities of this type. Since it lacks sufficient class specific attributes that are required for simulation purposes, federates cannot publish objects of this class. Certain simulation management federates, e.g. viewers, may subscribe to this class. Simulation federates will normally subscribe to one of the subclasses, to gain the extra information required to properly simulate the entity.</semantics>
+                <attribute>
+                    <name>Organization</name>
+                    <dataType>UUID</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional: The organization in the scenario this entity belongs to.</semantics>
+                </attribute>
+                <objectClass>
+                    <name>AggregateEntity</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>A group of one or more separate objects that operate together as part of an organization. These objects may be discrete, may be other aggregate objects, or may be a mixture of both.</semantics>
+                    <attribute>
+                        <name>Unit</name>
+                        <dataType>UUID</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional: Reference to an existing NETN-ORG `Unit` object that is represented by this `AggregateEntity`. Default value is all zeros.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>PhysicalEntity</name>
+                    <objectClass>
+                        <name>Platform</name>
+                        <sharing>Subscribe</sharing>
+                        <semantics>A physical object under the control of armed forces upon which sensor, communication, or weapon systems may be mounted.</semantics>
+                        <attribute>
+                            <name>Equipment</name>
+                            <dataType>UUID</dataType>
+                            <updateType>Conditional</updateType>
+                            <updateCondition>On change</updateCondition>
+                            <ownership>DivestAcquire</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAreliable</transportation>
+                            <order>Receive</order>
+                            <semantics>Optional: Reference to a Equipment that is represented by this Platform. Default value is all zeros.</semantics>
+                        </attribute>
+                    </objectClass>
                 </objectClass>
             </objectClass>
         </objectClass>
@@ -862,51 +913,59 @@ Credibility Ratings:
     <notes>
         <note>
             <label>netn-org_1</label>
-            <semantics>* Replaced `ORG_Root` attribute `UniqueId` with NETN-BASE `HLAobjectRoot` attribute `UniqueId` 
-* Added `ORG_Root` attribute `Name` 
- 
-* Added object class `OrganizationElement` 
- 
-* Replaced `Unit` attribute `Name` with `ORG_Root` attribute `Name` 
-* Replaced `Unit` attribute `Force` with `OrganizationElement` attribute `Organization` 
-* Replaced `Unit` attribute `EntityType` with `OrganizationElement` attribute `EntityType` 
-* Replaced `Unit` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId` 
-* Replaced `Unit` attribute `Disposition` with `OrganizationElement` attribute `Location` 
-* Replaced `Unit` attribute `CommunicationNetworks` with NETN-COM `Unit` attribute `CommunicationNetworks` 
- 
+            <semantics>* Removed dependency `NETN-BASE`
+* Added dependency `NETN-MRM`
+
+
+* Replaced `ORG_Root` attribute `UniqueId` with NETN-BASE `HLAobjectRoot` attribute `UniqueId`
+* Added `ORG_Root` attribute `Name`
+
+* Added object class `OrganizationElement`
+
+* Replaced `Unit` attribute `Name` with `ORG_Root` attribute `Name`
+* Replaced `Unit` attribute `Force` with `OrganizationElement` attribute `Organization`
+* Replaced `Unit` attribute `EntityType` with `OrganizationElement` attribute `EntityType`
+* Replaced `Unit` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId`
+* Replaced `Unit` attribute `Disposition` with `OrganizationElement` attribute `Location`
+* Replaced `Unit` attribute `CommunicationNetworks` with NETN-COM `Unit` attribute `CommunicationNetworks`
+
 * Renamed object class `EquipmentItem` to `Equipment` 
-* Replaced `EquipmentItem` attribute `Name` with `ORG_Root` attribute `Name` 
-* Replaced `EquipmentItem` attribute `EntityType` with `OrganizationElement` attribute `EntityType` 
-* Removed `EquipmentItem` attribute `NatoStockNumber` 
-* Replaced `EquipmentItem` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId` 
-* Replaced `EquipmentItem` attribute `Disposition` with `OrganizationElement` attribute `Location` 
-* Replaced `EquipmentItem` attribute `CommunicationNetworks` with NETN-COM `Equipment` attribute `CommunicationNetworks` 
-* Removed `EquipmentItem` attribute `Resolution` 
- 
-* Replaced `Installation` attribute `Name` with `ORG_Root` attribute `Name` 
+* Replaced `EquipmentItem` attribute `Name` with `ORG_Root` attribute `Name`
+* Replaced `EquipmentItem` attribute `EntityType` with `OrganizationElement` attribute `EntityType`
+* Removed `EquipmentItem` attribute `NatoStockNumber`
+* Replaced `EquipmentItem` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId`
+* Replaced `EquipmentItem` attribute `Disposition` with `OrganizationElement` attribute `Location`
+* Replaced `EquipmentItem` attribute `CommunicationNetworks` with NETN-COM `Equipment` attribute `CommunicationNetworks`
+* Removed `EquipmentItem` attribute `Resolution`
+
+* Replaced `Installation` attribute `Name` with `ORG_Root` attribute `Name`
 * Renamed `Installation` attribute `Owner` to `UnitInCommand` 
-* Replaced `Installation` attribute `EntityType` with `OrganizationElement` attribute `EntityType` 
-* Replaced `Installation` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId` 
-* Replaced `Installation` attribute `Location` with `OrganizationElement` attribute `Location` 
- 
-* Renamed object class `Force` to `Organization` 
-* Replaced `Force` attribute `Name` with `ORG_Root` attribute `Name` 
-* Added `Organization` attribute `ForceIdentifier` 
-* Added `Organization` attribute `Nation` 
- 
-* Moved object class `FederateApplication` to NETN-TMR 
- 
-* Removed datatype `ArrayOfCommunicationNetworks` 
-* Removed datatype `CommunicationNetworkStruct` 
-* Removed datatype `CommunicationServiceTypeEnum32` 
-* Removed datatype `DispositionStruct` 
-* Added datatype `ForceIDEnum8` 
-* Removed datatype `FormationInt32` 
-* Removed datatype `FormationPositionStruct` 
-* Replaced datatype `HostilityStatusCodeEnum32` with NETN-BASE datatype `HostilityStatusCodeEnum32` 
-* Removed datatype `ModelResolutionTypeEnum32` 
-* Removed datatype `NatoStockNumberArray13` 
-* Replaced datatype `Text255` with `HLAunicodeString`</semantics>
+* Replaced `Installation` attribute `EntityType` with `OrganizationElement` attribute `EntityType`
+* Replaced `Installation` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId`
+* Replaced `Installation` attribute `Location` with `OrganizationElement` attribute `Location`
+
+* Renamed object class `Force` to `Organization`
+* Replaced `Force` attribute `Name` with `ORG_Root` attribute `Name`
+* Added `Organization` attribute `ForceIdentifier`
+* Added `Organization` attribute `Nation`
+
+* Moved object class `FederateApplication` to NETN-TMR
+
+* Removed datatype `ArrayOfCommunicationNetworks`
+* Removed datatype `CommunicationNetworkStruct`
+* Removed datatype `CommunicationServiceTypeEnum32`
+* Removed datatype `DispositionStruct`
+* Added datatype `ForceIDEnum8`
+* Removed datatype `FormationInt32`
+* Removed datatype `FormationPositionStruct`
+* Replaced datatype `HostilityStatusCodeEnum32` with NETN-BASE datatype `HostilityStatusCodeEnum32`
+* Removed datatype `ModelResolutionTypeEnum32`
+* Removed datatype `NatoStockNumberArray13`
+* Replaced datatype `Text255` with `HLAunicodeString`
+
+* Added `BaseEntity` attribute `Organization`
+* Added `AggregateEntity` attribute `Unit`
+* Added `Platform` attribute `Equipment`</semantics>
         </note>
         <note>
             <label>netn-org_2</label>
