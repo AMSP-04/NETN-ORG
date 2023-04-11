@@ -38,7 +38,7 @@ The specification is based on IEEE 1516 High Level Architecture (HLA) Object Mod
         </reference>
         <reference>
             <type>Dependency</type>
-            <identification>NETN-MRM</identification>
+            <identification>NETN-BASE</identification>
         </reference>
         <other>
 Copyright © 2020 by NATO/OTAN. All rights reserved.
@@ -100,7 +100,18 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. A symbol identifier.</semantics>
+                        <semantics>Required. Initial symbol identifier for this element.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>SymbolAmplification</name>
+                        <dataType>SymbolAmplificationVariant</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional: Initial values for amplification of symbol for this element.</semantics>
                     </attribute>
                     <attribute>
                         <name>Location</name>
@@ -111,12 +122,23 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. The geographic location of the element.</semantics>
+                        <semantics>Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation. </semantics>
+                    </attribute>
+                    <attribute>
+                        <name>HostUnit</name>
+                        <dataType>UUID</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. A reference to a unit or equipment controlling the movement or operating an installation. E.g. a unit embarked on a transport, or a helicopter on a ship. The default value is all zeros, indicating that the unit is not embarked in or mounted on any other unit or equipment. Not applicable to `Installation`.</semantics>
                     </attribute>
                     <objectClass>
                         <name>Equipment</name>
                         <sharing>PublishSubscribe</sharing>
-                        <semantics>Equipment represents individual physical items identified in the scenario, including platforms and sensors.</semantics>
+                        <semantics>An equipment represents individual physical items defined specifically and apart from any holdings defined for the `HoldingUnit`. Equipment includes platforms, munition and sensors object.</semantics>
                         <attribute>
                             <name>HoldingUnit</name>
                             <dataType>UUID</dataType>
@@ -127,28 +149,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics>Optional: A reference to the unit to which this equipment belongs. The default is that the equipment does not belong to a specific unit.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>MountedOn</name>
-                            <dataType>UUID</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>On change</updateCondition>
-                            <ownership>DivestAcquire</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Optional. Reference to another equipment item on which this item is mounted or attached.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>SymbolAmplification</name>
-                            <dataType>EquipmentSymbolAmplificationStruct</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>On change</updateCondition>
-                            <ownership>DivestAcquire</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Optional. Text amplifications for the symbol.</semantics>
                         </attribute>
                     </objectClass>
                     <objectClass>
@@ -165,17 +165,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics>Optional: A reference to a superior unit within the organization. The default is that this unit does not have a superior.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>SymbolAmplification</name>
-                            <dataType>UnitSymbolAmplificationStruct</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>On change</updateCondition>
-                            <ownership>DivestAcquire</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Optional. Text amplifications for the symbol.</semantics>
                         </attribute>
                         <attribute>
                             <name>Echelon</name>
@@ -197,7 +186,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional. Indicate whether the unit has a command function, e.g. if it is an HQ or not.</semantics>
+                            <semantics>Optional. Indicate whether the unit has a command function, e.g. if it is an HQ or not. The default is FALSE, no HQ.</semantics>
                         </attribute>
                         <attribute>
                             <name>Holdings</name>
@@ -208,18 +197,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional. A set of holdings of the unit. The default is an empty list.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>EmbarkedIn</name>
-                            <dataType>UUID</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>WhenChanged</updateCondition>
-                            <ownership>DivestAcquire</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Optional. A reference to a unit or equipment carrying/transporting the unit. The default value is 00000000-0000-0000-0000-000000000000 (UUID with all zeros), indicating that the unit is not embarked in or mounted on any other unit or equipment.</semantics>
+                            <semantics>Optional. A set of holdings defined for this unit in addition to holdings defined for all subunits and any specific `Equipment` objects with this unit as `HoldingUnit . The default is an empty list.`</semantics>
                         </attribute>
                         <attribute>
                             <name>Formation</name>
@@ -247,17 +225,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics>Optional: A reference to a unit in charge of this installation. The default is that no specific unit is in charge of the installation.</semantics>
-                        </attribute>
-                        <attribute>
-                            <name>SymbolAmplification</name>
-                            <dataType>InstallationSymbolAmplificationStruct</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>On change</updateCondition>
-                            <ownership>DivestAcquire</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Optional. Text amplifications for the symbol.</semantics>
                         </attribute>
                     </objectClass>
                 </objectClass>
@@ -288,15 +255,15 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <semantics>Required: A force identifier indicate a special relationship with an organization in the scenario designated as the default perspective of the scenario. The force identifier applies to all simulated entities representing an organizational element belonging to the organization and is a required attribute for all `PhysicalEntity` and `AggregateEntity` objects in the federation.</semantics>
                     </attribute>
                     <attribute>
-                        <name>Nation</name>
-                        <dataType>HLAunicodeString</dataType>
+                        <name>CountryCode</name>
+                        <dataType>HLAinteger32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On change</updateCondition>
                         <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional: A textual description of the nation the organization affiliates with.</semantics>
+                        <semantics>Optional: Numerical country code based on ISO 3166-1 numeric. The numeric codes 900 to 999 can be user-assigned in the federation agreement.</semantics>
                     </attribute>
                 </objectClass>
             </objectClass>
@@ -315,41 +282,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     <order>Receive</order>
                     <semantics>Optional: The organization in the scenario this entity belongs to.</semantics>
                 </attribute>
-                <objectClass>
-                    <name>AggregateEntity</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>A group of one or more separate objects that operate together as part of an organization. These objects may be discrete, may be other aggregate objects, or may be a mixture of both.</semantics>
-                    <attribute>
-                        <name>Unit</name>
-                        <dataType>UUID</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On change</updateCondition>
-                        <ownership>DivestAcquire</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Optional: Reference to an existing NETN-ORG `Unit` object that is represented by this `AggregateEntity`. Default value is all zeros.</semantics>
-                    </attribute>
-                </objectClass>
-                <objectClass>
-                    <name>PhysicalEntity</name>
-                    <objectClass>
-                        <name>Platform</name>
-                        <sharing>Subscribe</sharing>
-                        <semantics>A physical object under the control of armed forces upon which sensor, communication, or weapon systems may be mounted.</semantics>
-                        <attribute>
-                            <name>Equipment</name>
-                            <dataType>UUID</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>On change</updateCondition>
-                            <ownership>DivestAcquire</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Optional: Reference to a Equipment that is represented by this Platform. Default value is all zeros.</semantics>
-                        </attribute>
-                    </objectClass>
-                </objectClass>
             </objectClass>
         </objectClass>
     </objects>
@@ -534,76 +466,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                 <encoding>HLAvariableArray</encoding>
                 <semantics>Sequence of holdings.</semantics>
             </arrayData>
-            <arrayData>
-                <name>Text5</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..5]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 5 characters.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>Text21</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..21]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 21 characters.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>Text24</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..24]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 24 characters.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>Text20</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..20]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 20 characters.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>Text9</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..9]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 9 characters.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>Text3</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..3]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 3 characters.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>Text2</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..2]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 2 characters.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>Text1</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..1]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 1 character.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>Text15</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..15]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 15 characters.</semantics>
-            </arrayData>
-            <arrayData>
-                <name>Text8</name>
-                <dataType>HLAunicodeChar</dataType>
-                <cardinality>[0..8]</cardinality>
-                <encoding>HLAvariableArray</encoding>
-                <semantics>Text of max length 8 characters.</semantics>
-            </arrayData>
         </arrayDataTypes>
         <fixedRecordDataTypes>
             <fixedRecordData>
@@ -624,230 +486,32 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
             <fixedRecordData>
                 <name>Holding</name>
                 <encoding>HLAfixedRecord</encoding>
-                <semantics>Static and dynamic data about the holding.</semantics>
+                <semantics>Static and dynamic data about the holding. The `EntityType` determines if the holding is a platform, munition, lifeform, supplies etc.</semantics>
                 <field>
-                    <name>OperationalCount</name>
-                    <dataType>QuantityFloat64</dataType>
-                    <semantics>The number of specific OBJECT-TYPEs a specific OBJECT-ITEM has available for operations</semantics>
-                </field>
-                <field>
-                    <name>OnHandQuantity</name>
-                    <dataType>QuantityFloat64</dataType>
-                    <semantics>Current number of the holding.</semantics>
+                    <name>Name</name>
+                    <dataType>HLAunicodeString</dataType>
+                    <semantics>A short name used for this holding.</semantics>
                 </field>
                 <field>
                     <name>RequiredOnHandQuantity</name>
                     <dataType>QuantityFloat64</dataType>
-                    <semantics>The required number of the holding.</semantics>
+                    <semantics>The minimum required amount of the specified type of entites.</semantics>
                 </field>
                 <field>
-                    <name>IsEquipment</name>
-                    <dataType>HLAboolean</dataType>
-                    <semantics>True if is equipment, false for expendables.</semantics>
+                    <name>OnHandQuantity</name>
+                    <dataType>QuantityFloat64</dataType>
+                    <semantics>The actual amount of the specified type of entites.</semantics>
+                </field>
+                <field>
+                    <name>OperationalCount</name>
+                    <dataType>QuantityFloat64</dataType>
+                    <semantics>The amount of the specified type of entites available for operations</semantics>
                 </field>
                 <field>
                     <name>EntityType</name>
                     <dataType>EntityTypeStruct</dataType>
                     <semantics>DIS enumeration. 
 Use 0.0.0.0.0.0.0 when not defined.</semantics>
-                </field>
-            </fixedRecordData>
-            <fixedRecordData>
-                <name>UnitSymbolAmplificationStruct</name>
-                <encoding>HLAfixedRecord</encoding>
-                <semantics>Text amplifiers for Unit symbols.</semantics>
-                <field>
-                    <name>ReinforcedOrReduced</name>
-                    <dataType>Text3</dataType>
-                    <semantics>A text amplifier in a unit symbol that displays (+) for reinforced, (-) for reduced, (±) reinforced and reduced.</semantics>
-                </field>
-                <field>
-                    <name>StaffComments</name>
-                    <dataType>Text20</dataType>
-                    <semantics>A text amplifier for units, equipment and installations.</semantics>
-                </field>
-                <field>
-                    <name>AdditionalInformation</name>
-                    <dataType>Text20</dataType>
-                    <semantics>A text amplifier for units, equipment and installations.</semantics>
-                </field>
-                <field>
-                    <name>EvaluationRating</name>
-                    <dataType>Text2</dataType>
-                    <semantics>A text amplifier for units, equipment and installations that consists of a one-letter reliability rating and a one-number credibility rating. 
- 
-Reliability Ratings: 
-A-completely reliable 
-B-usually reliable 
-C-fairly reliable 
-D-not usually reliable 
-E-unreliable 
-F-reliability cannot be judged 
- 
-Credibility Ratings: 
-1-confirmed by other sources 
-2-probably true 
-3-possibly true 
-4-doubtfully true 
-5-improbable 
-6-truth cannot be judged.</semantics>
-                </field>
-                <field>
-                    <name>CombatEffectiveness</name>
-                    <dataType>Text5</dataType>
-                    <semantics>A text amplifier for units and installations that indicates unit effectiveness or installation capability.</semantics>
-                </field>
-                <field>
-                    <name>HigherFormation</name>
-                    <dataType>Text21</dataType>
-                    <semantics>A text amplifier for units that indicates number or title of higher echelon command (corps are designated by Roman numerals).</semantics>
-                </field>
-                <field>
-                    <name>IFF_SIF_AIS</name>
-                    <dataType>Text15</dataType>
-                    <semantics>A text amplifier displaying IFF/SIF/AIS identification modes and codes.</semantics>
-                </field>
-                <field>
-                    <name>UniqueDesignation</name>
-                    <dataType>Text21</dataType>
-                    <semantics>A text amplifier for units, equipment and installations that uniquely identifies a particular symbol or track number. Identifies acquisitions number when used with SIGINT symbology.</semantics>
-                </field>
-                <field>
-                    <name>SpecialHeadquarters</name>
-                    <dataType>Text9</dataType>
-                    <semantics>A text modifier for a unit's special C2 Headquarters.</semantics>
-                </field>
-                <field>
-                    <name>EngagementBarText</name>
-                    <dataType>Text8</dataType>
-                    <semantics>A text amplifier placed immediately atop the symbol in the engagement bar. May denote, 1) local/remote status; 2) engagement status; and 3) weapon type.</semantics>
-                </field>
-            </fixedRecordData>
-            <fixedRecordData>
-                <name>EquipmentSymbolAmplificationStruct</name>
-                <encoding>HLAfixedRecord</encoding>
-                <semantics>Text amplifiers for Equipment symbols.</semantics>
-                <field>
-                    <name>Quantity</name>
-                    <dataType>Text9</dataType>
-                    <semantics>A text amplifier in an equipment symbol that identifies the number of items present.</semantics>
-                </field>
-                <field>
-                    <name>StaffComments</name>
-                    <dataType>Text20</dataType>
-                    <semantics>A text amplifier for units, equipment and installations.</semantics>
-                </field>
-                <field>
-                    <name>AdditionalInformation</name>
-                    <dataType>Text20</dataType>
-                    <semantics>A text amplifier for units, equipment and installations.</semantics>
-                </field>
-                <field>
-                    <name>EvaluationRating</name>
-                    <dataType>Text2</dataType>
-                    <semantics>A text amplifier for units, equipment and installations that consists of a one-letter reliability rating and a one-number credibility rating. 
- 
-Reliability Ratings: 
-A-completely reliable 
-B-usually reliable 
-C-fairly reliable 
-D-not usually reliable 
-E-unreliable 
-F-reliability cannot be judged 
- 
-Credibility Ratings: 
-1-confirmed by other sources 
-2-probably true 
-3-possibly true 
-4-doubtfully true 
-5-improbable 
-6-truth cannot be judged.</semantics>
-                </field>
-                <field>
-                    <name>SignatureEquipment</name>
-                    <dataType>Text1</dataType>
-                    <semantics>A text amplifier for hostile equipment; “!” indicates detectable electronic signatures.</semantics>
-                </field>
-                <field>
-                    <name>Hostile</name>
-                    <dataType>Text3</dataType>
-                    <semantics>A text amplifier for equipment; letters "ENY" denote hostile symbols.</semantics>
-                </field>
-                <field>
-                    <name>IFF_SIF_AIS</name>
-                    <dataType>Text15</dataType>
-                    <semantics>A text amplifier displaying IFF/SIF/AIS identification modes and codes.</semantics>
-                </field>
-                <field>
-                    <name>UniqueDesignation</name>
-                    <dataType>Text21</dataType>
-                    <semantics>A text amplifier for units, equipment and installations that uniquely identifies a particular symbol or track number. Identifies acquisitions number when used with SIGINT symbology.</semantics>
-                </field>
-                <field>
-                    <name>EquipmentType</name>
-                    <dataType>Text24</dataType>
-                    <semantics>A text amplifier for equipment that indicates types of equipment.</semantics>
-                </field>
-                <field>
-                    <name>EngagementBarText</name>
-                    <dataType>Text8</dataType>
-                    <semantics>A text amplifier placed immediately atop the symbol in the engagement bar. May denote, 1) local/remote status; 2) engagement status; and 3) weapon type.</semantics>
-                </field>
-            </fixedRecordData>
-            <fixedRecordData>
-                <name>InstallationSymbolAmplificationStruct</name>
-                <encoding>HLAfixedRecord</encoding>
-                <semantics>Text amplifiers for Installation symbols.</semantics>
-                <field>
-                    <name>StaffComments</name>
-                    <dataType>Text20</dataType>
-                    <semantics>A text amplifier for units, equipment and installations.</semantics>
-                </field>
-                <field>
-                    <name>AdditionalInformation</name>
-                    <dataType>Text20</dataType>
-                    <semantics>A text amplifier for units, equipment and installations.</semantics>
-                </field>
-                <field>
-                    <name>EvaluationRating</name>
-                    <dataType>Text2</dataType>
-                    <semantics>A text amplifier for units, equipment and installations that consists of a one-letter reliability rating and a one-number credibility rating. 
- 
-Reliability Ratings: 
-A-completely reliable 
-B-usually reliable 
-C-fairly reliable 
-D-not usually reliable 
-E-unreliable 
-F-reliability cannot be judged 
- 
-Credibility Ratings: 
-1-confirmed by other sources 
-2-probably true 
-3-possibly true 
-4-doubtfully true 
-5-improbable 
-6-truth cannot be judged.</semantics>
-                </field>
-                <field>
-                    <name>CombatEffectiveness</name>
-                    <dataType>Text5</dataType>
-                    <semantics>A text amplifier for units and installations that indicates unit effectiveness or installation capability.</semantics>
-                </field>
-                <field>
-                    <name>IFF_SIF_AIS</name>
-                    <dataType>Text15</dataType>
-                    <semantics>A text amplifier displaying IFF/SIF/AIS identification modes and codes.</semantics>
-                </field>
-                <field>
-                    <name>UniqueDesignation</name>
-                    <dataType>Text21</dataType>
-                    <semantics>A text amplifier for units, equipment and installations that uniquely identifies a particular symbol or track number. Identifies acquisitions number when used with SIGINT symbology.</semantics>
-                </field>
-                <field>
-                    <name>EngagementBarText</name>
-                    <dataType>Text8</dataType>
-                    <semantics>A text amplifier placed immediately atop the symbol in the engagement bar. May denote, 1) local/remote status; 2) engagement status; and 3) weapon type.</semantics>
                 </field>
             </fixedRecordData>
             <fixedRecordData>
@@ -913,59 +577,79 @@ Credibility Ratings:
     <notes>
         <note>
             <label>netn-org_1</label>
-            <semantics>* Removed dependency `NETN-BASE`
-* Added dependency `NETN-MRM`
-
-
-* Replaced `ORG_Root` attribute `UniqueId` with NETN-BASE `HLAobjectRoot` attribute `UniqueId`
-* Added `ORG_Root` attribute `Name`
-
-* Added object class `OrganizationElement`
-
-* Replaced `Unit` attribute `Name` with `ORG_Root` attribute `Name`
-* Replaced `Unit` attribute `Force` with `OrganizationElement` attribute `Organization`
-* Replaced `Unit` attribute `EntityType` with `OrganizationElement` attribute `EntityType`
-* Replaced `Unit` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId`
-* Replaced `Unit` attribute `Disposition` with `OrganizationElement` attribute `Location`
-* Replaced `Unit` attribute `CommunicationNetworks` with NETN-COM `Unit` attribute `CommunicationNetworks`
-
+            <semantics>* Removed dependency `NETN-BASE` 
+* Added dependency `NETN-MRM` 
+ 
+ 
+* Replaced `ORG_Root` attribute `UniqueId` with NETN-BASE `HLAobjectRoot` attribute `UniqueId` 
+* Added `ORG_Root` attribute `Name` 
+ 
+* Added object class `OrganizationElement` 
+ 
+* Replaced `Unit` attribute `Name` with `ORG_Root` attribute `Name` 
+* Replaced `Unit` attribute `Force` with `OrganizationElement` attribute `Organization` 
+* Replaced `Unit` attribute `EntityType` with `OrganizationElement` attribute `EntityType` 
+* Replaced `Unit` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId` 
+* Replaced `Unit` attribute `Disposition` with `OrganizationElement` attribute `Location` 
+* Replaced `Unit` attribute `CommunicationNetworks` with NETN-COM `Unit` attribute `CommunicationNetworks` 
+* Replaced `Unit` attribute `EmbarkedIn` with `OrganizationElement` attribute `HostUnit` 
+* Replaced `Unit` attribute `SymbolAmplification` with `OrganizationElement` attribute `SymbolAmplification` 
+ 
 * Renamed object class `EquipmentItem` to `Equipment` 
-* Replaced `EquipmentItem` attribute `Name` with `ORG_Root` attribute `Name`
-* Replaced `EquipmentItem` attribute `EntityType` with `OrganizationElement` attribute `EntityType`
-* Removed `EquipmentItem` attribute `NatoStockNumber`
-* Replaced `EquipmentItem` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId`
-* Replaced `EquipmentItem` attribute `Disposition` with `OrganizationElement` attribute `Location`
-* Replaced `EquipmentItem` attribute `CommunicationNetworks` with NETN-COM `Equipment` attribute `CommunicationNetworks`
-* Removed `EquipmentItem` attribute `Resolution`
-
-* Replaced `Installation` attribute `Name` with `ORG_Root` attribute `Name`
+* Replaced `EquipmentItem` attribute `Name` with `ORG_Root` attribute `Name` 
+* Replaced `EquipmentItem` attribute `EntityType` with `OrganizationElement` attribute `EntityType` 
+* Removed `EquipmentItem` attribute `NatoStockNumber` 
+* Replaced `EquipmentItem` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId` 
+* Replaced `EquipmentItem` attribute `Disposition` with `OrganizationElement` attribute `Location` 
+* Replaced `EquipmentItem` attribute `CommunicationNetworks` with NETN-COM `Equipment` attribute `CommunicationNetworks` 
+* Removed `EquipmentItem` attribute `Resolution` 
+* Replaced `EquipmentItem` attribute `MountedOn` with `OrganizationElement` attribute `HostUnit` 
+* Replaced `EquipmentItem` attribute `SymbolAmplification` with `OrganizationElement` attribute `SymbolAmplification` 
+ 
+* Replaced `Installation` attribute `Name` with `ORG_Root` attribute `Name` 
 * Renamed `Installation` attribute `Owner` to `UnitInCommand` 
-* Replaced `Installation` attribute `EntityType` with `OrganizationElement` attribute `EntityType`
-* Replaced `Installation` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId`
-* Replaced `Installation` attribute `Location` with `OrganizationElement` attribute `Location`
-
-* Renamed object class `Force` to `Organization`
-* Replaced `Force` attribute `Name` with `ORG_Root` attribute `Name`
-* Added `Organization` attribute `ForceIdentifier`
-* Added `Organization` attribute `Nation`
-
-* Moved object class `FederateApplication` to NETN-TMR
-
-* Removed datatype `ArrayOfCommunicationNetworks`
-* Removed datatype `CommunicationNetworkStruct`
-* Removed datatype `CommunicationServiceTypeEnum32`
-* Removed datatype `DispositionStruct`
-* Added datatype `ForceIDEnum8`
-* Removed datatype `FormationInt32`
-* Removed datatype `FormationPositionStruct`
-* Replaced datatype `HostilityStatusCodeEnum32` with NETN-BASE datatype `HostilityStatusCodeEnum32`
-* Removed datatype `ModelResolutionTypeEnum32`
-* Removed datatype `NatoStockNumberArray13`
-* Replaced datatype `Text255` with `HLAunicodeString`
-
+* Replaced `Installation` attribute `EntityType` with `OrganizationElement` attribute `EntityType` 
+* Replaced `Installation` attribute `SymbolId` with `OrganizationElement` attribute `SymbolId` 
+* Replaced `Installation` attribute `Location` with `OrganizationElement` attribute `Location` 
+* Replaced `Installation` attribute `SymbolAmplification` with `OrganizationElement` attribute `SymbolAmplification` 
+ 
+* Renamed object class `Force` to `Organization` 
+* Replaced `Force` attribute `Name` with `ORG_Root` attribute `Name` 
+* Added `Organization` attribute `ForceIdentifier` 
+* Added `Organization` attribute `Nation` 
+ 
+* Moved object class `FederateApplication` to NETN-TMR 
+ 
+* Removed datatype `ArrayOfCommunicationNetworks` 
+* Removed datatype `CommunicationNetworkStruct` 
+* Removed datatype `CommunicationServiceTypeEnum32` 
+* Removed datatype `DispositionStruct` 
+* Added datatype `ForceIDEnum8` 
+* Removed datatype `FormationInt32` 
+* Removed datatype `FormationPositionStruct` 
+* Replaced datatype `HostilityStatusCodeEnum32` with NETN-BASE datatype `HostilityStatusCodeEnum32` 
+* Removed datatype `ModelResolutionTypeEnum32` 
+* Removed datatype `NatoStockNumberArray13` 
+* Replaced datatype `Text255` with `HLAunicodeString` 
+ 
+* Replaced datatype `EquipmentSymbolAmplificationStruct` with NETN-BASE datatype `SymbolAmplificationVariant` 
+* Replaced datatype `UnitSymbolAmplificationStruct` with NETN-BASE datatype `SymbolAmplificationVariant` 
+* Replaced datatype `InstallationSymbolAmplificationStruct` with NETN-BASE datatype `SymbolAmplificationVariant` 
+ 
 * Added `BaseEntity` attribute `Organization`
-* Added `AggregateEntity` attribute `Unit`
-* Added `Platform` attribute `Equipment`</semantics>
+
+
+* Replaced datatype `Text5` with NETN-BASE datatype `Text5` 
+* Replaced datatype `Text21` with NETN-BASE datatype `Text21` 
+* Replaced datatype `Text24` with NETN-BASE datatype `Text24` 
+* Replaced datatype `Text20` with NETN-BASE datatype `Text20` 
+* Replaced datatype `Text9` with NETN-BASE datatype `Text9` 
+* Replaced datatype `Text3` with NETN-BASE datatype `Text3` 
+* Replaced datatype `Text2` with NETN-BASE datatype `Text2` 
+* Replaced datatype `Text1` with NETN-BASE datatype `Text1` 
+* Replaced datatype `Text15` with NETN-BASE datatype `Text15` 
+* Replaced datatype `Text8` with NETN-BASE datatype `Text8` 
+</semantics>
         </note>
         <note>
             <label>netn-org_2</label>
@@ -977,7 +661,7 @@ Dynamic organizational changes may include new and or rearranged unit structure 
  
 In a simulation, not all units, equipment and installations have a corresponding simulation entity in the federation. Which elements to represent as simulated entities are determined by the current modelling responsibility described in NETN-TMR and dynamic changes in the level of aggregation described in NETN-MRM. 
  
-The NETN-ORG organization elements are the basis for the initialization of simulated entities, e.g. `Platforms` or `AggregateEntity` objects. Therefore, updates of NETN-ORG objects should be considered a re-initialization of any associate simulation entity. E.g. updating the `Unit` attribute `Holdings` should be reflected in an `AggregateEntity` representing the unit.</semantics>
+The NETN-ORG organization elements are the basis for the initialization of simulated entities, e.g. `PhysicalEntitiy` or `AggregateEntity` objects. Therefore, updates of NETN-ORG objects should be considered a re-initialization of any associate simulation entity. E.g. updating the `Unit` attribute `Holdings` should be reflected in an `AggregateEntity` representing the unit.</semantics>
         </note>
     </notes>
 </objectModel>
