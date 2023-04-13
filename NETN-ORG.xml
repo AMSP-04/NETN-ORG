@@ -122,7 +122,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation. </semantics>
+                        <semantics>Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation.</semantics>
                     </attribute>
                     <attribute>
                         <name>HostUnit</name>
@@ -165,6 +165,17 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics>Optional: A reference to a superior unit within the organization. The default is that this unit does not have a superior.</semantics>
+                        </attribute>
+                        <attribute>
+                            <name>HigherHeadquarters</name>
+                            <dataType>UUID</dataType>
+                            <updateType>Conditional</updateType>
+                            <updateCondition>On change</updateCondition>
+                            <ownership>DivestAcquire</ownership>
+                            <sharing>PublishSubscribe</sharing>
+                            <transportation>HLAbestEffort</transportation>
+                            <order>Receive</order>
+                            <semantics>Optional. A reference to a unit representing the superior headquarters. The default value is all zeros (no higher headquarters).</semantics>
                         </attribute>
                         <attribute>
                             <name>Echelon</name>
@@ -245,7 +256,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     </attribute>
                     <attribute>
                         <name>ForceIdentifier</name>
-                        <dataType>ForceIDEnum8</dataType>
+                        <dataType>ForceIdentifierEnum</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On change</updateCondition>
                         <ownership>DivestAcquire</ownership>
@@ -256,7 +267,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     </attribute>
                     <attribute>
                         <name>CountryCode</name>
-                        <dataType>HLAinteger32BE</dataType>
+                        <dataType>Integer32</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On change</updateCondition>
                         <ownership>DivestAcquire</ownership>
@@ -398,9 +409,9 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
-                <name>ForceIDEnum8</name>
+                <name>ForceIdentifierEnum</name>
                 <representation>RPRunsignedInteger8BE</representation>
-                <semantics>The identification of the force that the entity belongs to.</semantics>
+                <semantics>RPR-FOM Force Identifier enumeration.</semantics>
                 <enumerator>
                     <name>Friendly_11</name>
                     <value>31</value>
@@ -594,6 +605,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
 * Replaced `Unit` attribute `CommunicationNetworks` with NETN-COM `Unit` attribute `CommunicationNetworks` 
 * Replaced `Unit` attribute `EmbarkedIn` with `OrganizationElement` attribute `HostUnit` 
 * Replaced `Unit` attribute `SymbolAmplification` with `OrganizationElement` attribute `SymbolAmplification` 
+* Added `Unit` attribute `HigherHeadquarters` 
  
 * Renamed object class `EquipmentItem` to `Equipment` 
 * Replaced `EquipmentItem` attribute `Name` with `ORG_Root` attribute `Name` 
@@ -624,7 +636,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
 * Removed datatype `CommunicationNetworkStruct` 
 * Removed datatype `CommunicationServiceTypeEnum32` 
 * Removed datatype `DispositionStruct` 
-* Added datatype `ForceIDEnum8` 
+* Added datatype `ForceIdentifierEnum` 
 * Removed datatype `FormationInt32` 
 * Removed datatype `FormationPositionStruct` 
 * Replaced datatype `HostilityStatusCodeEnum32` with NETN-BASE datatype `HostilityStatusCodeEnum32` 
@@ -636,9 +648,9 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
 * Replaced datatype `UnitSymbolAmplificationStruct` with NETN-BASE datatype `SymbolAmplificationVariant` 
 * Replaced datatype `InstallationSymbolAmplificationStruct` with NETN-BASE datatype `SymbolAmplificationVariant` 
  
-* Added `BaseEntity` attribute `Organization`
-
-
+* Added `BaseEntity` attribute `Organization` 
+ 
+ 
 * Replaced datatype `Text5` with NETN-BASE datatype `Text5` 
 * Replaced datatype `Text21` with NETN-BASE datatype `Text21` 
 * Replaced datatype `Text24` with NETN-BASE datatype `Text24` 
@@ -648,8 +660,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
 * Replaced datatype `Text2` with NETN-BASE datatype `Text2` 
 * Replaced datatype `Text1` with NETN-BASE datatype `Text1` 
 * Replaced datatype `Text15` with NETN-BASE datatype `Text15` 
-* Replaced datatype `Text8` with NETN-BASE datatype `Text8` 
-</semantics>
+* Replaced datatype `Text8` with NETN-BASE datatype `Text8`</semantics>
         </note>
         <note>
             <label>netn-org_2</label>

@@ -23,6 +23,7 @@
 * Replaced `Unit` attribute `CommunicationNetworks` with NETN-COM `Unit` attribute `CommunicationNetworks` 
 * Replaced `Unit` attribute `EmbarkedIn` with `OrganizationElement` attribute `HostUnit` 
 * Replaced `Unit` attribute `SymbolAmplification` with `OrganizationElement` attribute `SymbolAmplification` 
+* Added `Unit` attribute `HigherHeadquarters` 
  
 * Renamed object class `EquipmentItem` to `Equipment` 
 * Replaced `EquipmentItem` attribute `Name` with `ORG_Root` attribute `Name` 
