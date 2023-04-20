@@ -173,7 +173,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                             <updateCondition>On change</updateCondition>
                             <ownership>DivestAcquire</ownership>
                             <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAbestEffort</transportation>
+                            <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics>Optional. A reference to a unit representing the superior headquarters. The default value is all zeros (no higher headquarters).</semantics>
                         </attribute>
