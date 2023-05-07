@@ -160,8 +160,8 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                             <dataType>UUID</dataType>
                             <updateType>Conditional</updateType>
                             <updateCondition>On change</updateCondition>
-                            <ownership>NoTransfer</ownership>
-                            <sharing>Neither</sharing>
+                            <ownership>DivestAcquire</ownership>
+                            <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
                             <semantics>Optional: A reference to a superior unit within the organization. The default is that this unit does not have a superior.</semantics>
