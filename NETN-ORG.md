@@ -1,148 +1,157 @@
+
 # NETN-ORG
-Copyright (C) 2020 NATO/OTAN.
-This work is licensed under a [Creative Commons Attribution-NoDerivatives 4.0 International License](LICENCE.md).
+|Version| Date| Dependencies|
+|---|---|---|
+|2.0|2023-04-08|NETN-BASE|
 
-## Introduction
-Modelling of an organizational unit in a distributed simulation depends on its organizational relationship with other units (e.g. superior, subordinate) and the relationship between organizational units (e.g. friendly or hostile). This organizational information is normally provided to a simulation system as part of its initialization.
+The NATO Education and Training Organization (NETN-ORG) module provides a standard way to represent organizations in the simulation scenario and their relationships and structure. The relationships include unit command structure, relationships between organizations, unit equipment, and installations.
 
-The NATO Education and Training Network Organization Module (NETN ORG) is a specification of how to represent organizations in a federated distributed simulation.
+Simulation of elements of an organization requires knowledge of the intra-organizational relationship, e.g. superior, subordinate, and iter-organizational relationships with other organizations, e.g. friendly or hostile. The NETN-ORG supports initialization and organizations' dynamic change of this information.
 
-### Purpose
+The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and supports interoperability in a federated simulation (federation) based on HLA. In addition to the FOM Module, a file-based data storage and interchange format is defined based on SISO-STD-007-2008 Military Scenario Definition Language (MSDL). The NETN-ORG XML schema defines elements to capture units, equipment items, relationships, and initial modelling responsibilities.
 
-The NETN-ORG FOM Module provides a standard object model for the representation of organizational information, including command structure, relationships between organizational units, relationships between units and equipment items, and installations associated with a unit or a force. This representation can be used for setting the initial state of simulated entities, for capturing subsequent snapshot states, and for dynamically changing model attributes such as organizational relationships.
+Use the NETN-ORG information to: * initialize simulated entities * perform disaggregation, aggregation, divide and merge actions using NETN-MRM * change organizational relationships * capture simulated unit and equipment state as snapshots
 
-In addition to the FOM Module, a file-based data storage and interchange format is defined based on SISO-STD-007-2008 Military Scenario Definition Language (MSDL). The NETN-ORG XML schema defines elements to capture units, equipment items, relationships, and initial modelling responsibilities.
+## Overview 
+ 
+Use the NETN-ORG FOM module to represent organizations and their internal structure, relationships, associated units, equipment, and installations. 
+ 
+Dynamic organizational changes may include new and or rearranged unit structure or changes in the relationships with other organizations. 
+ 
+In a simulation, not all units, equipment and installations have a corresponding simulation entity in the federation. Which elements to represent as simulated entities are determined by the current modelling responsibility described in NETN-TMR and dynamic changes in the level of aggregation described in NETN-MRM. 
+ 
+The NETN-ORG organization elements are the basis for the initialization of simulated entities, e.g. `PhysicalEntitiy` or `AggregateEntity` objects. Therefore, updates of NETN-ORG objects should be considered a re-initialization of any associate simulation entity. E.g. updating the `Unit` attribute `Holdings` should be reflected in an `AggregateEntity` representing the unit.
 
-### Scope
 
-- Initial allocation of modelling responsibilities
-- Capture unit and equipment state for (re-)initialization and snapshots
-- Dynamic changes in an organization command structure
-- Dynamic changes in relationships between organizational units
-- Dynamic changes in relationships between equipment items and organizational units
+## Object Classes
 
-## Overview
+Note that inherited and dependency attributes are not included in the description of object classes.
 
-Use the NETN-ORG FOM module to represent organizational units, their internal organizational structure and relationships between different organizations based on force affiliation. Specific equipment items are associated with a unit, and the initial modelling responsibility of both units and equipment can be allocated to specific federates. Represent installations related to a unit or force.
+```mermaid
+graph RL
+ORG_Root-->HLAobjectRoot
+BaseEntity-->HLAobjectRoot
+OrganizationElement-->ORG_Root
+Organization-->ORG_Root
+Equipment-->OrganizationElement
+Unit-->OrganizationElement
+Installation-->OrganizationElement
+```
 
-<img src=./images/objectclasses.png>
+### ORG_Root
 
-**Figure: ORG FOM Object Classes**
+The object class for all NETN-ORG object classes
 
-|Class|Description|
-|---|---|
-|ORG_Root|Root object class for all NETN-ORG object classes. Includes unique identifier and unique name attributes inherited by all subclasses.|
-|Unit|Representation of an organizational unit based on attributes defined in the NETN-ORG extensions of MSDL.|
-|EquipmentItem|Representation of an equipment item based on attributes defined in the NETN-ORG extensions of MSDL.|
-|Installation|Representation of an installation/facility based on attributes defined in the NETN-ORG extensions of MSDL.|
-|Force| Representation of a specific force and its relationship with other forces. Units belonging to a force all have the same relationship with units belonging to another force. The relationships between forces can be asymmetrical, e.g. Force A can be hostile to B while B is neutral to A. The relation may change during a federation execution. |
-|FederateApplication| Representation of the allocation of initial modelling responsibility of units and equipment items to a federate application. |
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|Name|HLAunicodeString|Required. A unique name. Max 255 characters.|
 
-During a simulation, the organizational relationships between units may change. Dynamic changes in the task organization may include new and or rearranged unit structure. These changes can be represented in the NETN-ORG FOM module as updates of corresponding attributes reflected by all subscribing simulation systems.
+### OrganizationElement
 
-## Units, Equipment items and Installations
+An object class for all NETN-ORG organizational elements
 
-Not all units and equipment items are required to have a corresponding simulation entity representation in the federation execution. The existence of simulation entities may depend on the aggregation level of the federation and participating applications. During the execution of a scenario, the level of aggregation may also change, e.g. by using NETN-MRM aggregation patterns. Units may also be divided and represented as multiple aggregate entities or as platforms. 
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|Organization|UUID|Required: A reference to the organization the element is affiliated with.|
+|EntityType|EntityTypeStruct|Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
+|SymbolId|SymbolIdentifier|Required. Initial symbol identifier for this element.|
+|SymbolAmplification|SymbolAmplificationVariant|Optional: Initial values for amplification of symbol for this element.|
+|Location|GeodeticPoint|Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation. |
+|HostUnit|UUID|Optional. A reference to a unit or equipment controlling the movement or operating an installation. E.g. a unit embarked on a transport, or a helicopter on a ship. The default value is all zeros, indicating that the unit is not embarked in or mounted on any other unit or equipment. Not applicable to `Installation`.|
 
-Units and equipment items in NETN-ORG have both an `EntityType` attribute and a `SymbolId` attribute. The `EntityType` attribute indicates the type of model to use in the simulation. The `SymbolId` is a representation of the simulated entity as a 2D symbol on a map. In some cases, the symbol selected may indicate a different type of entity compared to the simulation `EntityType`. The SISO standard SISO-REF-010 (Reference for Enumerations for Simulation Interoperability) provides a standard set of entity type enumeration values. Federation agreements and mapping of entity types to simulation models may be developed to complement and override the standard enumerations.
+### Equipment
 
-The NETN-ORG objects represent data used for (re-)initialization of ground truth objects such as NETN-Physical Platforms and NETN-MRM Aggregate entities. The initial value of the NETN-ORG object attributes can be used by federates to perform initial registration and update of ground-truth objects. Note that each federate will interpret these values and perform their internal initialization which might include approximations, adjustments etc. E.g. an equipment item that is representing a ground vehicle can be located in water or inside buildings/trees. Therefore the initial value of the corresponding ground-truth platform can be adjusted by the federate. 
+An equipment represents individual physical items defined specifically and apart from any holdings defined for the `HoldingUnit`. Equipment includes platforms, munition and sensors object.
 
-Subsequent updates of NETN-ORG objects with an associated ground-truth representation in the federation execution should be considered a re-initialization of the ground-truth object. A federate with current modelling responsibility of a ground-truth object must perform the re-initialization based on the updated unit or equipment item attribute values. Federation agreements should specify any limitation as to which NETN-ORG object attributes are allowed to be updated during the federation execution.  
-
-Snapshots of the simulation ground-truth can be made at any point during the federation execution but preferably in a paused state when there is no advancement of simulation time. The snapshot is an update of all NETN-ORG objects to reflect the current simulated ground-truth state, e.g. unit locations and relationships in NETN-ORG are updated.
-
-The initial allocation of modelling responsibility of NETN-ORG objects (unit, equipment item, installation) in the federation is represented by Federate Application, which associates specific federates with NETN-ORG objects. As noted earlier, during the federation execution the modelling responsibility may change, and another federate may become responsible for modelling a particular unit or child units.
-
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|HoldingUnit|UUID|Optional: A reference to the unit to which this equipment belongs. The default is that the equipment does not belong to a specific unit.|
 
 ### Unit
 
-A `Unit` is a representation of an initial or snapshot state of an organizational unit based on attributes defined in the NETN-ORG extensions of MSDL.
+A unit represents an element at a specified level in the organization. An organizational unit can contain subunits and can belong to a superior unit. A unit consists of equipment, personnel and supplies; these holdings can belong directly to the unit or indirectly as a holding of a subunit.
 
-The `Unit` object class attributes represent model data for organizational units that can be represented in the federation as ground-truth Aggregate Entities. The initial values can be used during scenario initialization, and subsequent updates of attributes are reflected in the federation to update model attributes.
-
-|Attribute|Description|
-|---|---|
-|UniqueId (Inherited)|**Required.** Unique Identifier.|
-|Name|**Required.** A unique name of the unit.|
-|SuperiorUnit|**Required.** Reference to the superior unit. If this unit has no superior unit (i.e. is the top-unit) then the value of this attribute shall be 00000000-0000-0000-0000-000000000000 (UUID with all zeros).|
-|EmbarkedIn|**Optional.** A reference to a unit or equipment item which is carrying/transporting the unit. Default value is 00000000-0000-0000-0000-000000000000 (UUID with all zeros) indicating that the unit is not embarked in or mounted on any other unit or equipment.|
-|Force|**Required.** A reference to the Force that the unit belongs to. A missing value is interpreted as the force being unknown/undetermined.|
-|Holdings|**Optional.** A set of holdings of the unit. Default is an empty list.|
-|EntityType|**Required.** The entity type to use for representation of the unit as an aggregate entity. Entity types should be based on SISO-REF-010 and/or defined by federation agreements.|
-|SymbolId|**Required.** A symbol identifier represented as a string.|
-|SymbolAmplification|**Optional.** Text amplifications for the unit's symbol. Static or very low update rate.|
-|Disposition|**Required.** Detailed positional information on unit.|
-|Formation|**Optional.** Formation of this unit.|
-|IsHq|**Optional.** Indicate whether the unit has a command function, e.g. if it is an HQ or not.|
-|Echelon|**Optional.** Symbol modifier identifying the command level. Default NONE.|
-|CommunicationNetworks|**Optional.** Set of Communication Networks that the unit monitors and uses to communicate during a mission.|
-|IsSimulationEntity|**Optional.** Indicates if the Unit has an initial allocation of modelling responsibility and is represented as a ground-truth aggregate entity during federation execution. Default is False.|
-
-### Equipment Item
-
-The `EquipmentItem` object class attributes represent specific equipment associated with a unit. Equipment items can be represented in the federation as ground-truth physical entities, e.g. an Aircraft platform or RadioTransmitter.
-
-|Attribute|Description|
-|---|---|
-|UniqueId (Inherited)|**Required.** Unique Identifier.|
-|Name|**Required.** A unique name of the equipment item.|
-|HoldingUnit|**Required.** Identifies the lowest level unit in the ORBAT to which this equipment item belongs.|
-|MountedOn|**Optional.** Reference to another equipment item on which this item is mounted or attached.|
-|EntityType|**Required.** SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
-|NatoStockNumber|**Optional.** NATO stock number code. 13 digits (0-9)|
-|SymbolId|**Required.** Required. A symbol identifier represented as a string.|
-|SymbolAmplification|**Optional.** Text amplifications for the equipment's symbol. Static or very low update rate.|
-|Disposition|**Required.** Detailed positional information on equipment item.|
-|CommunicationNetworks|**Optional.** Set of Communication Networks that the equipment monitors and uses to communicate during a mission.|
-|Resolution|**Optional.** Enumeration indicating the level of fidelity appropriate for instancing the equipment in the simulation. Default value: NOT_SPECIFIED.|
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|SuperiorUnit|UUID|Optional: A reference to a superior unit within the organization. The default is that this unit does not have a superior.|
+|Echelon|EchelonEnum32|Optional. Symbol modifier identifying the command level. Default NONE.|
+|IsHq|HLAboolean|Optional. Indicate whether the unit has a command function, e.g. if it is an HQ or not. The default is FALSE, no HQ.|
+|Holdings|ArrayOfHoldings|Optional. A set of holdings defined for this unit in addition to holdings defined for all subunits and any specific `Equipment` objects with this unit as `HoldingUnit . The default is an empty list.`|
+|Formation|FormationStruct|Optional. Formation of this unit.|
 
 ### Installation
 
-Representation of an initial or snapshot state of an installation/facility based on attributes defined in the NETN-ORG extensions of MSDL.
+Installations are facilities, e.g. harbours, airfields, or engineering objects, e.g. minefields.
 
-|Attribute|Description|
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|UnitInCommand|UUID|Optional: A reference to a unit in charge of this installation. The default is that no specific unit is in charge of the installation.|
+
+### Organization
+
+An organization have relationships with other organizations. Units belonging to different organizations have the same relationship as the organizations they belong to. However, the relationships between organizations can be asymmetrical, e.g. Side A can be hostile to B while B is neutral to A. Furthermore, the relation may change during a federation execution.
+
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|Relations|ArrayOfRelations|Optional. The relations with other organizations. The federation agreements specify default relationship.|
+|ForceIdentifier|ForceIDEnum8|Required: A force identifier indicate a special relationship with an organization in the scenario designated as the default perspective of the scenario. The force identifier applies to all simulated entities representing an organizational element belonging to the organization and is a required attribute for all `PhysicalEntity` and `AggregateEntity` objects in the federation.|
+|CountryCode|HLAinteger32BE|Optional: Numerical country code based on ISO 3166-1 numeric. The numeric codes 900 to 999 can be user-assigned in the federation agreement.|
+
+### BaseEntity
+
+A base class of aggregate and discrete scenario domain participants. The BaseEntity class is characterized by being located at a particular location in space and independently movable, if capable of movement at all. It specifically excludes elements normally considered to be a component of another element. The BaseEntity class is intended to be a container for common attributes for entities of this type. Since it lacks sufficient class specific attributes that are required for simulation purposes, federates cannot publish objects of this class. Certain simulation management federates, e.g. viewers, may subscribe to this class. Simulation federates will normally subscribe to one of the subclasses, to gain the extra information required to properly simulate the entity.
+
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|Organization|UUID|Optional: The organization in the scenario this entity belongs to.|
+
+## Datatypes
+
+Note that only datatypes defined in this FOM Module are listed below. Please refer to FOM Modules on which this module depends for other referenced datatypes.
+
+### Overview
+|Name|Semantics|
 |---|---|
-|UniqueId (Inherited)|**Required.** Unique Identifier.|
-|Name|**Required.** A unique name of the installation.|
-|Owner|**Required** Reference to the force, unit or equipment item owning or hosting the installation.|
-|EntityType|**Required.** SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
-|SymbolId|**Required.** A symbol identifier represented as a string.|
-|SymbolAmplification|**Optional.** Text amplifications for the installation's symbol. Static or very low update rate.|
-|Location|**Required.** Geographic location of the installation.|
-
-## Force
-
-A `Force` object represents a specific force or side and its relationship with other forces. Units belonging to a force all have the same relationship with units belonging to another force. The relation between forces can be asymmetrical, e.g. Force A can be hostile to B when B is neutral to A. The relation may change during a federation execution. Updates of the NETN-ORG Force relations attribute should be reflected and used by federates that depend on this information.
-
-|Attribute|Description|
-|---|---|
-|UniqueId (Inherited)|**Required.** Unique Identifier.|
-|Name|**Required** Name of the force/side.|
-|Relations|**Optional:** Sequence of relations, force-relation. Default is an empty array. |
-
-## FederateApplication
-
-A `FederateApplication` object is used to represent the allocation of initial modelling responsibility of units, equipment items and installations.
-
-|Attribute|Description|
-|---|---|
-|UniqueId (Inherited)|**Required.** Unique Identifier.|
-|Name|**Required.** A unique name in the organization to group units and equipment items. This group name is used to determine the initial allocation of modelling responsibility of units and equipment items to a federate. The federation agreements should specify how this name is to be interpreted and how the allocation will be performed. A common agreement and practice are to use the federate name as group name, i.e. the units and equipment items are allocated to the federate with that name. Typically one application will be responsible for performing the allocation. Alternatives for the group name are for example: federate type name, a functional name.|
-|Units|**Optional:** The units for which the federate has the responsibility of simulating.  Default is an empty list.|
-|EquipmentItems|**Optional.** The equipment for which the federate has the responsibility of simulating.  Default is an empty list.|
-|Installations|**Optional.** The installations for which the federate has the responsibility of simulating. Default is an empty list.|
-
-Note that each unit, equipment or installation is only allowed to be referenced in one `FederateApplication` object instance. 
-
-## SISO MSDL Schema Derivative Work
-
-The NETN-ORG FOM Module is associated with a set of XML Schemas developed based on the SISO MSDL Standard and adapted to capture additional aspects of ORBAT information and an initial allocation of modelling responsibilities to systems in a federated distributed simulation. The updated schemas only contain extensions, and any existing MSDL file is still valid according to the new schema. 
-
-The main changes include:
-
-- Introduce Holdings of equipment and consumables for Units 
-- Use of NSNcode for equipment type
-- Deployment information for initial allocation of modelling responsibilities for Units and EquipmentItems
-- Add the possibility to extend the description of Equipment Items with additional elements
-- Allow equipment items to be owned by other equipment
+|AirFormationTypeEnum32|Air formation|
+|ArrayOfHoldings|Sequence of holdings.|
+|ArrayOfRelations|Sequence of relations.|
+|ForceIDEnum8|The identification of the force that the entity belongs to.|
+|FormationDataStruct|Struct for enumerated choice for the type of formation being Ground, Air, Surface or Subsurface.|
+|FormationLocationTypeEnum32|Enumerated choice for the method to correlate formation to location as the centre of mass or lead element.|
+|FormationStruct|The formation of this unit.|
+|FormationTypeEnum32|Enumerated choice for the type of formation being Ground, Air, Surface or Subsurface.|
+|GroundFormationTypeEnum32|Specifies the formations for ground units.|
+|Holding|Static and dynamic data about the holding. The `EntityType` determines if the holding is a platform, munition, lifeform, supplies etc.|
+|Relation|The specific value that represents the perceived hostility status.|
+|SubsurfaceFormationTypeEnum32|Subsurface formation|
+|SurfaceFormationTypeEnum32|Surface formation|
+        
+### Enumerated Datatypes
+|Name|Representation|Semantics|
+|---|---|---|
+|AirFormationTypeEnum32|HLAinteger32BE|Air formation|
+|ForceIDEnum8|RPRunsignedInteger8BE|The identification of the force that the entity belongs to.|
+|FormationLocationTypeEnum32|HLAinteger32BE|Enumerated choice for the method to correlate formation to location as the centre of mass or lead element.|
+|FormationTypeEnum32|HLAinteger32BE|Enumerated choice for the type of formation being Ground, Air, Surface or Subsurface.|
+|GroundFormationTypeEnum32|HLAinteger32BE|Specifies the formations for ground units.|
+|SubsurfaceFormationTypeEnum32|HLAinteger32BE|Subsurface formation|
+|SurfaceFormationTypeEnum32|HLAinteger32BE|Surface formation|
+        
+### Array Datatypes
+|Name|Element Datatype|Semantics|
+|---|---|---|
+|ArrayOfHoldings|Holding|Sequence of holdings.|
+|ArrayOfRelations|Relation|Sequence of relations.|
+        
+### Fixed Record Datatypes
+|Name|Fields|Semantics|
+|---|---|---|
+|FormationStruct|FormationLocationType, FormationSpacing, FormationOrientation, FormationData|The formation of this unit.|
+|Holding|Name, RequiredOnHandQuantity, OnHandQuantity, OperationalCount, EntityType|Static and dynamic data about the holding. The `EntityType` determines if the holding is a platform, munition, lifeform, supplies etc.|
+|Relation|Affiliate, Relationship|The specific value that represents the perceived hostility status.|
+        
+### Variant Record Datatypes
+|Name|Discriminant (Datatype)|Alternatives|Semantics|
+|---|---|---|---|
+|FormationDataStruct|Domain (FormationTypeEnum32)|Ground, Air, Surface, Subsurface|Struct for enumerated choice for the type of formation being Ground, Air, Surface or Subsurface.|
+    
