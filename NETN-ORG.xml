@@ -294,6 +294,11 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     <semantics>Optional: The organization in the scenario this entity belongs to.</semantics>
                 </attribute>
             </objectClass>
+            <objectClass>
+                <name>EmbeddedSystem</name>
+                <sharing>Neither</sharing>
+                <semantics>A base class used to associate components such as sensor and emitting systems with their parent entity object.</semantics>
+            </objectClass>
         </objectClass>
     </objects>
     <dataTypes>
