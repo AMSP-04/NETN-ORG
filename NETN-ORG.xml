@@ -12,8 +12,8 @@
 
 The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and supports interoperability in a federated simulation (federation) based on HLA. In addition to the FOM Module, a file-based data storage and interchange format is defined based on SISO-STD-007-2008 Military Scenario Definition Language (MSDL). The NETN-ORG XML schema defines elements to capture units, equipment items, relationships, and initial modelling responsibilities.</description>
         <useLimitation>Use the NETN-ORG information to: * initialize simulated entities * perform disaggregation, aggregation, divide and merge actions using NETN-MRM * change organizational relationships * capture simulated unit and equipment state as snapshots</useLimitation>
-        <useHistory>v1.0 - Initial version developed by MSG-163. Release included in NETN-FOM v3.0</useHistory>
-        <useHistory notes="netn-org_1">v2.0 - Updated version developed by MSG-191. Release included in NETN-FOM v4.0</useHistory>
+        <useHistory>v1.0 - Initial version developed by MSG-163. Release included in NETN FOM v3.0</useHistory>
+        <useHistory notes="netn-org_1">v2.0 - Updated version developed by MSG-191. Release included in NETN FOM v4.0</useHistory>
         <poc>
             <pocType>Release authority</pocType>
             <pocName>NATO Modelling and Simulation Group</pocName>
@@ -100,7 +100,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. Initial symbol identifier for this element.</semantics>
+                        <semantics>Required. Initial symbol identifier for this element. May contain wildcard characters * for undefined fields.</semantics>
                     </attribute>
                     <attribute>
                         <name>SymbolAmplification</name>
@@ -521,7 +521,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                 <field>
                     <name>EntityType</name>
                     <dataType>EntityTypeStruct</dataType>
-                    <semantics>DIS enumeration. 
+                    <semantics>SISO-REF-010 enumeration. 
 Use 0.0.0.0.0.0.0 when not defined.</semantics>
                 </field>
             </fixedRecordData>
@@ -542,7 +542,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
                 <field>
                     <name>FormationOrientation</name>
                     <dataType>DirectionDegreesFloat32</dataType>
-                    <semantics>Orientation in compass degrees for unit formations and equipment.</semantics>
+                    <semantics>Orientation in degrees for unit formations and equipment.</semantics>
                 </field>
                 <field>
                     <name>FormationData</name>

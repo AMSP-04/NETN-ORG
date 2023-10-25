@@ -1,10 +1,10 @@
 ## Changelog NETN-ORG
 
-### v1.0 - Initial version developed by MSG-163. Release included in NETN-FOM v3.0
+### v1.0 - Initial version developed by MSG-163. Release included in NETN FOM v3.0
 
 
 
-### v2.0 - Updated version developed by MSG-191. Release included in NETN-FOM v4.0
+### v2.0 - Updated version developed by MSG-191. Release included in NETN FOM v4.0
 
 * Removed dependency `NETN-BASE` 
 * Added dependency `NETN-MRM` 
