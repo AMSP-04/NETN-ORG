@@ -2,7 +2,7 @@
 # NETN-ORG
 |Version| Date| Dependencies|
 |---|---|---|
-|2.0|2023-04-08|NETN-BASE|
+|2.0|2023-10-28|NETN-BASE|
 
 The NATO Education and Training Organization (NETN-ORG) module provides a standard way to represent organizations in the simulation scenario and their relationships and structure. The relationships include unit command structure, relationships between organizations, unit equipment, and installations.
 
@@ -44,7 +44,7 @@ The object class for all NETN-ORG object classes
 
 |Attribute|Datatype|Semantics|
 |---|---|---|
-|Name|HLAunicodeString|Required. A unique name. Max 255 characters.|
+|Name|HLAunicodeString|Required. A unique name.|
 
 ### OrganizationElement
 
@@ -54,9 +54,8 @@ An object class for all NETN-ORG organizational elements
 |---|---|---|
 |Organization|UUID|Required: A reference to the organization the element is affiliated with.|
 |EntityType|EntityTypeStruct|Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
-|SymbolId|SymbolIdentifier|Required. Initial symbol identifier for this element.|
-|SymbolAmplification|SymbolAmplificationVariant|Optional: Initial values for amplification of symbol for this element.|
-|Location|GeodeticPoint|Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation. |
+|Symbol|SymbolStruct|Required. Initial symbol identifier and amplification data for this element. May contain wildcard characters * for undefined fields.|
+|Location|GeodeticPoint|Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation.|
 |HostUnit|UUID|Optional. A reference to a unit or equipment controlling the movement or operating an installation. E.g. a unit embarked on a transport, or a helicopter on a ship. The default value is all zeros, indicating that the unit is not embarked in or mounted on any other unit or equipment. Not applicable to `Installation`.|
 
 ### Equipment
@@ -73,7 +72,8 @@ A unit represents an element at a specified level in the organization. An organi
 
 |Attribute|Datatype|Semantics|
 |---|---|---|
-|SuperiorUnit|UUID|Optional: A reference to a superior unit within the organization. The default is that this unit does not have a superior.|
+|AggregateUnit|UUID|Optional: A reference to another unit (aggregate) within the organization for which this unit is a subunit.  The default value is all zeros (no aggregate unit).|
+|HigherHeadquarters|UUID|Optional. A reference to a unit representing the superior headquarters. The default value is all zeros (no higher headquarters).|
 |Echelon|EchelonEnum32|Optional. Symbol modifier identifying the command level. Default NONE.|
 |IsHq|HLAboolean|Optional. Indicate whether the unit has a command function, e.g. if it is an HQ or not. The default is FALSE, no HQ.|
 |Holdings|ArrayOfHoldings|Optional. A set of holdings defined for this unit in addition to holdings defined for all subunits and any specific `Equipment` objects with this unit as `HoldingUnit . The default is an empty list.`|
@@ -93,9 +93,9 @@ An organization have relationships with other organizations. Units belonging to 
 
 |Attribute|Datatype|Semantics|
 |---|---|---|
-|Relations|ArrayOfRelations|Optional. The relations with other organizations. The federation agreements specify default relationship.|
-|ForceIdentifier|ForceIDEnum8|Required: A force identifier indicate a special relationship with an organization in the scenario designated as the default perspective of the scenario. The force identifier applies to all simulated entities representing an organizational element belonging to the organization and is a required attribute for all `PhysicalEntity` and `AggregateEntity` objects in the federation.|
-|CountryCode|HLAinteger32BE|Optional: Numerical country code based on ISO 3166-1 numeric. The numeric codes 900 to 999 can be user-assigned in the federation agreement.|
+|Hostility|ArrayOfRelations|Optional. The relations with other organizations. The federation agreements specify default relationship.|
+|ForceIdentifier|ForceIdentifierEnum|Required: A force identifier indicate a special relationship with an organization in the scenario designated as the default perspective of the scenario. The force identifier applies to all simulated entities representing an organizational element belonging to the organization and is a required attribute for all `PhysicalEntity` and `AggregateEntity` objects in the federation.|
+|CountryCode|Integer32|Optional: Numerical country code based on ISO 3166-1 numeric. The numeric codes 900 to 999 can be user-assigned in the federation agreement.|
 
 ### BaseEntity
 
@@ -115,7 +115,7 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |AirFormationTypeEnum32|Air formation|
 |ArrayOfHoldings|Sequence of holdings.|
 |ArrayOfRelations|Sequence of relations.|
-|ForceIDEnum8|The identification of the force that the entity belongs to.|
+|ForceIdentifierEnum|RPR-FOM Force Identifier enumeration.|
 |FormationDataStruct|Struct for enumerated choice for the type of formation being Ground, Air, Surface or Subsurface.|
 |FormationLocationTypeEnum32|Enumerated choice for the method to correlate formation to location as the centre of mass or lead element.|
 |FormationStruct|The formation of this unit.|
@@ -130,7 +130,7 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |Name|Representation|Semantics|
 |---|---|---|
 |AirFormationTypeEnum32|HLAinteger32BE|Air formation|
-|ForceIDEnum8|RPRunsignedInteger8BE|The identification of the force that the entity belongs to.|
+|ForceIdentifierEnum|RPRunsignedInteger8BE|RPR-FOM Force Identifier enumeration.|
 |FormationLocationTypeEnum32|HLAinteger32BE|Enumerated choice for the method to correlate formation to location as the centre of mass or lead element.|
 |FormationTypeEnum32|HLAinteger32BE|Enumerated choice for the type of formation being Ground, Air, Surface or Subsurface.|
 |GroundFormationTypeEnum32|HLAinteger32BE|Specifies the formations for ground units.|
