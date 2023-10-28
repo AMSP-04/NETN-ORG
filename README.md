@@ -3,7 +3,7 @@
 
 |Version| Date| Dependencies|
 |---|---|---|
-|2.0|2023-04-08|NETN-BASE|
+|2.0|2023-10-28|NETN-BASE|
 
 > [Full Documentation](NETN-ORG.md)
 
@@ -38,8 +38,8 @@ Version numbering of this FOM Module and associated documentation is based on th
 
 |Version|
 |---|
-|v1.0 - Initial version developed by MSG-163. Release included in NETN-FOM v3.0|
-|v2.0 - Updated version developed by MSG-191. Release included in NETN-FOM v4.0|
+|v1.0 - Initial version developed by MSG-163. Release included in NETN FOM v3.0|
+|v2.0 - Updated version developed by MSG-191. Release included in NETN FOM v4.0|
 
 > [Changelog](changelog.md)
 
