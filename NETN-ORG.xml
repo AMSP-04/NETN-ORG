@@ -266,6 +266,44 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <semantics>Optional: Numerical country code based on ISO 3166-1 numeric. The numeric codes 900 to 999 can be user-assigned in the federation agreement.</semantics>
                     </attribute>
                 </objectClass>
+                <objectClass>
+                    <name>FederateApplication</name>
+                    <sharing>Neither</sharing>
+                    <semantics>Represents the allocation of initial primary modelling responsibility of simulated entities representing a set of Organizational Element. Use this information to register corresponding simulation entities to represent the identified units, equipment and installations. Unit -&gt; AggregateEntity, Equipment-&gt;PhysicalEntity, Installation-&gt;CulturalFeature or Environment Object.</semantics>
+                    <attribute>
+                        <name>Units</name>
+                        <dataType>ArrayOfUuid</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On Change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. The units for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Equipment</name>
+                        <dataType>ArrayOfUuid</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On Change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. The equipment for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>Installations</name>
+                        <dataType>ArrayOfUuid</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Optional. The installations for which the federate has the responsibility of simulating. The default is an empty list.</semantics>
+                    </attribute>
+                </objectClass>
             </objectClass>
             <objectClass>
                 <name>BaseEntity</name>
@@ -281,55 +319,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
                     <semantics>Optional: The organization in the scenario this entity belongs to.</semantics>
-                </attribute>
-            </objectClass>
-            <objectClass>
-                <name>FederateApplication</name>
-                <sharing>Neither</sharing>
-                <semantics>Represents the allocation of initial modelling responsibility of of a set of Organizational Elements to specific Federate Applications.</semantics>
-                <attribute>
-                    <name>Name</name>
-                    <dataType>HLAunicodeString</dataType>
-                    <updateType>NA</updateType>
-                    <updateCondition></updateCondition>
-                    <ownership>DivestAcquire</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Optional: Name of a federate application. Use the `UniqueId` attribute as the unique identifier for federate applications.</semantics>
-                </attribute>
-                <attribute>
-                    <name>Units</name>
-                    <dataType>ArrayOfUuid</dataType>
-                    <updateType>Conditional</updateType>
-                    <updateCondition>On Change</updateCondition>
-                    <ownership>DivestAcquire</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Optional. The units for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
-                </attribute>
-                <attribute>
-                    <name>Equipment</name>
-                    <dataType>ArrayOfUuid</dataType>
-                    <updateType>Conditional</updateType>
-                    <updateCondition>On Change</updateCondition>
-                    <ownership>DivestAcquire</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Optional. The equipment for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
-                </attribute>
-                <attribute>
-                    <name>Installations</name>
-                    <dataType>ArrayOfUuid</dataType>
-                    <updateType>Conditional</updateType>
-                    <updateCondition>On change</updateCondition>
-                    <ownership>DivestAcquire</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Optional. The installations for which the federate has the responsibility of simulating. The default is an empty list.</semantics>
                 </attribute>
             </objectClass>
         </objectClass>
