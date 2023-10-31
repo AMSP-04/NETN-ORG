@@ -283,6 +283,55 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     <semantics>Optional: The organization in the scenario this entity belongs to.</semantics>
                 </attribute>
             </objectClass>
+            <objectClass>
+                <name>FederateApplication</name>
+                <sharing>Neither</sharing>
+                <semantics>Represents the allocation of initial modelling responsibility of of a set of Organizational Elements to specific Federate Applications.</semantics>
+                <attribute>
+                    <name>Name</name>
+                    <dataType>HLAunicodeString</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional: Name of a federate application. Use the `UniqueId` attribute as the unique identifier for federate applications.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Units</name>
+                    <dataType>ArrayOfUuid</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional. The units for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Equipment</name>
+                    <dataType>ArrayOfUuid</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional. The equipment for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Installations</name>
+                    <dataType>ArrayOfUuid</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional. The installations for which the federate has the responsibility of simulating. The default is an empty list.</semantics>
+                </attribute>
+            </objectClass>
         </objectClass>
     </objects>
     <dataTypes>
@@ -578,7 +627,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
         <note>
             <label>netn-org_1</label>
             <semantics>* Replaced `ORG_Root` attribute `UniqueId` with NETN-BASE `HLAobjectRoot` attribute `UniqueId` 
-
+ 
 * Added `ORG_Root` attribute `Name` 
  
 * Added object class `OrganizationElement` 
@@ -592,7 +641,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
 * Replaced `Unit` attribute `EmbarkedIn` with `OrganizationElement` attribute `HostUnit` 
 * Replaced `Unit` attribute `SymbolAmplification` with `OrganizationElement` attribute `Symbol` 
 * Renamed `Unit` attribute `SuperiorUnit` to `AggregateUnit` 
-
+ 
 * Added `Unit` attribute `HigherHeadquarters` 
  
 * Renamed object class `EquipmentItem` to `Equipment` 
@@ -613,44 +662,43 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
 * Replaced `Installation` attribute `Location` with `OrganizationElement` attribute `Location` 
 * Replaced `Installation` attribute `SymbolAmplification` with `OrganizationElement` attribute `Symbol` 
  
-* Renamed `Force` attribute `Relations` to `Hostility`
+* Renamed `Force` attribute `Relations` to `Hostility` 
 * Replaced `Force` attribute `Name` with `ORG_Root` attribute `Name` 
-
+ 
 * Renamed object class `Force` to `Organization` 
-
+ 
 * Added `Organization` attribute `ForceIdentifier` 
 * Added `Organization` attribute `CountryCode` 
-
  
-* Added `BaseEntity` attribute `Organization`
-* Removed object class `FederateApplication`
-
+ 
+* Added `BaseEntity` attribute `Organization` 
+* Removed object class `FederateApplication` 
+ 
 * Added datatype `ForceIdentifierEnum` 
  
 * Removed datatype `Text1` 
-* Removed datatype `Text2`
-* Removed datatype `Text3`
-* Removed datatype `Text5`
+* Removed datatype `Text2` 
+* Removed datatype `Text3` 
+* Removed datatype `Text5` 
 * Removed datatype `Text8` 
-* Removed datatype `Text9`
-* Removed datatype `Text15`
+* Removed datatype `Text9` 
+* Removed datatype `Text15` 
 * Removed datatype `Text20` 
-* Removed datatype `Text21`
-* Removed datatype `Text24`
-* Removed datatype `Text255`
-* Removed datatype `EquipmentSymbolAmplificationStruct`
-* Removed datatype `UnitSymbolAmplificationStruct`
-* Removed datatype `InstallationSymbolAmplificationStruct`
+* Removed datatype `Text21` 
+* Removed datatype `Text24` 
+* Removed datatype `Text255` 
+* Removed datatype `EquipmentSymbolAmplificationStruct` 
+* Removed datatype `UnitSymbolAmplificationStruct` 
+* Removed datatype `InstallationSymbolAmplificationStruct` 
 * Removed datatype `FormationInt32` 
 * Removed datatype `FormationPositionStruct` 
-* Removed datatype `HostilityStatusCodeEnum32`
+* Removed datatype `HostilityStatusCodeEnum32` 
 * Removed datatype `ModelResolutionTypeEnum32` 
 * Removed datatype `NatoStockNumberArray13` 
 * Removed datatype `ArrayOfCommunicationNetworks` 
 * Removed datatype `CommunicationNetworkStruct` 
 * Removed datatype `CommunicationServiceTypeEnum32` 
-* Removed datatype `DispositionStruct` 
-</semantics>
+* Removed datatype `DispositionStruct`</semantics>
         </note>
         <note>
             <label>netn-org_2</label>
