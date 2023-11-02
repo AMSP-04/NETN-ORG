@@ -271,6 +271,17 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     <sharing>Neither</sharing>
                     <semantics>Represents the allocation of initial primary modelling responsibility of simulated entities representing a set of Organizational Element. Use this information to register corresponding simulation entities to represent the identified units, equipment and installations. Unit -&gt; AggregateEntity, Equipment-&gt;PhysicalEntity, Installation-&gt;CulturalFeature or Environment Object.</semantics>
                     <attribute>
+                        <name>Name</name>
+                        <dataType>FederateName</dataType>
+                        <updateType>NA</updateType>
+                        <updateCondition></updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required: Unique identifier for a federate application.</semantics>
+                    </attribute>
+                    <attribute>
                         <name>Units</name>
                         <dataType>ArrayOfUuid</dataType>
                         <updateType>Conditional</updateType>
