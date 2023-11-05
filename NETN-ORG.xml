@@ -100,7 +100,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. Initial symbol identifier and amplification data for this element. May contain wildcard characters * for undefined fields.</semantics>
+                        <semantics>Required. Initial symbol identifier and amplification data for this element. In NETN-ORG the symbol identifier acts as a template and may contain wildcard characters '*' to indicate undefined elements of the symbol code. </semantics>
                     </attribute>
                     <attribute>
                         <name>Location</name>
