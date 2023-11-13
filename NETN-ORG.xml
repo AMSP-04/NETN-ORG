@@ -67,7 +67,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                 </attribute>
                 <objectClass>
                     <name>OrganizationElement</name>
-                    <sharing>Neither</sharing>
+                    <sharing>Subscribe</sharing>
                     <semantics>An object class for all NETN-ORG organizational elements</semantics>
                     <attribute>
                         <name>Organization</name>
@@ -79,6 +79,17 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
                         <semantics>Required: A reference to the organization the element is affiliated with.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>SuperiorUnit</name>
+                        <dataType>UUID</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On change</updateCondition>
+                        <ownership>DivestAcquire</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Required: A reference to a unit within the organization for which this element is a subunit/equipment or controlled installation.  The default value is all zeros (no aggregate unit).</semantics>
                     </attribute>
                     <attribute>
                         <name>EntityType</name>
@@ -100,7 +111,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Required. Initial symbol identifier and amplification data for this element. In NETN-ORG the symbol identifier acts as a template and may contain wildcard characters '*' to indicate undefined elements of the symbol code. </semantics>
+                        <semantics>Required. Initial symbol identifier and amplification data for this element. In NETN-ORG the symbol identifier acts as a template and may contain wildcard characters '*' to indicate undefined elements of the symbol code.</semantics>
                     </attribute>
                     <attribute>
                         <name>Location</name>
@@ -128,33 +139,11 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <name>Equipment</name>
                         <sharing>PublishSubscribe</sharing>
                         <semantics>An equipment represents individual physical items defined specifically and apart from any holdings defined for the `HoldingUnit`. Equipment includes platforms, munition and sensors object.</semantics>
-                        <attribute>
-                            <name>HoldingUnit</name>
-                            <dataType>UUID</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>on change</updateCondition>
-                            <ownership>DivestAcquire</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Optional: A reference to the unit to which this equipment belongs. The default is that the equipment does not belong to a specific unit.</semantics>
-                        </attribute>
                     </objectClass>
                     <objectClass>
                         <name>Unit</name>
                         <sharing>PublishSubscribe</sharing>
                         <semantics>A unit represents an element at a specified level in the organization. An organizational unit can contain subunits and can belong to a superior unit. A unit consists of equipment, personnel and supplies; these holdings can belong directly to the unit or indirectly as a holding of a subunit.</semantics>
-                        <attribute>
-                            <name>AggregateUnit</name>
-                            <dataType>UUID</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>On change</updateCondition>
-                            <ownership>DivestAcquire</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Optional: A reference to another unit (aggregate) within the organization for which this unit is a subunit.  The default value is all zeros (no aggregate unit).</semantics>
-                        </attribute>
                         <attribute>
                             <name>HigherHeadquarters</name>
                             <dataType>UUID</dataType>
@@ -215,17 +204,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <name>Installation</name>
                         <sharing>PublishSubscribe</sharing>
                         <semantics>Installations are facilities, e.g. harbours, airfields, or engineering objects, e.g. minefields.</semantics>
-                        <attribute>
-                            <name>UnitInCommand</name>
-                            <dataType>UUID</dataType>
-                            <updateType>Conditional</updateType>
-                            <updateCondition>On change</updateCondition>
-                            <ownership>DivestAcquire</ownership>
-                            <sharing>PublishSubscribe</sharing>
-                            <transportation>HLAreliable</transportation>
-                            <order>Receive</order>
-                            <semantics>Optional: A reference to a unit in charge of this installation. The default is that no specific unit is in charge of the installation.</semantics>
-                        </attribute>
                     </objectClass>
                 </objectClass>
                 <objectClass>
@@ -266,55 +244,6 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                         <semantics>Optional: Numerical country code based on ISO 3166-1 numeric. The numeric codes 900 to 999 can be user-assigned in the federation agreement.</semantics>
                     </attribute>
                 </objectClass>
-                <objectClass>
-                    <name>FederateApplication</name>
-                    <sharing>Neither</sharing>
-                    <semantics>Represents the allocation of initial primary modelling responsibility of simulated entities representing a set of Organizational Element. Use this information to register corresponding simulation entities to represent the identified units, equipment and installations. Unit -&gt; AggregateEntity, Equipment-&gt;PhysicalEntity, Installation-&gt;CulturalFeature or Environment Object.</semantics>
-                    <attribute>
-                        <name>Name</name>
-                        <dataType>FederateName</dataType>
-                        <updateType>NA</updateType>
-                        <updateCondition></updateCondition>
-                        <ownership>DivestAcquire</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Required: Unique identifier for a federate application.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>Units</name>
-                        <dataType>ArrayOfUuid</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On Change</updateCondition>
-                        <ownership>DivestAcquire</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Optional. The units for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>Equipment</name>
-                        <dataType>ArrayOfUuid</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On Change</updateCondition>
-                        <ownership>DivestAcquire</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Optional. The equipment for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>Installations</name>
-                        <dataType>ArrayOfUuid</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On change</updateCondition>
-                        <ownership>DivestAcquire</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Optional. The installations for which the federate has the responsibility of simulating. The default is an empty list.</semantics>
-                    </attribute>
-                </objectClass>
             </objectClass>
             <objectClass>
                 <name>BaseEntity</name>
@@ -332,8 +261,74 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     <semantics>Optional: The organization in the scenario this entity belongs to.</semantics>
                 </attribute>
             </objectClass>
+            <objectClass>
+                <name>ORG_FederateApplication</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Represents the federate allocation of initial primary modelling responsibility of simulated entities representing a set of Organizational Element. Use this information to register corresponding simulation entities to represent the identified units, equipment and installations. Unit -&gt; AggregateEntity, Equipment-&gt;PhysicalEntity, Installation-&gt;CulturalFeature or Environment Object.</semantics>
+                <attribute>
+                    <name>Federate</name>
+                    <dataType>FederateName</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Required: Reference to the federate allocated with the initial modelling responsibility of the specified orgnizational elements.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Units</name>
+                    <dataType>ArrayOfUuid</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional. The units for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Equipment</name>
+                    <dataType>ArrayOfUuid</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional. The equipment for which the federate has the responsibility of simulating.  The default is an empty list.</semantics>
+                </attribute>
+                <attribute>
+                    <name>Installations</name>
+                    <dataType>ArrayOfUuid</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Optional. The installations for which the federate has the responsibility of simulating. The default is an empty list.</semantics>
+                </attribute>
+            </objectClass>
         </objectClass>
     </objects>
+    <interactions>
+        <interactionClass>
+            <name>HLAinteractionRoot</name>
+            <interactionClass>
+                <name>ORG_RequestChange</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Request a change in the organizational structure. The federate with the primary responsibility of the organizational element related to the referenced entity should if possible update the relationship to its `AggregateUnit`.</semantics>
+                <parameter>
+                    <name>AggregateUnit</name>
+                    <dataType>UUID</dataType>
+                    <semantics>Required: Reference to a new AggregateUnit for which the referenced entity is requested to relate to as a subunit/equipment.</semantics>
+                </parameter>
+            </interactionClass>
+        </interactionClass>
+    </interactions>
     <dataTypes>
         <enumeratedDataTypes>
             <enumeratedData>
