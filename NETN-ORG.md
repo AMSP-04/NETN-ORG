@@ -2,15 +2,17 @@
 # NETN-ORG
 |Version| Date| Dependencies|
 |---|---|---|
-|2.0|2023-10-28|NETN-BASE|
+|2.0|2023-11-19|NETN-BASE|
 
 The NATO Education and Training Organization (NETN-ORG) module provides a standard way to represent organizations in the simulation scenario and their relationships and structure. The relationships include unit command structure, relationships between organizations, unit equipment, and installations.
 
 Simulation of elements of an organization requires knowledge of the intra-organizational relationship, e.g. superior, subordinate, and iter-organizational relationships with other organizations, e.g. friendly or hostile. The NETN-ORG supports initialization and organizations' dynamic change of this information.
 
-The specification is based on IEEE 1516 High Level Architecture (HLA) Object Model Template (OMT) and supports interoperability in a federated simulation (federation) based on HLA. In addition to the FOM Module, a file-based data storage and interchange format is defined based on SISO-STD-007-2008 Military Scenario Definition Language (MSDL). The NETN-ORG XML schema defines elements to capture units, equipment items, relationships, and initial modelling responsibilities.
-
-Use the NETN-ORG information to: * initialize simulated entities * perform disaggregation, aggregation, divide and merge actions using NETN-MRM * change organizational relationships * capture simulated unit and equipment state as snapshots
+Use the NETN-ORG information to: 
+* initialize simulated entities 
+* perform disaggregation, aggregation, divide and merge actions using NETN-MRM 
+* change organizational relationships 
+* capture simulated unit and equipment state as snapshots
 
 ## Overview 
  
@@ -31,11 +33,13 @@ Note that inherited and dependency attributes are not included in the descriptio
 graph RL
 ORG_Root-->HLAobjectRoot
 BaseEntity-->HLAobjectRoot
+SMC_Service-->HLAobjectRoot
 OrganizationElement-->ORG_Root
 Organization-->ORG_Root
 Equipment-->OrganizationElement
 Unit-->OrganizationElement
 Installation-->OrganizationElement
+EntitySimulation-->SMC_Service
 ```
 
 ### ORG_Root
@@ -53,8 +57,9 @@ An object class for all NETN-ORG organizational elements
 |Attribute|Datatype|Semantics|
 |---|---|---|
 |Organization|UUID|Required: A reference to the organization the element is affiliated with.|
+|SuperiorUnit|UUID|Required: A reference to a unit within the organization for which this element is a subunit/equipment or controlled installation.  The default value is all zeros (no aggregate unit).|
 |EntityType|EntityTypeStruct|Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
-|Symbol|SymbolStruct|Required. Initial symbol identifier and amplification data for this element. May contain wildcard characters * for undefined fields.|
+|Symbol|SymbolStruct|Required. Initial symbol identifier and amplification data for this element. In NETN-ORG the symbol identifier acts as a template and may contain wildcard characters '*' to indicate undefined elements of the symbol code.|
 |Location|GeodeticPoint|Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation.|
 |HostUnit|UUID|Optional. A reference to a unit or equipment controlling the movement or operating an installation. E.g. a unit embarked on a transport, or a helicopter on a ship. The default value is all zeros, indicating that the unit is not embarked in or mounted on any other unit or equipment. Not applicable to `Installation`.|
 
@@ -62,9 +67,6 @@ An object class for all NETN-ORG organizational elements
 
 An equipment represents individual physical items defined specifically and apart from any holdings defined for the `HoldingUnit`. Equipment includes platforms, munition and sensors object.
 
-|Attribute|Datatype|Semantics|
-|---|---|---|
-|HoldingUnit|UUID|Optional: A reference to the unit to which this equipment belongs. The default is that the equipment does not belong to a specific unit.|
 
 ### Unit
 
@@ -72,7 +74,6 @@ A unit represents an element at a specified level in the organization. An organi
 
 |Attribute|Datatype|Semantics|
 |---|---|---|
-|AggregateUnit|UUID|Optional: A reference to another unit (aggregate) within the organization for which this unit is a subunit.  The default value is all zeros (no aggregate unit).|
 |HigherHeadquarters|UUID|Optional. A reference to a unit representing the superior headquarters. The default value is all zeros (no higher headquarters).|
 |Echelon|EchelonEnum32|Optional. Symbol modifier identifying the command level. Default NONE.|
 |IsHq|HLAboolean|Optional. Indicate whether the unit has a command function, e.g. if it is an HQ or not. The default is FALSE, no HQ.|
@@ -83,9 +84,6 @@ A unit represents an element at a specified level in the organization. An organi
 
 Installations are facilities, e.g. harbours, airfields, or engineering objects, e.g. minefields.
 
-|Attribute|Datatype|Semantics|
-|---|---|---|
-|UnitInCommand|UUID|Optional: A reference to a unit in charge of this installation. The default is that no specific unit is in charge of the installation.|
 
 ### Organization
 
@@ -104,6 +102,38 @@ A base class of aggregate and discrete scenario domain participants. The BaseEnt
 |Attribute|Datatype|Semantics|
 |---|---|---|
 |Organization|UUID|Optional: The organization in the scenario this entity belongs to.|
+
+### EntitySimulation
+
+A service providing modelling responsibility for aggregate and/or physical entities.
+
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|AggregateEntityAllocation|ArrayOfUuid|Optional. The organization Unit elements for which the federate has the responsibility of modelling corresponding Aggregate Entities.  The default is an empty list.|
+|PhysicalEntityAllocation|ArrayOfUuid|Optional. The the organization Equipment or Installation elements for which the federate has the responsibility of simulating a Physical Entity.  The default is an empty list.|
+
+## Interaction Classes
+
+Note that inherited and dependency parameters are not included in the description of interaction classes.
+
+```mermaid
+graph RL
+SMC_EntityControl-->HLAinteractionRoot
+ChangeSuperiorUnit-->SMC_EntityControl
+```
+
+### SMC_EntityControl
+
+
+
+
+### ChangeSuperiorUnit
+
+Request a change in the organizational structure. The federate with the primary responsibility of the referenced entity (OrganizationElement) should if possible update the `SuperiorUnit` relationship.
+
+|Parameter|Datatype|Semantics|
+|---|---|---|
+|SuperiorUnit|UUID|Required: Reference to a Unit for which the referenced entity (OrganizationElement) is requested to relate to as a subunit/equipment.|
 
 ## Datatypes
 
