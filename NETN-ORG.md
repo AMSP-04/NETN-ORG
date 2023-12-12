@@ -27,19 +27,37 @@ The NETN-ORG organization elements are the basis for the initialization of simul
 
 ## Object Classes
 
-Note that inherited and dependency attributes are not included in the description of object classes.
-
 ```mermaid
-graph RL
-ORG_Root-->HLAobjectRoot
-BaseEntity-->HLAobjectRoot
-SMC_Service-->HLAobjectRoot
-OrganizationElement-->ORG_Root
-Organization-->ORG_Root
-Equipment-->OrganizationElement
-Unit-->OrganizationElement
-Installation-->OrganizationElement
-EntitySimulation-->SMC_Service
+classDiagram 
+direction LR
+
+HLAobjectRoot <|-- ORG_Root
+HLAobjectRoot <|-- BaseEntity
+HLAobjectRoot <|-- SMC_Service
+ORG_Root <|-- OrganizationElement
+ORG_Root <|-- Organization
+ORG_Root : Name
+OrganizationElement <|-- Equipment
+OrganizationElement <|-- Unit
+OrganizationElement <|-- Installation
+OrganizationElement : EntityType
+OrganizationElement : HostUnit
+OrganizationElement : Location
+OrganizationElement : Organization
+OrganizationElement : SuperiorUnit
+OrganizationElement : Symbol
+Unit : Echelon
+Unit : Formation
+Unit : HigherHeadquarters
+Unit : Holdings
+Unit : IsHq
+Organization : CountryCode
+Organization : ForceIdentifier
+Organization : Hostility
+BaseEntity : Organization
+SMC_Service <|-- EntitySimulation
+EntitySimulation : AggregateEntityAllocation
+EntitySimulation : PhysicalEntityAllocation
 ```
 
 ### ORG_Root
@@ -56,17 +74,27 @@ An object class for all NETN-ORG organizational elements
 
 |Attribute|Datatype|Semantics|
 |---|---|---|
+|EntityType|EntityTypeStruct|Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
+|HostUnit|UUID|Optional. A reference to a unit or equipment controlling the movement or operating an installation. E.g. a unit embarked on a transport, or a helicopter on a ship. The default value is all zeros, indicating that the unit is not embarked in or mounted on any other unit or equipment. Not applicable to `Installation`.|
+|Location|GeodeticPoint|Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation.|
+|Name|HLAunicodeString|Required. A unique name.|
 |Organization|UUID|Required: A reference to the organization the element is affiliated with.|
 |SuperiorUnit|UUID|Required: A reference to a unit within the organization for which this element is a subunit/equipment or controlled installation.  The default value is all zeros (no aggregate unit).|
-|EntityType|EntityTypeStruct|Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
 |Symbol|SymbolStruct|Required. Initial symbol identifier and amplification data for this element. In NETN-ORG the symbol identifier acts as a template and may contain wildcard characters '*' to indicate undefined elements of the symbol code.|
-|Location|GeodeticPoint|Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation.|
-|HostUnit|UUID|Optional. A reference to a unit or equipment controlling the movement or operating an installation. E.g. a unit embarked on a transport, or a helicopter on a ship. The default value is all zeros, indicating that the unit is not embarked in or mounted on any other unit or equipment. Not applicable to `Installation`.|
 
 ### Equipment
 
 An equipment represents individual physical items defined specifically and apart from any holdings defined for the `HoldingUnit`. Equipment includes platforms, munition and sensors object.
 
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|EntityType|EntityTypeStruct|Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
+|HostUnit|UUID|Optional. A reference to a unit or equipment controlling the movement or operating an installation. E.g. a unit embarked on a transport, or a helicopter on a ship. The default value is all zeros, indicating that the unit is not embarked in or mounted on any other unit or equipment. Not applicable to `Installation`.|
+|Location|GeodeticPoint|Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation.|
+|Name|HLAunicodeString|Required. A unique name.|
+|Organization|UUID|Required: A reference to the organization the element is affiliated with.|
+|SuperiorUnit|UUID|Required: A reference to a unit within the organization for which this element is a subunit/equipment or controlled installation.  The default value is all zeros (no aggregate unit).|
+|Symbol|SymbolStruct|Required. Initial symbol identifier and amplification data for this element. In NETN-ORG the symbol identifier acts as a template and may contain wildcard characters '*' to indicate undefined elements of the symbol code.|
 
 ### Unit
 
@@ -74,16 +102,32 @@ A unit represents an element at a specified level in the organization. An organi
 
 |Attribute|Datatype|Semantics|
 |---|---|---|
-|HigherHeadquarters|UUID|Optional. A reference to a unit representing the superior headquarters. The default value is all zeros (no higher headquarters).|
 |Echelon|EchelonEnum32|Optional. Symbol modifier identifying the command level. Default NONE.|
-|IsHq|HLAboolean|Optional. Indicate whether the unit has a command function, e.g. if it is an HQ or not. The default is FALSE, no HQ.|
-|Holdings|ArrayOfHoldings|Optional. A set of holdings defined for this unit in addition to holdings defined for all subunits and any specific `Equipment` objects with this unit as `HoldingUnit . The default is an empty list.`|
+|EntityType|EntityTypeStruct|Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
 |Formation|FormationStruct|Optional. Formation of this unit.|
+|HigherHeadquarters|UUID|Optional. A reference to a unit representing the superior headquarters. The default value is all zeros (no higher headquarters).|
+|Holdings|ArrayOfHoldings|Optional. A set of holdings defined for this unit in addition to holdings defined for all subunits and any specific `Equipment` objects with this unit as `HoldingUnit . The default is an empty list.`|
+|HostUnit|UUID|Optional. A reference to a unit or equipment controlling the movement or operating an installation. E.g. a unit embarked on a transport, or a helicopter on a ship. The default value is all zeros, indicating that the unit is not embarked in or mounted on any other unit or equipment. Not applicable to `Installation`.|
+|IsHq|HLAboolean|Optional. Indicate whether the unit has a command function, e.g. if it is an HQ or not. The default is FALSE, no HQ.|
+|Location|GeodeticPoint|Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation.|
+|Name|HLAunicodeString|Required. A unique name.|
+|Organization|UUID|Required: A reference to the organization the element is affiliated with.|
+|SuperiorUnit|UUID|Required: A reference to a unit within the organization for which this element is a subunit/equipment or controlled installation.  The default value is all zeros (no aggregate unit).|
+|Symbol|SymbolStruct|Required. Initial symbol identifier and amplification data for this element. In NETN-ORG the symbol identifier acts as a template and may contain wildcard characters '*' to indicate undefined elements of the symbol code.|
 
 ### Installation
 
 Installations are facilities, e.g. harbours, airfields, or engineering objects, e.g. minefields.
 
+|Attribute|Datatype|Semantics|
+|---|---|---|
+|EntityType|EntityTypeStruct|Required. SISO-REF-010 code for entity type definitions. If unknown, use 0.0.0.0.0.0.0.|
+|HostUnit|UUID|Optional. A reference to a unit or equipment controlling the movement or operating an installation. E.g. a unit embarked on a transport, or a helicopter on a ship. The default value is all zeros, indicating that the unit is not embarked in or mounted on any other unit or equipment. Not applicable to `Installation`.|
+|Location|GeodeticPoint|Optional. The geographic location of the element. Required if no `HostUnit` is provided. This represents the initial location in the scenario unless otherwise modelled in the simulation.|
+|Name|HLAunicodeString|Required. A unique name.|
+|Organization|UUID|Required: A reference to the organization the element is affiliated with.|
+|SuperiorUnit|UUID|Required: A reference to a unit within the organization for which this element is a subunit/equipment or controlled installation.  The default value is all zeros (no aggregate unit).|
+|Symbol|SymbolStruct|Required. Initial symbol identifier and amplification data for this element. In NETN-ORG the symbol identifier acts as a template and may contain wildcard characters '*' to indicate undefined elements of the symbol code.|
 
 ### Organization
 
@@ -91,9 +135,10 @@ An organization have relationships with other organizations. Units belonging to 
 
 |Attribute|Datatype|Semantics|
 |---|---|---|
-|Hostility|ArrayOfRelations|Optional. The relations with other organizations. The federation agreements specify default relationship.|
-|ForceIdentifier|ForceIdentifierEnum|Required: A force identifier indicate a special relationship with an organization in the scenario designated as the default perspective of the scenario. The force identifier applies to all simulated entities representing an organizational element belonging to the organization and is a required attribute for all `PhysicalEntity` and `AggregateEntity` objects in the federation.|
 |CountryCode|Integer32|Optional: Numerical country code based on ISO 3166-1 numeric. The numeric codes 900 to 999 can be user-assigned in the federation agreement.|
+|ForceIdentifier|ForceIdentifierEnum|Required: A force identifier indicate a special relationship with an organization in the scenario designated as the default perspective of the scenario. The force identifier applies to all simulated entities representing an organizational element belonging to the organization and is a required attribute for all `PhysicalEntity` and `AggregateEntity` objects in the federation.|
+|Hostility|ArrayOfRelations|Optional. The relations with other organizations. The federation agreements specify default relationship.|
+|Name|HLAunicodeString|Required. A unique name.|
 
 ### BaseEntity
 
@@ -114,18 +159,13 @@ A service providing modelling responsibility for aggregate and/or physical entit
 
 ## Interaction Classes
 
-Note that inherited and dependency parameters are not included in the description of interaction classes.
-
 ```mermaid
-graph RL
-SMC_EntityControl-->HLAinteractionRoot
-ChangeSuperiorUnit-->SMC_EntityControl
+classDiagram 
+direction LR
+HLAinteractionRoot <|-- SMC_EntityControl
+SMC_EntityControl <|-- ChangeSuperiorUnit
+ChangeSuperiorUnit : SuperiorUnit
 ```
-
-### SMC_EntityControl
-
-
-
 
 ### ChangeSuperiorUnit
 
