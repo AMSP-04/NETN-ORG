@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <modelIdentification notes="netn-org_2">
+    <modelIdentification notes="netn-org_overview">
         <name>NETN-ORG</name>
         <type>FOM</type>
         <version>2.0</version>
@@ -15,7 +15,7 @@
 * change organizational relationships 
 * capture simulated unit and equipment state as snapshots</useLimitation>
         <useHistory>v1.0 - Initial version developed by MSG-163. Release included in NETN FOM v3.0</useHistory>
-        <useHistory notes="netn-org_1">v2.0 - Updated version developed by MSG-191. Release included in NETN FOM v4.0</useHistory>
+        <useHistory notes="netn-org_changelog_1">v2.0 - Updated version developed by MSG-191. Release included in NETN FOM v4.0</useHistory>
         <poc>
             <pocType>Release authority</pocType>
             <pocName>NATO Modelling and Simulation Group</pocName>
@@ -612,7 +612,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
     </dataTypes>
     <notes>
         <note>
-            <label>netn-org_1</label>
+            <label>netn-org_changelog_1</label>
             <semantics>* Replaced `ORG_Root` attribute `UniqueId` with NETN-BASE `HLAobjectRoot` attribute `UniqueId` 
  
 * Added `ORG_Root` attribute `Name` 
@@ -688,7 +688,7 @@ Use 0.0.0.0.0.0.0 when not defined.</semantics>
 * Removed datatype `DispositionStruct`</semantics>
         </note>
         <note>
-            <label>netn-org_2</label>
+            <label>netn-org_overview</label>
             <semantics>## Overview 
  
 Use the NETN-ORG FOM module to represent organizations and their internal structure, relationships, associated units, equipment, and installations. 
