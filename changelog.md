@@ -42,7 +42,7 @@
 * Replaced `Installation` attribute `Location` with `OrganizationElement` attribute `Location` 
 * Replaced `Installation` attribute `SymbolAmplification` with `OrganizationElement` attribute `Symbol` 
  
-* Renamed `Force` attribute `Relations` to `Hostility` 
+* Renamed `Force` attribute `Relations` to `Relationships` 
 * Replaced `Force` attribute `Name` with `ORG_Root` attribute `Name` 
  
 * Renamed object class `Force` to `Organization` 
