@@ -30,7 +30,7 @@ In NETN-ORG, an `Organization` is a representation used to:
 1. group elements of the organization 
 2. define relationships between different organizations 
  
-All `BaseEntity` objects are associated with a specific `Organization`. The required RPR-FOM attribute `ForceIdentifier` can be derived from the referenced organization and the corresponding `Organization` attribute `ForceIdentifier`. 
+All `BaseEntity` objects are associated with a specific `Organization`.The required RPR-FOM attribute `ForceIdentifier` can be derived from the referenced organization and the corresponding `Organization` attribute `ForceIdentifier`. 
  
  
  
@@ -68,8 +68,25 @@ BaseEntity : Organization
 Each `Organization` is defined by a structure of `OrganizationElement` objects. Each `OrganizationElement` object is related to its `Organization` and its `SuperiorUnit`, if any. There are three (3) subtypes of `OrganizationElement`: 
  
 1. `Unit` represents an element at a specified level in the organization. An organizational unit can contain subunits and can belong to a superior unit. A unit consists of equipment, personnel and supplies; these holdings can belong directly to the unit or indirectly as a holding of a subunit. 
-2. `Equipment` represents individual physical items defined specifically and apart from any holdings defined for the `HostUnit`. Equipment includes platforms, munition and sensors object.
+2. `Equipment` represents individual physical items defined specifically and apart from any holdings defined for the `HostUnit`. Equipment includes platforms, munition and sensors object. 
 3. `Installation` are facilities, e.g. harbours, airfields, or engineering objects, e.g. minefields.
+
+To request a change of `SuperiorUnit` use the NETN-SMC entity control action `ChangeSuperiorUnit`.
+
+
+
+```mermaid
+classDiagram 
+direction LR
+HLAinteractionRoot <|-- SMC_EntityControl
+
+HLAinteractionRoot : UniqueId(NETN-BASE)
+SMC_EntityControl <|-- ChangeSuperiorUnit
+SMC_EntityControl : Entity(NETN-SMC)
+ChangeSuperiorUnit : SuperiorUnit
+
+```
+
  
 ## Allocation to Federates 
  
@@ -231,7 +248,6 @@ A service providing modelling responsibility for aggregate and/or physical entit
 classDiagram 
 direction LR
 HLAinteractionRoot <|-- SMC_EntityControl
-HLAinteractionRoot : SendTime(NETN-BASE)
 HLAinteractionRoot : UniqueId(NETN-BASE)
 SMC_EntityControl <|-- ChangeSuperiorUnit
 SMC_EntityControl : Entity(NETN-SMC)
@@ -256,6 +272,7 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |AirFormationTypeEnum32|Air formation|
 |ArrayOfHoldings|Sequence of holdings.|
 |ArrayOfRelationship|Sequence of relations.|
+|EntityControlActionEnum|Enumeration of Entity Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
 |ForceIdentifierEnum|RPR-FOM Force Identifier enumeration.|
 |FormationDataStruct|Struct for enumerated choice for the type of formation being Ground, Air, Surface or Subsurface.|
 |FormationLocationTypeEnum32|Enumerated choice for the method to correlate formation to location as the centre of mass or lead element.|
@@ -271,6 +288,7 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |Name|Representation|Semantics|
 |---|---|---|
 |AirFormationTypeEnum32|HLAinteger32BE|Air formation|
+|EntityControlActionEnum|HLAinteger32BE|Enumeration of Entity Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
 |ForceIdentifierEnum|RPRunsignedInteger8BE|RPR-FOM Force Identifier enumeration.|
 |FormationLocationTypeEnum32|HLAinteger32BE|Enumerated choice for the method to correlate formation to location as the centre of mass or lead element.|
 |FormationTypeEnum32|HLAinteger32BE|Enumerated choice for the type of formation being Ground, Air, Surface or Subsurface.|

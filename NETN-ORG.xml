@@ -753,7 +753,24 @@ Each `Organization` is defined by a structure of `OrganizationElement` objects. 
  
 1. `Unit` represents an element at a specified level in the organization. An organizational unit can contain subunits and can belong to a superior unit. A unit consists of equipment, personnel and supplies; these holdings can belong directly to the unit or indirectly as a holding of a subunit. 
 2. `Equipment` represents individual physical items defined specifically and apart from any holdings defined for the `HostUnit`. Equipment includes platforms, munition and sensors object. 
-3. `Installation` are facilities, e.g. harbours, airfields, or engineering objects, e.g. minefields. 
+3. `Installation` are facilities, e.g. harbours, airfields, or engineering objects, e.g. minefields.
+
+To request a change of `SuperiorUnit` use the NETN-SMC entity control action `ChangeSuperiorUnit`.
+
+
+
+```mermaid
+classDiagram 
+direction LR
+HLAinteractionRoot &lt;|-- SMC_EntityControl
+
+HLAinteractionRoot : UniqueId(NETN-BASE)
+SMC_EntityControl &lt;|-- ChangeSuperiorUnit
+SMC_EntityControl : Entity(NETN-SMC)
+ChangeSuperiorUnit : SuperiorUnit
+
+```
+
  
 ## Allocation to Federates 
  
