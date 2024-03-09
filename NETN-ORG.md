@@ -6,7 +6,7 @@
 
 The NATO Education and Training Organization (NETN-ORG) module provides a standard way to represent organizations in the simulation scenario and their relationships and structure. The relationships include unit command structure, relationships between organizations, unit equipment, and installations.
 
-Simulation of elements of an organization requires knowledge of the intra-organizational relationship, e.g. superior, subordinate, and iter-organizational relationships with other organizations, e.g. friendly or hostile. The NETN-ORG supports initialization and organizations' dynamic change of this information.
+Simulating organizational elements requires knowledge of intra-organizational relationships, e.g., superior, subordinate, and inter-organizational relationships with other organizations, e.g., friendly or hostile. The NETN-ORG supports initialization and organizations' dynamic change of this information.
 
 Use the NETN-ORG information to: 
 * initialize simulated entities 
@@ -18,11 +18,11 @@ Use the NETN-ORG information to:
  
 Use the NETN-ORG FOM module to represent organizations and their internal structure, relationships, associated units, equipment, and installations. 
  
-Dynamic organizational changes may include new and or rearranged unit structure or changes in the relationships with other organizations. 
+Dynamic organizational changes may include new or rearranged unit structures or changes in the relationships with other organizations. 
  
 In a simulation, not all units, equipment and installations have a corresponding simulation entity in the federation. Which elements to represent as simulated entities are determined by the current modelling responsibility described in NETN-TMR and dynamic changes in the level of aggregation described in NETN-MRM. 
  
-The NETN-ORG organization elements are the basis for the initialization of simulated entities, e.g. `PhysicalEntitiy` or `AggregateEntity` objects. Therefore, updates of NETN-ORG objects should be considered a re-initialization of any associate simulation entity. E.g. updating the `Unit` attribute `Holdings` should be reflected in an `AggregateEntity` representing the unit. 
+The NETN-ORG organization elements are the basis for initializing simulated entities, e.g., `PhysicalEntitiy` or `AggregateEntity` objects. Therefore, updates of NETN-ORG objects should be considered a re-initialization of any associated simulation entity. For example, updating the `Unit` attribute `Holdings` could be reflected in an `AggregateEntity`.
  
 ## Organization 
  
@@ -68,10 +68,10 @@ BaseEntity : Organization
 Each `Organization` is defined by a structure of `OrganizationElement` objects. Each `OrganizationElement` object is related to its `Organization` and its `SuperiorUnit`, if any. There are three (3) subtypes of `OrganizationElement`: 
  
 1. `Unit` represents an element at a specified level in the organization. An organizational unit can contain subunits and can belong to a superior unit. A unit consists of equipment, personnel and supplies; these holdings can belong directly to the unit or indirectly as a holding of a subunit. 
-2. `Equipment` represents individual physical items defined specifically and apart from any holdings defined for the `HostUnit`. Equipment includes platforms, munition and sensors object. 
+2. `Equipment` represents individual physical items explicitly defined and apart from any holdings defined for the `HostUnit`. Equipment includes platforms, munition and sensor objects. 
 3. `Installation` are facilities, e.g. harbours, airfields, or engineering objects, e.g. minefields.
 
-To request a change of `SuperiorUnit` use the NETN-SMC entity control action `ChangeSuperiorUnit`.
+To request a change of `SuperiorUnit`, use the NETN-SMC entity control action `ChangeSuperiorUnit`.
 
 
 
