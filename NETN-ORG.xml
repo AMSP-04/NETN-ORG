@@ -194,7 +194,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                             <sharing>PublishSubscribe</sharing>
                             <transportation>HLAreliable</transportation>
                             <order>Receive</order>
-                            <semantics>Optional. A set of holdings defined for this unit in addition to holdings defined for all subunits and any specific `Equipment` objects with this unit as `HoldingUnit . The default is an empty list.`</semantics>
+                            <semantics>Optional. A set of holdings defined for this unit in addition to holdings defined for all subunits and any specific `Equipment` objects with this unit as `HostUnit . The default is an empty list.`</semantics>
                         </attribute>
                         <attribute>
                             <name>Formation</name>
